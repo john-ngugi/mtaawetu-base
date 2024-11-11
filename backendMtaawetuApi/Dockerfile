@@ -12,8 +12,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y gcc curl
 
 
-# Copy the Poetry lock files
-COPY pyproject.toml poetry.lock ./
+# # Copy the Poetry lock files
+# COPY pyproject.toml poetry.lock ./
 
 
 # Install pipx and use it to install Poetry
