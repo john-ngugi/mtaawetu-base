@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import maplibregl from "maplibre-gl";
+import { useState } from "react";
+// import maplibregl from "maplibre-gl";
 import KisiiForm from "../components/KisiiForm";
 
 interface props {
@@ -13,12 +13,12 @@ function BottomSlidePanel({
   lat,
   lng,
   isVisible,
-  onLocationSelect,
+  // onLocationSelect,
   onClose,
 }: props) {
-  const [location, setLocation] = useState<maplibregl.LngLat>(
-    new maplibregl.LngLat(0, 0)
-  ); // Initial values
+  // const [location, setLocation] = useState<maplibregl.LngLat>(
+  //   new maplibregl.LngLat(0, 0)
+  // ); // Initial values
 
   const [isPopVisible, setIsPopVisible] = useState(false); // State to manage visibility
 
@@ -26,10 +26,10 @@ function BottomSlidePanel({
     setIsPopVisible(false); // Hide the message when the button is clicked
   };
 
-  const handleMapClick = (lng: number, lat: number) => {
-    setLocation(new maplibregl.LngLat(lng, lat));
-    onLocationSelect(lng, lat); // Center map to the clicked location
-  };
+  // const handleMapClick = (lng: number, lat: number) => {
+  //   setLocation(new maplibregl.LngLat(lng, lat));
+  //   onLocationSelect(lng, lat); // Center map to the clicked location
+  // };
 
   return (
     <>

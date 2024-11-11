@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Home, Map, List, LayoutDashboard, Menu, X } from "lucide-react";
-import maplibregl, { NullType, ScaleControl } from "maplibre-gl";
+import maplibregl, { ScaleControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import SelectMenuMap from "../components/SelectMenuMap";
 import ToggleButton from "../components/ToggoleVisibilityBtn";
@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
   const [selectedLat, setSelectedLat] = useState<number | null>(null);
   const [selectedLng, setSelectedLng] = useState<number | null>(null);
-  const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
+  // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
   const [isVisible, setIsPanelVisible] = useState(false);
 
   // Function to fetch possible location suggestions (limited to 4 results)
@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
       const estates = await response.json();
 
       if (estates && estates.geoJson) {
-        setBoundCoords(estates.coordinates);
+        // setBoundCoords(estates.coordinates);
         console.log(estates.geoJson);
         // Add GeoJSON source
         map.addSource(id, {
@@ -262,49 +262,49 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  function enableFeaturePopupOnLayer(map: maplibregl.Map, layerId: string) {
-    // Ensure the layer exists before adding the event listener
-    if (!map.getLayer(layerId)) {
-      console.error(`Layer with ID '${layerId}' not found.`);
-      return;
-    }
+  // function enableFeaturePopupOnLayer(map: maplibregl.Map, layerId: string) {
+  //   // Ensure the layer exists before adding the event listener
+  //   if (!map.getLayer(layerId)) {
+  //     console.error(`Layer with ID '${layerId}' not found.`);
+  //     return;
+  //   }
 
-    // Listen for click events on the specific GeoJSON layer
-    map.on("click", layerId, (e) => {
-      // Check if the clicked feature has geometry and properties
-      if (e.features && e.features.length > 0) {
-        const feature = e.features[0]; // Get the clicked feature
-        const coordinates =
-          feature.geometry.type === "Point"
-            ? (feature.geometry.coordinates as [number, number])
-            : e.lngLat.toArray(); // Get coordinates for point geometries
+  //   // Listen for click events on the specific GeoJSON layer
+  //   map.on("click", layerId, (e) => {
+  //     // Check if the clicked feature has geometry and properties
+  //     if (e.features && e.features.length > 0) {
+  //       const feature = e.features[0]; // Get the clicked feature
+  //       const coordinates =
+  //         feature.geometry.type === "Point"
+  //           ? (feature.geometry.coordinates as [number, number])
+  //           : e.lngLat.toArray(); // Get coordinates for point geometries
 
-        const description =
-          feature.properties?.description || "No description available"; // You can customize this
+  //       const description =
+  //         feature.properties?.description || "No description available"; // You can customize this
 
-        // Adjust coordinates if needed for map wrap-around effect
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
+  //       // Adjust coordinates if needed for map wrap-around effect
+  //       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  //       }
 
-        // Create a popup and set its content and position
-        new maplibregl.Popup()
-          .setLngLat(coordinates) // Set the popup position
-          .setHTML(`<strong>Description:</strong> ${description}`) // Set the popup content
-          .addTo(map); // Add the popup to the map
-      }
-    });
+  //       // Create a popup and set its content and position
+  //       new maplibregl.Popup()
+  //         .setLngLat(coordinates) // Set the popup position
+  //         .setHTML(`<strong>Description:</strong> ${description}`) // Set the popup content
+  //         .addTo(map); // Add the popup to the map
+  //     }
+  //   });
 
-    // Change cursor style to pointer when hovering over the features in the layer
-    map.on("mouseenter", layerId, () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
+  //   // Change cursor style to pointer when hovering over the features in the layer
+  //   map.on("mouseenter", layerId, () => {
+  //     map.getCanvas().style.cursor = "pointer";
+  //   });
 
-    // Reset cursor style when not hovering over features
-    map.on("mouseleave", layerId, () => {
-      map.getCanvas().style.cursor = "";
-    });
-  }
+  //   // Reset cursor style when not hovering over features
+  //   map.on("mouseleave", layerId, () => {
+  //     map.getCanvas().style.cursor = "";
+  //   });
+  // }
   // Initialize the map and add the GeoJSON layer
   useEffect(() => {
     if (mapRef.current) {
@@ -340,10 +340,12 @@ const Dashboard: React.FC = () => {
     // Add popup on map click
     addPopupOnMapClick(map);
     // enableFeaturePopupOnLayer(map, "Neigbourhoods");
+    setCurrentMap("map 1")
     return () => {
       map.remove(); // Clean up map on unmount
       mapRef.current = null;
     };
+    
   }, [currentMap]); // Effect re-runs when the current map changes
 
   // Function to handle fly to a searched location
