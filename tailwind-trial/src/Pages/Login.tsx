@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function Authentication() {
   const [isLogin, setIsLogin] = useState(true);
