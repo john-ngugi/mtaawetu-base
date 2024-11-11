@@ -411,7 +411,7 @@ const Dashboard: React.FC = () => {
         id: 1,
         name: "sdna_1000m2018",
         apilink:
-          "http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
+          "http://0.0.0.0:8000/products/maps/sdna_1000m2018/",
       },
       {
         id: 2,
