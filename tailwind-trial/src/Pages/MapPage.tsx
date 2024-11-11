@@ -402,12 +402,14 @@ const Dashboard: React.FC = () => {
           "http://127.0.0.1:8000/products/maps-wfs/schoolaccessindexwalk/",
       },
     ],
+    //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
+    //"http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
     "Design Of Road Network": [
       {
         id: 1,
         name: "sdna_1000m2018",
         apilink:
-          "http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/",
+          "http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
       },
       {
         id: 2,

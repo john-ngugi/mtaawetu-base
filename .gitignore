@@ -2,3 +2,4 @@ lib
 scripts
 .pyenv.cfg
 Include
+.env

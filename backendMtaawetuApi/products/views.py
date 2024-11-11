@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from sqlalchemy import create_engine
 from io import BytesIO
 from datetime import datetime
+from dotenv import load_dotenv
 # Create your views here.
 import geopandas as gpd 
 import json
@@ -17,6 +18,9 @@ import geopandas as gpd
 import requests
 import time
 import os 
+
+
+load_dotenv()
 
 @api_view(["POST","GET"])
 def index(request):
@@ -75,12 +79,11 @@ def coreProductAPI(request, pk=None):
             serializer.save(content=content)
             return Response(serializer.data)
         return Response({"Invalid":"not good data"}, status=400)
-              
         
 def getAccessibility(request,table_name):
     method = request.method
     if method == "GET":
-        db_connection_url = "postgresql://johngis:john0735880407@postgresql-johngis.alwaysdata.net/johngis_db1"
+        db_connection_url = os.getenv("DBURL")
         # create the connection engine
         # Create SQLAlchemy engine
         engine = create_engine(db_connection_url)
@@ -107,7 +110,7 @@ def getAccessibility(request,table_name):
 
 def fetch_geojson_from_geoserver(request,table_name):
     # GeoServer WFS endpoint URL
-    wfs_url = "http://44.211.211.66:8080/geoserver/mtaawetu/ows"
+    wfs_url = "http://44.211.211.66:8080/geoserver/mtaawetu/wms"
 
     # Layer name (ensure this is the correct workspace and layer name)
     layer_name = f"mtaawetu:{table_name}"
@@ -118,7 +121,7 @@ def fetch_geojson_from_geoserver(request,table_name):
         "version": "1.0.0",
         "request": "GetFeature",
         "typeName": layer_name,
-        "outputFormat": "application/json",  # Request GeoJSON
+        "outputFormat": "json",  # Request GeoJSON
         "srsName": "EPSG:4326",
     }
 
