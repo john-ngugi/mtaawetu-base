@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)4u^m#wxvd%q0%cl3pqy@*e5!8d0n6qt&c$8z8ety%o*fly=a&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,6 +53,27 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
+
+
+# Allow specific origins for security reasons
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000",  
+    "https://mtaawetu.com",# Frontend origin
+    "http://34.66.220.78"
+]
+
+# Allow credentials (cookies, auth headers)
+CORS_ALLOW_CREDENTIALS = True
+
+# Ensure headers are allowed for the request
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'x-requested-with',
+]
+
+
 
 ROOT_URLCONF = 'backendMtaawetuApi.urls'
 
