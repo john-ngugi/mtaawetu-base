@@ -56,24 +56,15 @@ MIDDLEWARE = [
 
 
 # Allow specific origins for security reasons
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:3000",  
-    "https://mtaawetu.com",# Frontend origin
-    "http://34.66.220.78:3000"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+#     "http://localhost:3000",  
+#     "https://mtaawetu.com",# Frontend origin
+#     "http://34.66.220.78:3000",
+#     "http://127.0.0.1:8000"
+# ]
 
-# Allow credentials (cookies, auth headers)
-CORS_ALLOW_CREDENTIALS = True
-
-# Ensure headers are allowed for the request
-CORS_ALLOW_HEADERS = [
-    'content-type',
-    'authorization',
-    'x-requested-with',
-]
-
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backendMtaawetuApi.urls'
 
