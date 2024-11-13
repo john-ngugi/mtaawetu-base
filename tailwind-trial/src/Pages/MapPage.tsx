@@ -395,7 +395,7 @@ const Dashboard: React.FC = () => {
       {
         id: 2,
         name: "Hospital Accessibility",
-        apilink: "http://127.0.0.1:8000/products/maps-wfs/nbihealthaccess/",
+        apilink: "http://34.66.220.78/products/maps-wfs/nbihealthaccess/",
       },
       {
         id: 3,
