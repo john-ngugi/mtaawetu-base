@@ -10,7 +10,7 @@ import Search from "../components/Search";
 import { SheetComponent } from "@/components/Sheet";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner"
-import { calcPercentages } from "@/lib/utils";
+import { calcPercentages } from "../lib/utils";
 import DropDownComponent from "../components/Popover"
 // Define the type for suggestion (based on Nominatim response structure)
 interface Suggestion {
