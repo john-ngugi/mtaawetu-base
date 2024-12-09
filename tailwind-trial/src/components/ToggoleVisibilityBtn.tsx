@@ -21,13 +21,13 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ layerId, map }) => {
   return (
     <button
       onClick={toggleLayer}
-      className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-green-600 hover:bg-green-500"
+      className="rounded-md px-1 py-1 text-sm text-white bg-green-600 hover:bg-green-500"
     >
       {/* {isVisible ? "Hide" : "Show"} */}
       <div className="flex flex-row">
         {isVisible ? <EyeOff size="16" /> : <Eye size="16" />}{" "}
         <span className="mr-1"></span>
-        {isVisible ? "Hide" : "Show"} Layer
+        {/* {isVisible ? "Hide" : "Show"} Layer */}
       </div>
     </button>
   );

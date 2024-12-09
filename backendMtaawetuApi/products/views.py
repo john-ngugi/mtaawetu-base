@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
 from io import BytesIO
 from datetime import datetime
 from dotenv import load_dotenv
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 import geopandas as gpd 
 import json
@@ -18,9 +19,14 @@ import geopandas as gpd
 import requests
 import time
 import os 
-
+import functools
 
 load_dotenv()
+
+
+
+
+
 
 @api_view(["POST","GET"])
 def index(request):
@@ -79,38 +85,54 @@ def coreProductAPI(request, pk=None):
             serializer.save(content=content)
             return Response(serializer.data)
         return Response({"Invalid":"not good data"}, status=400)
-        
-def getAccessibility(request,table_name):
-    method = request.method
-    if method == "GET":
-        db_connection_url = os.getenv("DBURL")
-        # create the connection engine
-        # Create SQLAlchemy engine
-        engine = create_engine(db_connection_url)
-        print("starting Query")
-        # get the connection url from the database
-        query = f'SELECT * FROM {table_name}'
-        # Use GeoPandas to run the query and read it as a GeoDataFrame
-        gdf = gpd.GeoDataFrame.from_postgis(query, con=engine, geom_col='geom')
-        print("Finished Query")
-        if gdf.crs != 'EPSG:4326':
-            gdf = gdf.to_crs('EPSG:4326')
-        #drop any null values
-        gdf = gdf.dropna()
-        print(gdf)
-        # Convert GeoPandas GeoDataFrame to GeoJSON format
-        geojson = gdf.to_json()
-        # Load the GeoJSON string to ensure it's valid JSON without extra slashes
-        geojson_data = json.loads(geojson)
-        geomType = gdf.geometry.geometry.type
-        print(geomType.values[0])
-        # Return as a JsonResponse
-        return JsonResponse({"geoJson":geojson_data,"geomType":geomType.values[0]}, safe=False)
 
 
+# Cache DB connection engine to reuse it for multiple requests
+@functools.cache
+def get_db_engine():
+    db_connection_url = os.getenv("DBURL")
+    return create_engine(db_connection_url)
+
+@functools.cache
+# Query function to fetch GeoDataFrame from the database
+def query(table_name):
+    engine = get_db_engine()  # Use cached engine
+    query = f'SELECT * FROM {table_name}'
+    # Use GeoPandas to run the query and read it as a GeoDataFrame
+    gdf = gpd.GeoDataFrame.from_postgis(query, con=engine, geom_col='geom')
+    return gdf
+
+def getAccessibility(request, table_name):
+    if request.method == "GET":
+        try:
+            # Fetch the GeoDataFrame using the query function
+            gdf = query(table_name)
+
+            # Check and transform CRS if necessary
+            if gdf.crs != 'EPSG:4326':
+                gdf = gdf.to_crs('EPSG:4326')
+
+            # Drop rows with null values in any column (including geometry)
+            gdf = gdf.dropna(subset=['geom'])
+
+            # Convert the GeoDataFrame to GeoJSON
+            geojson_data = json.loads(gdf.to_json())
+
+            # Extract geometry type (e.g., 'Point', 'Polygon')
+            geom_type = gdf.geometry.geometry.type.iloc[0]
+
+            # Return as a JsonResponse
+            return JsonResponse({"geoJson": geojson_data, "geomType": geom_type}, safe=False)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+
+
+@functools.cache
 def fetch_geojson_from_geoserver(request,table_name):
     # GeoServer WFS endpoint URL
-    wfs_url = "http://44.211.211.66:8080/geoserver/mtaawetu/wms"
+    wfs_url = "http://3.80.129.244:8080/geoserver/mtaawetu/wms"
 
     # Layer name (ensure this is the correct workspace and layer name)
     layer_name = f"mtaawetu:{table_name}"
@@ -173,43 +195,158 @@ def fetch_geojson_from_geoserver(request,table_name):
 
 def get_db_connection():
     return psycopg2.connect(
-        dbname='johngis_db1',
-        user='johngis',
-        password='john0735880407',
-        host='postgresql-johngis.alwaysdata.net',
+        dbname=os.getenv("dbname"),
+        user=os.getenv("user"),
+        password=os.getenv("password"),
+        host=os.getenv("host"),
         port='5432'
     )     
-      
-def getMaps(request, table_name): 
-    method = request.method 
-    # create the GeoJson file structure to avoid unaccepted geoJson
+    
+connection = get_db_connection()
+
+# Function to clean GeoJSON geometry
+def clean_geometry(geometry):
+    def strip_z(coords):
+        if isinstance(coords[0], list):
+            return [strip_z(c) for c in coords]
+        return coords[:2]
+
+    if "coordinates" in geometry:
+        geometry["coordinates"] = strip_z(geometry["coordinates"])
+    return geometry
+
+# Cache function based on table_name
+@functools.cache
+def get_cached_geojson(table_name):
     geojson_data = {
         "type": "FeatureCollection",
         "features": []
     }
-    
-    if method == "GET":
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        with cursor:
-            # Start a transaction
-            cursor.execute("BEGIN")
-            # Query to fetch all features and transform the geometry to GeoJSON
-            sql_query = f'SELECT ST_AsGeoJSON(ST_ForcePolygonCCW(ST_Transform(ST_SetSRID(geom,3237),3237))) AS geometry FROM {table_name};'
-            cursor.execute("ROLLBACK")
-            conn.commit()
-            cursor.execute(sql_query)
 
-            # Fetch all rows
-            rows = cursor.fetchall()
-            
-            for row in rows:
-                feature = {
-                    "type": "Feature",
-                    "geometry": json.loads(row[0]),
-                    "properties": {}
-                }
-                geojson_data["features"].append(feature)
-        return JsonResponse(geojson_data, safe=False)        
-            
-             
+    conn = connection
+    cursor = conn.cursor()
+    try:
+        # Query to fetch features and simplify geometry
+        sql_query = f'''
+        SELECT ST_AsGeoJSON(ST_Simplify(geom, 0.01)) AS geometry
+        FROM {table_name};
+        '''
+        cursor.execute(sql_query)
+        rows = cursor.fetchall()
+
+        for row in rows:
+            geojson_data["features"].append({
+                "type": "Feature",
+                "geometry": clean_geometry(json.loads(row[0])),
+                "properties": {}
+            })
+
+        return geojson_data
+    finally:
+        cursor.close()
+        conn.close()
+
+
+# Django view function
+def getMaps(request, table_name):
+    if request.method == "GET":
+        try:
+            # Use cached function for fetching GeoJSON data
+            geojson_data = get_cached_geojson(table_name)
+            return JsonResponse(geojson_data, safe=False)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+import traceback
+
+@csrf_exempt
+def getMapStats(request, tablename):
+    if request.method == "POST":
+        try:
+            # Validate table name
+            if not tablename or not tablename.isidentifier():
+                return JsonResponse({"error": "Invalid or missing table name"}, status=400)
+
+            # Query to fetch numeric columns
+            column_query = f"""
+                SELECT column_name
+                FROM information_schema.columns
+                WHERE table_name = '{tablename}'
+                AND data_type IN ('integer', 'double precision', 'numeric', 'real')
+                AND column_name NOT IN ('gid', 'id');
+            """
+
+            with connection.cursor() as cursor:
+                # Fetch numeric columns
+                cursor.execute(column_query)
+                columns = cursor.fetchall()
+
+                if not columns:
+                    return JsonResponse({"response": "No numeric columns found"}, safe=False)
+
+                # Prepare statistics query dynamically
+                numeric_columns = [col[0] for col in columns]
+                stats_parts = []
+                
+                # Add statistics for numeric columns
+                for col in numeric_columns:
+                    stats_parts.extend([
+                        f"AVG({col}) AS mean_{col}",
+                        f"SUM({col}) AS sum_{col}",
+                        f"STDDEV({col}) AS stddev_{col}",
+                        f"VARIANCE({col}) AS variance_{col}",
+                        f"MIN({col}) AS min_{col}",
+                        f"MAX({col}) AS max_{col}"
+                    ])
+                
+                # Add PostGIS statistics for the geom column
+                stats_parts.extend([
+                    "ST_Extent(geom) AS geom_extent",  # Bounding box
+                    "ST_Area(ST_Union(geom)) AS total_area"  # Total area
+                ])
+
+                # Combine all parts into the final query
+                stats_query = f"SELECT {', '.join(stats_parts)} FROM {tablename};"
+
+                # Execute the statistics query
+                cursor.execute(stats_query)
+                results = cursor.fetchone()
+
+            # Map results to keys
+            response_keys = stats_parts  # Using the order of the stats_parts
+            response = dict(zip([key.split(' AS ')[1] for key in stats_parts], results))
+
+            return JsonResponse({"response": response}, safe=False)
+
+        except Exception as e:
+            error_message = f"{str(e)}\n{traceback.format_exc()}"
+            return JsonResponse({"error": error_message}, status=500)
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+def get_wms_layer(request, layername):
+    # Base GeoServer WMS URL (update with your GeoServer's actual URL)
+    GEOSERVER_WMS_BASE_URL = "http://44.211.211.66:8080/geoserver/mtaawetu/wms"
+    
+    # Query parameters for WMS GetCapabilities
+    params = {
+        "service": "WMS",
+        "request": "GetCapabilities",
+        "version": "1.0.0",
+    }
+
+    try:
+        # Make a request to GeoServer's GetCapabilities endpoint
+        response = requests.get(GEOSERVER_WMS_BASE_URL, params=params)
+        response.raise_for_status()  # Raise an error if the request fails
+
+        # Parse the response to check if the layer exists
+        if layername in response.text:
+            # Construct the WMS layer URL
+            wms_layer_url = f"http://44.211.211.66:8080/geoserver/mtaawetu/wms?service=WMS&version=1.1.0&request=GetMap&layers=mtaawetu%3A{layername}&bbox=240302.28125%2C9846641.0%2C288697.15625%2C9871684.0&width=768&height=397&srs=EPSG%3A21037&styles=&format=image%2Fpng%3B%20mode%3D8bit"
+            return JsonResponse({"success": True, "wms_url": wms_layer_url})
+        else:
+            return JsonResponse({"success": False, "error": f"Layer '{layername}' not found in GeoServer."}, status=404)
+
+    except requests.RequestException as e:
+        return JsonResponse({"success": False, "error": str(e)}, status=500)    

@@ -1,8 +1,8 @@
 import {
-  ArrowPathIcon,
-  CloudArrowUpIcon,
+  BuildingOfficeIcon,
+  HomeIcon,
   FingerPrintIcon,
-  LockClosedIcon,
+  BuildingLibraryIcon,
 } from "@heroicons/react/24/outline";
 
 const features = [
@@ -10,19 +10,19 @@ const features = [
     name: "Residents",
     description:
       " Residents can get to know important or interesting information about where they live and make informed choices about residential location.",
-    icon: CloudArrowUpIcon,
+    icon: HomeIcon,
   },
   {
     name: "Neighborhood Associations",
     description:
       "Neighborhood associations can get a good grasp of their surroundings improving situational awareness.",
-    icon: LockClosedIcon,
+    icon: BuildingOfficeIcon,
   },
   {
     name: "County Governments",
     description:
       "The county governments can access data information to aid in urban planning and management.",
-    icon: ArrowPathIcon,
+    icon: BuildingLibraryIcon,
   },
   {
     name: "Researchers",
@@ -34,7 +34,7 @@ const features = [
     name: "Planning Professionals",
     description:
       "Planning professionals and built environment experts have a ready source of information to support their work and assignments.",
-    icon: ArrowPathIcon,
+    icon: BuildingOfficeIcon,
   },
   {
     name: "Real Estate Investors",
@@ -46,7 +46,7 @@ const features = [
     name: "Entrepreneurs",
     description:
       "Entrepreneurs and commercial enterprises can utilize Mtaa Wetu to pinpoint the “best bet” locations for business. Location, location, location is the Mtaa Wetu mantra",
-    icon: ArrowPathIcon,
+    icon: BuildingOfficeIcon,
   },
 ];
 
@@ -99,13 +99,13 @@ const WhatWeDofeatures = [
     name: "Push to deploy.",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-    icon: CloudArrowUpIcon,
+    icon: HomeIcon,
   },
   {
     name: "SSL certificates.",
     description:
       "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    icon: LockClosedIcon,
+    icon: BuildingOfficeIcon,
   },
   {
     name: "Database backups.",

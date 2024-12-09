@@ -42,6 +42,7 @@ const Search: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-gray-100 p-4 shadow flex flex-col justify-between">
+      
       <div className="flex flex-col sm:flex-row w-full h-9">
         {/* Stacks on small screens, row layout on larger screens */}
         <input
@@ -73,3 +74,4 @@ const Search: React.FC<HeaderProps> = ({
 };
 
 export default Search;
+

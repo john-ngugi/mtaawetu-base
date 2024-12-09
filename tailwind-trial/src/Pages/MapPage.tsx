@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Home, Map, List, LayoutDashboard, Menu, X } from "lucide-react";
+import ReactDOM from "react-dom";
+import { Home, Map, List, LayoutDashboard, Menu, X} from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import SelectMenuMap from "../components/SelectMenuMap";
 import ToggleButton from "../components/ToggoleVisibilityBtn";
 import BottomSlidePanel from "../components/BottomSlidePanelIssues";
 import Search from "../components/Search";
-
+import { SheetComponent } from "@/components/Sheet";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner"
+import { calcPercentages } from "@/lib/utils";
+import DropDownComponent from "../components/Popover"
 // Define the type for suggestion (based on Nominatim response structure)
 interface Suggestion {
   place_id: string;
@@ -57,182 +62,262 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // Function to add the GeoJSON layer
-  const addGeoJsonLayer = async (
-    map: maplibregl.Map | null,
-    url: string,
-    id: string,
-    colorProperty: string,
-    numericProperty: string
-  ) => {
-    if (!map) {
-      console.error("Map instance is not available.");
-      return;
-    }
+ // Function to add the GeoJSON layer and handle feature click
+const addGeoJsonLayer = async (
+  map: maplibregl.Map | null,
+  url: string,
+  id: string,
+  colorProperty: string,
+) => {
+  if (!map) {
+    console.error("Map instance is not available.");
+    return;
+  }
 
-    try {
-      // Fetch the GeoJSON data from the server
-      const response = await fetch(url);
-      const estates = await response.json();
+  try {
+    // Fetch the GeoJSON data from the server
+    const response = await fetch(url);
+    const data = await response.json();
+    const data_with_percent_string = calcPercentages({geojson: data.geoJson,column: "access_index"});
+    const data_with_percent = JSON.parse(data_with_percent_string);
+    const accessIndexKey = "percent";
+    if (data && data.geoJson) {
+      console.log(data.geoJson);
 
-      if (estates && estates.geoJson) {
-        // setBoundCoords(estates.coordinates);
-        console.log(estates.geoJson);
-        // Add GeoJSON source
-        map.addSource(id, {
-          type: "geojson",
-          data: estates.geoJson, // Ensure this is a valid GeoJSON object
+      // Add GeoJSON source
+      map.addSource(id, {
+        type: "geojson",
+        data: data_with_percent, // Ensure this is a valid GeoJSON object
+      });
+
+      // Determine where to place the layer
+      const layers = map.getStyle().layers;
+      let labelLayerId: string | undefined;
+
+      if (layers) {
+        for (let i = 0; i < layers.length; i++) {
+          const layer = layers[i];
+          if (
+            layer.type === "symbol" &&
+            layer.layout &&
+            "text-field" in layer.layout
+          ) {
+            labelLayerId = layer.id;
+            break;
+          }
+        }
+      }
+
+      if (id == "Neighbourhoods") {
+        // Generate a random color for each feature
+        function getRandomColor() {
+          let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+          return "#" + randomColor.padStart(6, "0");
+        }
+
+        // Assign random colors to the features based on properties
+        const geojsonData = data_with_percent;
+        const propertyColors: Record<string, string> = {};
+        geojsonData.features.forEach((feature: any) => {
+          let propertyValue = feature.properties.name; // or any other property
+          if (!propertyColors[propertyValue]) {
+            propertyColors[propertyValue] = getRandomColor();
+          }
         });
 
-        // Insert the layer below the label layer
-        const layers = map.getStyle().layers;
-        let labelLayerId;
+        // Create fill-color expression for dynamic coloring
+        let fillColorExpression: any[] = ["case"];
+        Object.entries(propertyColors).forEach(([key, color]) => {
+          fillColorExpression.push(["==", ["get", `${colorProperty}`], key]);
+          fillColorExpression.push(color);
+        });
+        fillColorExpression.push("#ffffff"); // Fallback color
 
-        if (layers) {
-          // Check if layers is not undefined
-          for (let i = 0; i < layers.length; i++) {
-            const layer = layers[i];
-
-            // Check if layer and layer.layout exist and that it has the 'text-field' property
-            if (
-              layer.type === "symbol" &&
-              layer.layout &&
-              "text-field" in layer.layout
-            ) {
-              labelLayerId = layer.id;
-              break;
-            }
-          }
-        }
-        const layerId = id;
-        if (layerId == "Neighbourhoods") {
-          // Generate a random color for each feature
-          function getRandomColor() {
-            let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-            return "#" + randomColor.padStart(6, "0");
-          }
-
-          // Assign random colors to the features based on properties
-          const geojsonData = estates.geoJson;
-          const propertyColors: Record<string, string> = {};
-          geojsonData.features.forEach((feature: any) => {
-            let propertyValue = feature.properties.name; // or any other property
-            if (!propertyColors[propertyValue]) {
-              propertyColors[propertyValue] = getRandomColor();
-            }
-          });
-
-          // Create fill-color expression for dynamic coloring
-          let fillColorExpression: any[] = ["case"];
-          Object.entries(propertyColors).forEach(([key, color]) => {
-            fillColorExpression.push(["==", ["get", `${colorProperty}`], key]);
-            fillColorExpression.push(color);
-          });
-          fillColorExpression.push("#bfbfbf"); // Fallback color
-
-          // Add the GeoJSON layer with dynamic coloring
-          map.addLayer(
-            {
-              id: id,
-              type: "fill",
-              source: id,
-              layout: {},
-              paint: {
-                "fill-color": fillColorExpression as any,
-                "fill-opacity": 0.3,
-              },
-            },
-            labelLayerId // Place below the label layer
-          );
-        } else if (estates.geomType === "MultiPolygon") {
-          console.log("In if else else");
-          if (!estates.geoJson || !estates.geoJson.features) {
-            throw new Error("Invalid GeoJSON data.");
-          }
-
-          // Define type of GeoJSON feature
-          type GeoJSONFeature = {
-            properties: Record<string, any>;
-          };
-
-          // Extract unique values from the numeric property
-          const uniqueValues: number[] = Array.from(
-            new Set(
-              (estates.geoJson.features as GeoJSONFeature[]).map((feature) =>
-                Number(feature.properties[numericProperty])
-              )
-            )
-          );
-
-          // Generate random colors for each unique value
-          const colorMap: Record<number, string> = {};
-          uniqueValues.forEach((value) => {
-            colorMap[value] = `#${Math.floor(Math.random() * 16777215)
-              .toString(16)
-              .padStart(6, "0")}`;
-          });
-
-          // Create `fill-color` expression for MapLibre
-          const fillColorExpression: any[] = ["case"];
-          uniqueValues.forEach((value) => {
-            fillColorExpression.push(["==", ["get", numericProperty], value]);
-            fillColorExpression.push(colorMap[value]);
-          });
-          fillColorExpression.push("#bfbfbf"); // Default color if no match
-
-          map.addLayer(
-            {
-              id: id,
-              type: "fill",
-              source: id,
-              layout: {},
-              paint: {
-                "fill-color": fillColorExpression as any,
-                "fill-opacity": 0.3,
-              },
-            },
-            labelLayerId // Place below the label layer
-          );
-        } else if (estates.geomType === "MultiLineString") {
-          map.addLayer({
+        // Add the GeoJSON layer with dynamic coloring
+        map.addLayer(
+          {
             id: id,
-            type: "line",
+            type: "fill",
             source: id,
-            layout: {
-              "line-join": "round",
-              "line-cap": "round",
-            },
+            layout: {},
             paint: {
-              "line-color": "purple",
-              "line-width": 4,
+              "fill-color": fillColorExpression as any,
+              "fill-opacity": 0.3,
             },
-          });
-        } else {
-          // Add the GeoJSON layer with dynamic coloring
-          map.addLayer(
-            {
-              id: id,
-              type: "fill",
-              source: id,
-              layout: {},
-              paint: {
-                "fill-color": "#fff",
-                "fill-opacity": 0.3,
-              },
-            },
-            labelLayerId // Place below the label layer
-          );
-        }
-        // Update the loadedLayers state to include the new layer
-        setLoadedLayers((prevLayers) => [...prevLayers, layerId]);
-      } else {
-        console.error("Invalid GeoJSON data:", estates);
+          },
+          labelLayerId // Place below the label layer
+        )
       }
-    } catch (error) {
-      console.error("Error fetching GeoJSON data:", error);
+      // Add the layer based on the geometry type
+      else if (data.geomType === "MultiPolygon") {
+        // Generate random colors for features based on properties
+
+        const percentileColors = [
+            { range: [0, 1], color: "#ffffff" }, // White
+            { range: [1, 25], color: "#dbeeff" },  // Very Light Blue
+            { range: [26, 50], color: "#a6c8ff" }, // Soft Sky Blue
+            { range: [51, 75], color: "#5b9aff" }, // Medium Blue
+            { range: [76, 100], color: "#003f88" } // Deep Navy Blue
+        ];
+        
+        const fillColorExpression: any[] = ["case"];
+        percentileColors.forEach(({ range, color }) => {
+          fillColorExpression.push(
+            ["all", 
+              [">=", ["coalesce", ["to-number", ["get", accessIndexKey]], -1], range[0]], 
+              ["<=", ["coalesce", ["to-number", ["get", accessIndexKey]], -1], range[1]]],
+            color
+          );
+        });
+        fillColorExpression.push("#ffffff"); // Fallback color
+        
+        map.addLayer(
+          {
+            id: id,
+            type: "fill",
+            source: id,
+            layout: {},
+            paint: {
+              "fill-color": fillColorExpression as any ,
+              "fill-opacity": 0.4, // Test with full opacity
+            },
+          },
+          labelLayerId // Test without label layer placement
+        );
+      } else if (data.geomType === "MultiLineString") {
+        map.addLayer({
+          id: id,
+          type: "line",
+          source: id,
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#5b9aff",
+            "line-width": 3,
+          },
+        },
+        labelLayerId
+      );
+      } else {
+        map.addLayer(
+          {
+            id: id,
+            type: "fill",
+            source: id,
+            layout: {},
+            paint: {
+              "fill-color": "#fff",
+              "fill-opacity": 0.3,
+            },
+          },
+          labelLayerId
+        );
+      }
+
+      toast.success(`Layer ${id} added successfully`)
+
+      // Add click event listener for the layer
+      map.on("click", id, async (e) => {
+        if (!e.features || e.features.length === 0) {
+          console.warn("No features found at the click location.");
+          return;
+        }
+      
+        const feature = e.features[0];
+        const { id: featureId, properties } = feature;
+      
+        try {
+          // Fetch statistics from the server
+          const statsResponse = await fetch(`http://127.0.0.1:8000/products/get-map-stats/${encodeURIComponent(id)}/`, {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              featureId,
+              properties,
+            }),
+          });
+      
+          if (!statsResponse.ok) {
+            throw new Error(`Error fetching statistics: ${statsResponse.statusText}`);
+          }
+      
+          const statsData = await statsResponse.json();
+          console.log("Stats",statsData)
+          // Create a beautiful HTML structure for the popup
+          const popupContent = `
+            <div style="font-family: Arial, sans-serif; max-width: 400px;">
+              <h3 style="color: #333; margin-bottom: 8px;">Feature Details</h3>
+              <div style="margin-bottom: 12px;">
+                <strong>ID:</strong> ${id}<br>
+                <strong>Properties:</strong>
+                <ul style="margin: 0; padding-left: 18px; color: #555;">
+                  ${Object.entries(properties)
+                    .map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`)
+                    .join("")}
+                </ul>
+              </div>
+              <div id="sheet-container" style="margin-top: 16px;"></div>
+            </div>
+          `;
+      
+          // Add a popup with the generated content
+          new maplibregl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(popupContent)
+            .addTo(map);
+      
+          // Render the SheetComponent into the popup
+          const container = document.getElementById("sheet-container");
+          if (container) {
+            ReactDOM.render(<SheetComponent  statsData={statsData.response}/>, container);
+          }
+        } catch (error) {
+          console.error("Error fetching statistics:", error);
+        }
+      });
+      
+
+      
+      
+
+      // Update the loadedLayers state
+      setLoadedLayers((prevLayers) => [...prevLayers, id]);
+    } else {
+      console.error("Invalid GeoJSON data:", data);
     }
+  } catch (error) {
+    console.error("Error fetching GeoJSON data:", error);
+  }
+};
+
+
+
+  const addWMSLayer = (map: maplibregl.Map | null, layerName: string, apilink: string) => {
+    if (!map) {
+      console.error("Map instance is null. Cannot add WMS layer.");
+      return;
+    }
+  
+    map.addSource(layerName, {
+      type: "raster",
+      tiles: [apilink],
+      tileSize: 256,
+    });
+  
+    map.addLayer({
+      id: layerName,
+      type: "raster",
+      source: layerName,
+    });
+  
+    console.log(`WMS layer added: ${layerName}`);
   };
-  // Function to add a popup on click event to the map
+
+  // // Function to add a popup on click event to the map
   function addPopupOnMapClick(map: maplibregl.Map) {
     // Listen for click events on the map
     map.on("click", (e) => {
@@ -242,18 +327,23 @@ const Dashboard: React.FC = () => {
       setSelectedLat(coordinatelat);
       setSelectedLng(coordinatelng);
       setIsPanelVisible(true);
-      map.flyTo({
-        center: [coordinates.lng, coordinates.lat],
-        zoom: 19,
-        speed: 0.4,
-      });
+      // map.flyTo({
+      //   center: [coordinates.lng, coordinates.lat],
+      //   zoom: 19,
+      //   speed: 0.4,
+      // });
+
+      
+
       // Create a new popup and set its content and position
       // new maplibregl.Popup()
       //   .setLngLat([coordinates.lng, coordinates.lat]) // Set popup position
-      //   .setHTML(popupHTML) // Set popup content
+      //   .setHTML("<h1>Hello World!</h1>") // Set popup content
       //   .addTo(map); // Add the popup to the map
     });
   }
+
+
   const removeLayer = (layerId: string) => {
     if (mapRef.current && mapRef.current.getLayer(layerId)) {
       mapRef.current.removeLayer(layerId);
@@ -262,49 +352,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // function enableFeaturePopupOnLayer(map: maplibregl.Map, layerId: string) {
-  //   // Ensure the layer exists before adding the event listener
-  //   if (!map.getLayer(layerId)) {
-  //     console.error(`Layer with ID '${layerId}' not found.`);
-  //     return;
-  //   }
-
-  //   // Listen for click events on the specific GeoJSON layer
-  //   map.on("click", layerId, (e) => {
-  //     // Check if the clicked feature has geometry and properties
-  //     if (e.features && e.features.length > 0) {
-  //       const feature = e.features[0]; // Get the clicked feature
-  //       const coordinates =
-  //         feature.geometry.type === "Point"
-  //           ? (feature.geometry.coordinates as [number, number])
-  //           : e.lngLat.toArray(); // Get coordinates for point geometries
-
-  //       const description =
-  //         feature.properties?.description || "No description available"; // You can customize this
-
-  //       // Adjust coordinates if needed for map wrap-around effect
-  //       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-  //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  //       }
-
-  //       // Create a popup and set its content and position
-  //       new maplibregl.Popup()
-  //         .setLngLat(coordinates) // Set the popup position
-  //         .setHTML(`<strong>Description:</strong> ${description}`) // Set the popup content
-  //         .addTo(map); // Add the popup to the map
-  //     }
-  //   });
-
-  //   // Change cursor style to pointer when hovering over the features in the layer
-  //   map.on("mouseenter", layerId, () => {
-  //     map.getCanvas().style.cursor = "pointer";
-  //   });
-
-  //   // Reset cursor style when not hovering over features
-  //   map.on("mouseleave", layerId, () => {
-  //     map.getCanvas().style.cursor = "";
-  //   });
-  // }
+  
   // Initialize the map and add the GeoJSON layer
   useEffect(() => {
     if (mapRef.current) {
@@ -316,8 +364,8 @@ const Dashboard: React.FC = () => {
       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
       center: [36.8219, -1.2921],
       zoom: 15.5,
-      pitch: 60,
-      bearing: -17.6,
+      // pitch: 60,
+      // bearing: -17.6,
       container: "map",
       antialias: true,
       // maxBounds: boundCoords,
@@ -339,8 +387,7 @@ const Dashboard: React.FC = () => {
     // });
     // Add popup on map click
     addPopupOnMapClick(map);
-    // enableFeaturePopupOnLayer(map, "Neigbourhoods");
-    setCurrentMap("map 1")
+    setCurrentMap("map 1");
     return () => {
       map.remove(); // Clean up map on unmount
       mapRef.current = null;
@@ -381,9 +428,9 @@ const Dashboard: React.FC = () => {
   const maps: (
     | "Accessibility"
     | "Design Of Road Network"
-    | "Map 3"
+    | "Opportunity"
     | "Map 4"
-  )[] = ["Accessibility", "Design Of Road Network", "Map 3", "Map 4"];
+  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Map 4"];
 
   const mapData = {
     Accessibility: [
@@ -394,14 +441,14 @@ const Dashboard: React.FC = () => {
       },
       {
         id: 2,
-        name: "Hospital Accessibility",
-        apilink: "http://34.66.220.78/products/maps-wfs/nbihealthaccess/",
+        name: "nbihealthaccess",
+        apilink: "http://127.0.0.1:8000/products/maps-wfs/nbihealthaccess/",
       },
       {
         id: 3,
-        name: "Schools Accessibility",
+        name: "schoolaccessindexwalk",
         apilink:
-          "http://34.66.220.78/products/maps-wfs/schoolaccessindexwalk/",
+          "http://127.0.0.1:8000/products/maps-wfs/schoolaccessindexwalk/",
       },
     ],
     //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
@@ -409,9 +456,9 @@ const Dashboard: React.FC = () => {
     "Design Of Road Network": [
       {
         id: 1,
-        name: "sdna_1000m2018",
+        name: "sdna_1000meters_2018",
         apilink:
-          "http://34.66.220.78/products/maps/sdna_1000m2018/",
+          "http://127.0.0.1:8000/products/maps/sdna_1000meters_2018/",
       },
       {
         id: 2,
@@ -419,11 +466,11 @@ const Dashboard: React.FC = () => {
         apilink: "https://example.com/traffic-patterns",
       },
     ],
-    "Map 3": [
+    "Opportunity": [
       {
         id: 1,
-        name: "Parks and Recreation",
-        apilink: "https://example.com/parks-recreation",
+        name: "hospital_opportunity",
+        apilink: "http://127.0.0.1:8000/products/maps-wfs/hospital_opportunity",
       },
     ],
     "Map 4": [
@@ -474,13 +521,14 @@ const Dashboard: React.FC = () => {
                   items={mapData[mapName]} // Dynamically pass the maps based on category
                   category={mapName} // Pass the current category as the title
                   onClick={(name, apilink) =>
-                    addGeoJsonLayer(
+                    {if (apilink.includes("maps-wms")) {
+                      addWMSLayer( mapRef.current, name, apilink);
+                    }else{ addGeoJsonLayer(
                       mapRef.current,
                       apilink,
                       name,
                       "name",
-                      "population"
-                    )
+                    )}}
                   }
                 />
               ))}
@@ -503,22 +551,24 @@ const Dashboard: React.FC = () => {
               {loadedLayers.map((layer) => (
                 <div
                   key={layer}
-                  className="rounded-md px-2 py-2 flex-col items-center justify-between ring-1 ring-inset ring-gray-300  hover:bg-green-300"
+                  className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300  hover:bg-green-300"
                 >
-                  <span>{layer}</span>
-                  <div className="flex mt-1 ">
-                    {/* Hide Button */}
-                    <ToggleButton layerId={layer} map={mapRef.current} />{" "}
-                    {/* Use the ToggleButton */}
-                    {/* Remove Button */}
-                    <button
-                      className="rounded-md px-1 py-1 text-sm text-white bg-red-500 hover:bg-red-700"
+                  <div className="overflow-hidden w-3/4"><span>{layer}</span></div>
+                  <div className="flex mt-1">
+                    <DropDownComponent />
+                      {/* Remove Button */}
+                      <button
+                      className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
                       onClick={() => removeLayer(layer)}
                     >
                       <div className="flex flex-row align-middle justify-center">
-                        <div>{<X size="16" />}</div> <div>Remove</div>
+                        <div>{<X size="16" />}</div> 
                       </div>
-                    </button>
+                    </button>{" "}
+                    {/* Hide Button */}
+                    <ToggleButton layerId={layer} map={mapRef.current} />
+                    {/* Use the ToggleButton */}
+
                   </div>
                 </div>
               ))}
@@ -547,6 +597,7 @@ const Dashboard: React.FC = () => {
         {/* Map and content area */}
         <div className="flex-grow rounded-sm">
           <div id="map" className="w-full h-full" />
+          <Toaster />
           <BottomSlidePanel
             lat={selectedLat}
             lng={selectedLng}
