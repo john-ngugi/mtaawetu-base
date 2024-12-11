@@ -400,10 +400,10 @@ function Footer() {
                 href="#"
                 aria-label="Brand"
               >
-                Brand
+                Mtaa Wetu
               </a>
               <p className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-neutral-400">
-                © 2024 Preline Labs.
+                © 2024 Mtaa Wetu.
               </p>
             </div>
 
