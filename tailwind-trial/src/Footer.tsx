@@ -8,7 +8,7 @@ function Footer() {
             href="#"
             aria-label="Brand"
           >
-            Brand
+            Mtaa Wetu
           </a>
           <p className="mt-3 text-xs sm:text-sm text-gray-600 dark:text-neutral-400">
             © 2024 Mtaa Wetu.
@@ -21,22 +21,22 @@ function Footer() {
           </h4>
 
           <div className="mt-3 grid space-y-3 text-sm">
-            <p>
+            {/* <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                 href="#"
               >
                 Pricing
               </a>
-            </p>
-            <p>
+            </p> */}
+            {/* <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                 href="#"
               >
                 Changelog
               </a>
-            </p>
+            </p> */}
             <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
@@ -45,14 +45,14 @@ function Footer() {
                 Docs
               </a>
             </p>
-            <p>
+            {/* <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                 href="#"
               >
                 Download
               </a>
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -75,43 +75,11 @@ function Footer() {
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                 href="#"
               >
-                Blog
-              </a>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
                 Careers
               </a>{" "}
-              <span className="inline text-blue-600 dark:text-blue-500">
+              {/* <span className="inline text-blue-600 dark:text-blue-500">
                 — We're hiring
-              </span>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Customers
-              </a>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Newsroom
-              </a>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Sitemap
-              </a>
+              </span> */}
             </p>
           </div>
         </div>
@@ -136,14 +104,6 @@ function Footer() {
                 href="#"
               >
                 Help & Support
-              </a>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                eBook
               </a>
             </p>
             <p>
@@ -190,7 +150,7 @@ function Footer() {
             <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="https://github.com/john-ngugi/mtaawetu-base"
               >
                 GitHub
               </a>{" "}
@@ -200,28 +160,6 @@ function Footer() {
             </p>
           </div>
 
-          <h4 className="mt-7 text-xs font-semibold text-gray-900 uppercase">
-            Industries
-          </h4>
-
-          <div className="mt-3 grid space-y-3 text-sm">
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Financial Services
-              </a>
-            </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Education
-              </a>
-            </p>
-          </div>
         </div>
       </div>
 
