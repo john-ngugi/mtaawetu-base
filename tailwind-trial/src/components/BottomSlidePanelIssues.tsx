@@ -3,15 +3,15 @@ import { useState } from "react";
 import KisiiForm from "../components/KisiiForm";
 
 interface props {
-  lat: number | null;
-  lng: number | null;
+  // lat: number | null;
+  // lng: number | null;
   onLocationSelect: (lng: number, lat: number) => void;
   isVisible: boolean;
   onClose: () => void;
 }
 function BottomSlidePanel({
-  lat,
-  lng,
+  // lat,
+  // lng,
   isVisible,
   // onLocationSelect,
   onClose,
@@ -46,12 +46,12 @@ function BottomSlidePanel({
               className="flex justify-between items-center"
               id="issues-header"
             >
-              <h3
+              {/* <h3
                 className="title-name text-gray-700 text-lg font-semibold"
                 id="issues-title"
               >
                 Location: {lat} <span className="mr-2">{lng}</span>
-              </h3>
+              </h3> */}
               <button
                 className="text-center outline pl-2 pr-2 outline-1 rounded outline-gray-400 close-button text-gray-400 hover:text-white hover:bg-green-600"
                 onClick={onClose}

@@ -27,11 +27,11 @@ const Dashboard: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]); // Explicitly type suggestions as an array of Suggestion objects
   const MAPTILER_KEY = "Zk2vXxVka5bwTvXQmJ0l";
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
-  const [selectedLat, setSelectedLat] = useState<number | null>(null);
-  const [selectedLng, setSelectedLng] = useState<number | null>(null);
+  // const [selectedLat, setSelectedLat] = useState<number | null>(null);
+  // const [selectedLng, setSelectedLng] = useState<number | null>(null);
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
   const [isVisible, setIsPanelVisible] = useState(false);
-const ipAddress = '34.66.220.78'
+const ipAddress = 'mtaawetu.com'
   // Function to fetch possible location suggestions (limited to 4 results)
   const fetchSuggestions = async (input: string) => {
     try {
@@ -230,7 +230,7 @@ const addGeoJsonLayer = async (
       
         try {
           // Fetch statistics from the server
-          const statsResponse = await fetch(`http://3${ipAddress}//products/get-map-stats/${encodeURIComponent(id)}/`, {
+          const statsResponse = await fetch(`http://${ipAddress}//products/get-map-stats/${encodeURIComponent(id)}/`, {
             method: "POST", 
             headers: {
               "Content-Type": "application/json",
@@ -318,30 +318,30 @@ const addGeoJsonLayer = async (
   };
 
   // // Function to add a popup on click event to the map
-  function addPopupOnMapClick(map: maplibregl.Map) {
-    // Listen for click events on the map
-    map.on("click", (e) => {
-      const coordinates = e.lngLat; // Get the clicked coordinates
-      const coordinatelat = parseFloat(coordinates.lat.toFixed(2));
-      const coordinatelng = parseFloat(coordinates.lng.toFixed(2));
-      setSelectedLat(coordinatelat);
-      setSelectedLng(coordinatelng);
-      setIsPanelVisible(true);
-      // map.flyTo({
-      //   center: [coordinates.lng, coordinates.lat],
-      //   zoom: 19,
-      //   speed: 0.4,
-      // });
+  // function addPopupOnMapClick(map: maplibregl.Map) {
+  //   // Listen for click events on the map
+  //   map.on("click", (e) => {
+  //     const coordinates = e.lngLat; // Get the clicked coordinates
+  //     const coordinatelat = parseFloat(coordinates.lat.toFixed(2));
+  //     const coordinatelng = parseFloat(coordinates.lng.toFixed(2));
+  //     setSelectedLat(coordinatelat);
+  //     setSelectedLng(coordinatelng);
+  //     setIsPanelVisible(true);
+  //     // map.flyTo({
+  //     //   center: [coordinates.lng, coordinates.lat],
+  //     //   zoom: 19,
+  //     //   speed: 0.4,
+  //     // });
 
       
 
-      // Create a new popup and set its content and position
-      // new maplibregl.Popup()
-      //   .setLngLat([coordinates.lng, coordinates.lat]) // Set popup position
-      //   .setHTML("<h1>Hello World!</h1>") // Set popup content
-      //   .addTo(map); // Add the popup to the map
-    });
-  }
+  //     // Create a new popup and set its content and position
+  //     // new maplibregl.Popup()
+  //     //   .setLngLat([coordinates.lng, coordinates.lat]) // Set popup position
+  //     //   .setHTML("<h1>Hello World!</h1>") // Set popup content
+  //     //   .addTo(map); // Add the popup to the map
+  //   });
+  // }
 
 
   const removeLayer = (layerId: string) => {
@@ -386,7 +386,7 @@ const addGeoJsonLayer = async (
     //   addGeoJsonLayer(map); // Call the function to add the GeoJSON layer
     // });
     // Add popup on map click
-    addPopupOnMapClick(map);
+    // addPopupOnMapClick(map);
     setCurrentMap("map 1");
     return () => {
       map.remove(); // Clean up map on unmount
@@ -599,8 +599,8 @@ const addGeoJsonLayer = async (
           <div id="map" className="w-full h-full" />
           <Toaster />
           <BottomSlidePanel
-            lat={selectedLat}
-            lng={selectedLng}
+            // lat={selectedLat}
+            // lng={selectedLng}
             onClose={() => setIsPanelVisible(false)}
             onLocationSelect={(lng, lat) =>
               console.log("Location selected:", lng, lat)
