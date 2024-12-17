@@ -230,7 +230,7 @@ const addGeoJsonLayer = async (
       
         try {
           // Fetch statistics from the server
-          const statsResponse = await fetch(`http://${ipAddress}//products/get-map-stats/${encodeURIComponent(id)}/`, {
+          const statsResponse = await fetch(`https://${ipAddress}//products/get-map-stats/${encodeURIComponent(id)}/`, {
             method: "POST", 
             headers: {
               "Content-Type": "application/json",
@@ -442,13 +442,13 @@ const addGeoJsonLayer = async (
       {
         id: 2,
         name: "nbihealthaccess",
-        apilink: `http://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
+        apilink: `https://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
       },
       {
         id: 3,
         name: "schoolaccessindexwalk",
         apilink:
-          `http://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
+          `https://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
       },
     ],
     //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
@@ -458,7 +458,7 @@ const addGeoJsonLayer = async (
         id: 1,
         name: "sdna_1000meters_2018",
         apilink:
-          `http://${ipAddress}/products/maps/sdna_1000meters_2018/`,
+          `https://${ipAddress}/products/maps-wfs/sdna_1000meters_2018/`,
       },
       {
         id: 2,
@@ -470,7 +470,7 @@ const addGeoJsonLayer = async (
       {
         id: 1,
         name: "hospital_opportunity",
-        apilink: `http://${ipAddress}/products/maps-wfs/hospital_opportunity`,
+        apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity`,
       },
     ],
     "Map 4": [
