@@ -458,7 +458,7 @@ const addGeoJsonLayer = async (
         id: 1,
         name: "sdna_1000meters_2018",
         apilink:
-          `https://${ipAddress}/products/maps-wfs/sdna_1000meters_2018/`,
+          `https://${ipAddress}/products/maps/sdna_1000m2018/`,
       },
       {
         id: 2,
