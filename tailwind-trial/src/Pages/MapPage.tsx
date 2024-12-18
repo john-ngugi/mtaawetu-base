@@ -515,7 +515,7 @@ let labelLayerId: string | undefined;
       {
         id: 1,
         name: "NDVI",
-        apilink: `http://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+        apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
       },
       {
         id: 2,
