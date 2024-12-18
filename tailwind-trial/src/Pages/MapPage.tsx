@@ -502,7 +502,7 @@ const addWMSLayer = (
       {
         id: 1,
         name: "NDBI",
-        apilink: `http://127.0.0.1:8000/products/maps-wms/NDVI_modified_Nairobi`,
+        apilink: `http://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
       },
     ],
   };
