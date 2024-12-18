@@ -300,6 +300,7 @@ const addWMSLayer = (
   map: maplibregl.Map | null,
   layerName: string,
   wmsBaseUrl: string,
+  id: string,
 ) => {
   if (!map) {
     console.error("Map instance is null. Cannot add WMS layer.");
@@ -347,6 +348,8 @@ let labelLayerId: string | undefined;
     );
 
       console.log(`WMS layer added: ${layerName}`);
+      // Update the loadedLayers state
+      setLoadedLayers((prevLayers) => [...prevLayers, id]);
     })
     .catch(error => {
       console.error('Error fetching WMS layer:', error);
@@ -565,7 +568,7 @@ let labelLayerId: string | undefined;
                   category={mapName}
                   onClick={(name, apilink) => {
                     if (apilink.includes("maps-wms")) {
-                      addWMSLayer(mapRef.current, name, apilink);
+                      addWMSLayer(mapRef.current, name, apilink,name);
                     } else {
                       addGeoJsonLayer(mapRef.current, apilink, name, "name");
                     }
