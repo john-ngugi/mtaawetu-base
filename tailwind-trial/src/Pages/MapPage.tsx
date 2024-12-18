@@ -471,7 +471,8 @@ let labelLayerId: string | undefined;
     | "Design Of Road Network"
     | "Opportunity"
     | "Indices"
-  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices"];
+    | "Air Quality"
+  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices","Air Quality"];
 
   const mapData = {
     Accessibility: [
@@ -525,6 +526,21 @@ let labelLayerId: string | undefined;
         name: "NDBI",
         apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
       },
+
+    ],
+
+    "Air Quality": [
+      {
+        id: 1,
+        name: "NO2",
+        apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI`,
+      },
+      {
+        id: 2,
+        name: "SO2",
+        apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
+      },
+
     ],
   };
 
