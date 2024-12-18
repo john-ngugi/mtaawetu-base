@@ -520,7 +520,7 @@ let labelLayerId: string | undefined;
       {
         id: 2,
         name: "NDBI",
-        apilink: `https://${ipAddress}/products/maps-wms/personal:NDBI_Nairobi`,
+        apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
       },
     ],
   };
