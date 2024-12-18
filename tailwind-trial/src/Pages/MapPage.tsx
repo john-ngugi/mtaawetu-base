@@ -319,14 +319,32 @@ const addWMSLayer = (
         'tiles': [`${wmsTileUrl}`],
         'tileSize': 256,
       });
+// Determine where to place the layer
+const layers = map.getStyle().layers;
+let labelLayerId: string | undefined;
 
+  if (layers) {
+    for (let i = 0; i < layers.length; i++) {
+      const layer = layers[i];
+      if (
+        layer.type === "symbol" &&
+        layer.layout &&
+        "text-field" in layer.layout
+      ) {
+        labelLayerId = layer.id;
+        break;
+      }
+    }
+  }
       // Add the layer to the map
       map.addLayer({
         id: layerName,
         type: "raster",
         source: layerName,
         paint: {}
-      });
+      },
+    labelLayerId
+    );
 
       console.log(`WMS layer added: ${layerName}`);
     })
@@ -497,12 +515,12 @@ const addWMSLayer = (
       {
         id: 1,
         name: "NDVI",
-        apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+        apilink: `http://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
       },
       {
-        id: 1,
+        id: 2,
         name: "NDBI",
-        apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+        apilink: `https://${ipAddress}/products/maps-wms/personal:NDBI_Nairobi`,
       },
     ],
   };
