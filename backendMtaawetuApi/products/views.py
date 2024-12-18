@@ -324,9 +324,14 @@ def getMapStats(request, tablename):
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
+
+
 def get_wms_layer(request, layername):
-    # Base GeoServer WMS URL (update with your GeoServer's actual URL)
-    GEOSERVER_WMS_BASE_URL = "http://44.211.211.66:8080/geoserver/mtaawetu/wms"
+    """
+    Returns a WMS layer URL for the given layername in the specified format.
+    """
+    # Base GeoServer WMS URL
+    GEOSERVER_WMS_BASE_URL = "http://34.66.220.78:8080/geoserver/personal/wms"
     
     # Query parameters for WMS GetCapabilities
     params = {
@@ -336,17 +341,42 @@ def get_wms_layer(request, layername):
     }
 
     try:
-        # Make a request to GeoServer's GetCapabilities endpoint
+        # Verify if the layer exists in GeoServer
         response = requests.get(GEOSERVER_WMS_BASE_URL, params=params)
-        response.raise_for_status()  # Raise an error if the request fails
+        response.raise_for_status()
 
-        # Parse the response to check if the layer exists
         if layername in response.text:
-            # Construct the WMS layer URL
-            wms_layer_url = f"http://44.211.211.66:8080/geoserver/mtaawetu/wms?service=WMS&version=1.1.0&request=GetMap&layers=mtaawetu%3A{layername}&bbox=240302.28125%2C9846641.0%2C288697.15625%2C9871684.0&width=768&height=397&srs=EPSG%3A21037&styles=&format=image%2Fpng%3B%20mode%3D8bit"
-            return JsonResponse({"success": True, "wms_url": wms_layer_url})
+            # Construct the WMS layer URL in the desired format
+            wms_layer_url = (
+                f"{GEOSERVER_WMS_BASE_URL}"
+                f"?bbox={{bbox-epsg-3857}}"
+                f"&format=image/png"
+                f"&service=WMS"
+                f"&version=1.1.0"
+                f"&request=GetMap"
+                f"&srs=EPSG:3857"
+                f"&transparent=true"
+                f"&width=256"
+                f"&height=256"
+                f"&layers=personal:{layername}"
+            )
+            # Return the WMS layer URL in the required structure
+            return JsonResponse({
+                "success": True,
+                "layer": {
+                    "id": layername,
+                    "name": layername,
+                    "apilink": wms_layer_url,
+                }
+            })
         else:
-            return JsonResponse({"success": False, "error": f"Layer '{layername}' not found in GeoServer."}, status=404)
+            return JsonResponse({
+                "success": False,
+                "error": f"Layer '{layername}' not found in GeoServer."
+            }, status=404)
 
     except requests.RequestException as e:
-        return JsonResponse({"success": False, "error": str(e)}, status=500)    
+        return JsonResponse({
+            "success": False,
+            "error": str(e)
+        }, status=500)

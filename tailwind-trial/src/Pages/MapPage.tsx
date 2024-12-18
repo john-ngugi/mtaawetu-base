@@ -296,26 +296,46 @@ const addGeoJsonLayer = async (
 
 
 
-  const addWMSLayer = (map: maplibregl.Map | null, layerName: string, apilink: string) => {
-    if (!map) {
-      console.error("Map instance is null. Cannot add WMS layer.");
-      return;
-    }
-  
-    map.addSource(layerName, {
-      type: "raster",
-      tiles: [apilink],
-      tileSize: 256,
+const addWMSLayer = (
+  map: maplibregl.Map | null,
+  layerName: string,
+  wmsBaseUrl: string,
+) => {
+  if (!map) {
+    console.error("Map instance is null. Cannot add WMS layer.");
+    return;
+  }
+
+  fetch(wmsBaseUrl)
+    .then(response => response.json())  // Assuming the response is a JSON object
+    .then(data => {
+      const wmsTileUrl = data.layer.apilink;  // Get the WMS URL from the response
+      console.log(data);
+      console.log(wmsTileUrl);
+
+      // Add the WMS source to the map after the URL is fetched
+      map.addSource(layerName, {
+        'type': "raster",
+        'tiles': [`${wmsTileUrl}`],
+        'tileSize': 256,
+      });
+
+      // Add the layer to the map
+      map.addLayer({
+        id: layerName,
+        type: "raster",
+        source: layerName,
+        paint: {}
+      });
+
+      console.log(`WMS layer added: ${layerName}`);
+    })
+    .catch(error => {
+      console.error('Error fetching WMS layer:', error);
     });
-  
-    map.addLayer({
-      id: layerName,
-      type: "raster",
-      source: layerName,
-    });
-  
-    console.log(`WMS layer added: ${layerName}`);
-  };
+};
+
+
 
   // // Function to add a popup on click event to the map
   // function addPopupOnMapClick(map: maplibregl.Map) {
@@ -429,8 +449,8 @@ const addGeoJsonLayer = async (
     | "Accessibility"
     | "Design Of Road Network"
     | "Opportunity"
-    | "Map 4"
-  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Map 4"];
+    | "Indices"
+  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices"];
 
   const mapData = {
     Accessibility: [
@@ -473,11 +493,16 @@ const addGeoJsonLayer = async (
         apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity`,
       },
     ],
-    "Map 4": [
+    "Indices": [
       {
         id: 1,
-        name: "Waterways",
-        apilink: "https://example.com/waterways",
+        name: "NDVI",
+        apilink: `http://127.0.0.1:8000/products/maps-wms/NDVI_modified_Nairobi`,
+      },
+      {
+        id: 1,
+        name: "NDBI",
+        apilink: `http://127.0.0.1:8000/products/maps-wms/NDVI_modified_Nairobi`,
       },
     ],
   };
@@ -518,18 +543,15 @@ const addGeoJsonLayer = async (
               {maps.map((mapName) => (
                 <SelectMenuMap
                   key={mapName}
-                  items={mapData[mapName]} // Dynamically pass the maps based on category
-                  category={mapName} // Pass the current category as the title
-                  onClick={(name, apilink) =>
-                    {if (apilink.includes("maps-wms")) {
-                      addWMSLayer( mapRef.current, name, apilink);
-                    }else{ addGeoJsonLayer(
-                      mapRef.current,
-                      apilink,
-                      name,
-                      "name",
-                    )}}
-                  }
+                  items={mapData[mapName]}
+                  category={mapName}
+                  onClick={(name, apilink) => {
+                    if (apilink.includes("maps-wms")) {
+                      addWMSLayer(mapRef.current, name, apilink);
+                    } else {
+                      addGeoJsonLayer(mapRef.current, apilink, name, "name");
+                    }
+                  }}
                 />
               ))}
             </div>
