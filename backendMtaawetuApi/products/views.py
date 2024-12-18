@@ -331,7 +331,7 @@ def get_wms_layer(request, layername):
     Returns a WMS layer URL for the given layername in the specified format.
     """
     # Base GeoServer WMS URL
-    GEOSERVER_WMS_BASE_URL = "http://34.66.220.78:8080/geoserver/personal/wms"
+    GEOSERVER_WMS_BASE_URL = "https://mtaawetu.com/geoserver/personal/wms"
     
     # Query parameters for WMS GetCapabilities
     params = {
