@@ -16,11 +16,12 @@ interface items {
   id: number;
   name: string;
   apilink: string;
+  legendUrl: string|null;
 }
 interface props {
   items: items[];
   category: string;
-  onClick: (name: string, apilink: string) => void;
+  onClick: (name: string, apilink: string,legendUrl: string | null) => void;
 }
 
 // const people = ;
@@ -68,7 +69,7 @@ export default function Example({ items, category, onClick }: props) {
               <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white">
                 <Button
                   text="Add"
-                  onClick={() => onClick(item.name, item.apilink)}
+                  onClick={() => onClick(item.name, item.apilink, item.legendUrl)}
                 />
               </span>
             </ListboxOption>

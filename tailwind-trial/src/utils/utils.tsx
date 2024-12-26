@@ -58,3 +58,38 @@ export function calcPercentages({ geojson, column }: CalcPercentagesInterface): 
 
 
 // get the column suggested.
+
+// legendManager.ts
+export const showLegend = (legendUrl: string | null, layerName: string) => {
+  const legendElement = document.getElementById("legend");
+  const legendContent = document.getElementById("legend-content");
+
+  if (!legendElement || !legendContent) {
+    console.error("Legend elements are missing in the DOM.");
+    return;
+  }
+
+  // Ensure legend is visible
+  legendElement.classList.remove("hidden");
+
+  // Add legend entry for the new layer
+  const listItem = document.createElement("li");
+  listItem.id = `legend-${layerName}`; // Unique ID for easy removal
+  listItem.innerHTML = `<img src="${legendUrl}" alt="${layerName} legend" class="inline-block mr-2" /> <span>${layerName}</span>`;
+  legendContent.appendChild(listItem);
+};
+
+export const hideLegend = (layerName: string) => {
+  const legendEntry = document.getElementById(`legend-${layerName}`);
+  if (legendEntry) {
+    legendEntry.remove();
+  }
+
+  const legendContent = document.getElementById("legend-content");
+  const legendElement = document.getElementById("legend");
+  
+  // Hide legend if no entries remain
+  if (legendContent && legendContent.children.length === 0 && legendElement) {
+    legendElement.classList.add("hidden");
+  }
+};

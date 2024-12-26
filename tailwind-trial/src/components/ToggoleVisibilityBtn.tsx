@@ -14,6 +14,13 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ layerId, map }) => {
     if (map) {
       const visibility = isVisible ? "none" : "visible"; // Toggle between 'none' and 'visible'
       map.setLayoutProperty(layerId, "visibility", visibility); // Update the map layer visibility
+
+      // Handle legend visibility
+      const legendEntry = document.getElementById(`legend-${layerId}`);
+      if (legendEntry) {
+        legendEntry.style.display = isVisible ? "none" : "block"; // Toggle legend visibility
+      }
+
       setIsVisible(!isVisible); // Update the state
     }
   };
@@ -23,11 +30,9 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ layerId, map }) => {
       onClick={toggleLayer}
       className="rounded-md px-1 py-1 text-sm text-white bg-green-600 hover:bg-green-500"
     >
-      {/* {isVisible ? "Hide" : "Show"} */}
       <div className="flex flex-row">
         {isVisible ? <EyeOff size="16" /> : <Eye size="16" />}{" "}
         <span className="mr-1"></span>
-        {/* {isVisible ? "Hide" : "Show"} Layer */}
       </div>
     </button>
   );

@@ -12,6 +12,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner"
 import { calcPercentages } from "../utils/utils";
 import DropDownComponent from "../components/Popover"
+import { showLegend } from "../utils/utils";
+import { hideLegend } from "../utils/utils";
 // Define the type for suggestion (based on Nominatim response structure)
 interface Suggestion {
   place_id: string;
@@ -32,6 +34,7 @@ const Dashboard: React.FC = () => {
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
   const [isVisible, setIsPanelVisible] = useState(false);
   const ipAddress = 'mtaawetu.com'
+  
   // Function to fetch possible location suggestions (limited to 4 results)
   const fetchSuggestions = async (input: string) => {
     try {
@@ -390,6 +393,7 @@ const Dashboard: React.FC = () => {
       mapRef.current.removeLayer(layerId);
       mapRef.current.removeSource(layerId); // Remove source as well
       setLoadedLayers(loadedLayers.filter((layer) => layer !== layerId)); // Update state
+      hideLegend(layerId);
     }
   };
 
@@ -413,7 +417,7 @@ const Dashboard: React.FC = () => {
     });
 
     mapRef.current = map; // Save the map instance to the ref
-    map.addControl(new maplibregl.NavigationControl(), "bottom-right");
+    map.addControl(new maplibregl.NavigationControl(), "top-right");
     // map.addControl(new maptilersdk.MaptilerTerrainControl(), "top-left");
     // Create and add the scale control
     const scale = new ScaleControl({
@@ -480,17 +484,20 @@ const Dashboard: React.FC = () => {
         id: 1,
         name: "Neighbourhoods",
         apilink: "https://home.mtaawetu.com/get-estates/",
+        legendUrl: null,
       },
       {
         id: 2,
         name: "nbihealthaccess",
         apilink: `https://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
+        legendUrl: null,
       },
       {
         id: 3,
         name: "schoolaccessindexwalk",
         apilink:
           `https://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
+          legendUrl: null,
       },
     ],
     //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
@@ -501,11 +508,13 @@ const Dashboard: React.FC = () => {
         name: "sdna_1000meters_2018",
         apilink:
           `https://${ipAddress}/products/maps/sdna_1000m2018/`,
+          legendUrl: null,
       },
       {
         id: 2,
         name: "Traffic Patterns",
         apilink: "https://example.com/traffic-patterns",
+        legendUrl: null,
       },
     ],
     "Opportunity": [
@@ -513,6 +522,7 @@ const Dashboard: React.FC = () => {
         id: 1,
         name: "hospital_opportunity",
         apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity`,
+        legendUrl: null,
       },
     ],
     "Indices": [
@@ -520,11 +530,14 @@ const Dashboard: React.FC = () => {
         id: 1,
         name: "NDVI",
         apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+        legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDVI_modified_Nairobi' ,
+        
       },
       {
         id: 2,
         name: "NDBI",
         apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
+        legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDBI_Nairobi' ,
       },
 
     ],
@@ -534,11 +547,13 @@ const Dashboard: React.FC = () => {
         id: 1,
         name: "NO2",
         apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI`,
+        legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI' ,
       },
       {
         id: 2,
         name: "SO2",
         apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
+        legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI' ,
       },
 
     ],
@@ -580,14 +595,27 @@ const Dashboard: React.FC = () => {
                   key={mapName}
                   items={mapData[mapName]}
                   category={mapName}
-                  onClick={(name, apilink) => {
+                  onClick={(name, apilink, legendUrl) => {
+                    const legendElement = document.getElementById("legend");
+                    const legendContent = document.getElementById("legend-content");
+
+                    if (!legendElement || !legendContent) {
+                      console.error("Legend elements are missing in the DOM.");
+                      return;
+                    }
+
                     if (apilink.includes("maps-wms")) {
                       addWMSLayer(mapRef.current, name, apilink, name);
+                      showLegend(legendUrl, name); // Show legend for the new layer
                     } else {
                       addGeoJsonLayer(mapRef.current, apilink, name, "name");
+                      // Hide the legend
+                      legendElement.classList.add("hidden");
                     }
                   }}
                 />
+
+
               ))}
             </div>
           </div>
@@ -653,6 +681,13 @@ const Dashboard: React.FC = () => {
         {/* Map and content area */}
         <div className="flex-grow rounded-sm">
           <div id="map" className="w-full h-full" />
+          <div
+              id="legend"
+              className="absolute bottom-4 right-4 bg-white p-4 rounded-md shadow-md border border-gray-300 hidden"
+            >
+              <h4 className="font-semibold mb-2">Legend</h4>
+              <ul id="legend-content" className="text-sm space-y-1"></ul>
+            </div>
           <Toaster />
           <BottomSlidePanel
             // lat={selectedLat}

@@ -27,7 +27,7 @@ export default function Home() {
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+                src="https://github.com/john-ngugi/Email-Imgs/blob/main/favicon-16x16.png?raw=true"
                 className="h-8 w-auto"
               />
             </a>
@@ -63,7 +63,7 @@ export default function Home() {
                 <span className="sr-only">Your Company</span>
                 <img
                   alt=""
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+                  src="https://github.com/john-ngugi/Email-Imgs/blob/main/favicon-16x16.png?raw=true"
                   className="h-8 w-auto"
                 />
               </a>

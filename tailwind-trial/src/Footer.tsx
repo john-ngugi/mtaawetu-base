@@ -65,7 +65,7 @@ function Footer() {
             <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="https://home.mtaawetu.com/about-us"
               >
                 About us
               </a>
