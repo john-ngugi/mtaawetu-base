@@ -471,27 +471,6 @@ const Dashboard: React.FC = () => {
     //   await fetchSuggestions(searchQuery);
     // }
   };
-  const months = [
-    { id: 1, name: "JAN" },
-    { id: 2, name: "FEB" },
-    { id: 3, name: "MAR" },
-    { id: 4, name: "APR" },
-    { id: 5, name: "MAY" },
-    { id: 6, name: "JUN" },
-    { id: 7, name: "JUL" },
-    { id: 8, name: "AUG" },
-    { id: 9, name: "SEP" },
-    { id: 10, name: "OCT" },
-    { id: 11, name: "NOV" },
-    { id: 12, name: "DEC" }
-  ];
-  
-  const no2AirQualityIndexTimeseries2024 = months.map(month => ({
-    id: month.id,
-    name: `${month.name} NO2`,
-    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_${month.id}_2024`,
-    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI'
-  }));
 
   const maps: (
     | "Accessibility"
@@ -580,7 +559,80 @@ const Dashboard: React.FC = () => {
         legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI' ,
       },
     ],
-    "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
+    "NO2 Air Quality Index Timeseries 2024": [
+  {
+    id: 1,
+    name: "JAN NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_1_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 2,
+    name: "FEB NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_2_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 3,
+    name: "MAR NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_3_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 4,
+    name: "APR NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_4_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 5,
+    name: "MAY NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_5_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 6,
+    name: "JUN NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_6_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 7,
+    name: "JUL NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_7_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 8,
+    name: "AUG NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_8_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 9,
+    name: "SEP NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_9_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 10,
+    name: "OCT NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_10_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 11,
+    name: "NOV NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_11_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  },
+  {
+    id: 12,
+    name: "DEC NO2",
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_12_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI',
+  }
+],
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
