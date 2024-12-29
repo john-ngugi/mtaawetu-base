@@ -229,8 +229,9 @@ const Dashboard: React.FC = () => {
           }
 
           const feature = e.features[0];
-          const { id: featureId, properties } = feature;
-
+          const { id: featureId, properties } = feature;        
+          // Extract the coordinates
+          const { lng, lat } = e.lngLat;
           try {
             // Fetch statistics from the server
             const statsResponse = await fetch(`https://${ipAddress}//products/get-map-stats/${encodeURIComponent(id)}/`, {
@@ -241,6 +242,7 @@ const Dashboard: React.FC = () => {
               body: JSON.stringify({
                 featureId,
                 properties,
+                coordinates: { lat, lng },
               }),
             });
 
@@ -469,6 +471,27 @@ const Dashboard: React.FC = () => {
     //   await fetchSuggestions(searchQuery);
     // }
   };
+  const months = [
+    { id: 1, name: "JAN" },
+    { id: 2, name: "FEB" },
+    { id: 3, name: "MAR" },
+    { id: 4, name: "APR" },
+    { id: 5, name: "MAY" },
+    { id: 6, name: "JUN" },
+    { id: 7, name: "JUL" },
+    { id: 8, name: "AUG" },
+    { id: 9, name: "SEP" },
+    { id: 10, name: "OCT" },
+    { id: 11, name: "NOV" },
+    { id: 12, name: "DEC" }
+  ];
+  
+  const no2AirQualityIndexTimeseries2024 = months.map(month => ({
+    id: month.id,
+    name: `${month.name} NO2`,
+    apilink: `https://${ipAddress}/products/maps-wms/personal:Nairobi_NO2_AQI_UN_${month.id}_2024`,
+    legendUrl: 'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI'
+  }));
 
   const maps: (
     | "Accessibility"
@@ -476,7 +499,8 @@ const Dashboard: React.FC = () => {
     | "Opportunity"
     | "Indices"
     | "Air Quality"
-  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices", "Air Quality"];
+    | "NO2 Air Quality Index Timeseries 2024"
+  )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices", "Air Quality","NO2 Air Quality Index Timeseries 2024"];
 
   const mapData = {
     Accessibility: [
@@ -555,8 +579,8 @@ const Dashboard: React.FC = () => {
         apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
         legendUrl:'https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI' ,
       },
-
     ],
+    "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -609,8 +633,6 @@ const Dashboard: React.FC = () => {
                       showLegend(legendUrl, name); // Show legend for the new layer
                     } else {
                       addGeoJsonLayer(mapRef.current, apilink, name, "name");
-                      // Hide the legend
-                      legendElement.classList.add("hidden");
                     }
                   }}
                 />
@@ -669,7 +691,8 @@ const Dashboard: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        <Search
+        <div className="flex flex-row items-center justify-between  bg-gray-100 shadow-md">        
+          <Search
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           suggestions={suggestions}
@@ -677,6 +700,16 @@ const Dashboard: React.FC = () => {
           flyTo={flyTo} // Pass flyTo as a prop to Header
           fetchSuggestions={fetchSuggestions} // Pass fetchSuggestions to update dynamically
         />
+
+        <div className="">
+          <ul className="flex flex-row cursor-pointer space-x-4 p-4">
+            <li><a href="#">Download</a></li>
+            <li><a href="#">Get Report</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </div>
+        
+        </div>
 
         {/* Map and content area */}
         <div className="flex-grow rounded-sm">
