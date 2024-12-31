@@ -244,7 +244,7 @@ const Dashboard: React.FC = () => {
           const fetchNeighborhood = async () => {
             try {
               const response = await fetch(
-                `http://127.0.0.1:8000/products/get-curent-neighbourhood/?coordinates=${lng},${lat}`,
+                `https://${ipAddress}/products/get-curent-neighbourhood/?coordinates=${lng},${lat}`,
                 {
                   method: "GET",
                   headers: {
