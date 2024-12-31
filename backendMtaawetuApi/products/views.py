@@ -11,6 +11,7 @@ from io import BytesIO
 from datetime import datetime
 from dotenv import load_dotenv
 from django.views.decorators.csrf import csrf_exempt
+import shapely
 # Create your views here.
 import geopandas as gpd 
 import json
@@ -101,6 +102,41 @@ def query(table_name):
     # Use GeoPandas to run the query and read it as a GeoDataFrame
     gdf = gpd.GeoDataFrame.from_postgis(query, con=engine, geom_col='geom')
     return gdf
+def getCurrentNeighbourhood(request):
+    engine = get_db_engine()  # Use cached engine
+    coordinates = request.GET.get("coordinates")
+    try:
+        # Parse the coordinates into a list of floats
+        coords = [float(coord) for coord in coordinates.split(",")]
+        if len(coords) != 2:
+            return JsonResponse({"error": "Invalid coordinates format, expected two values"}, status=400)
+    except ValueError:
+        return JsonResponse({"error": "Invalid coordinates format, ensure they are numbers"}, status=400)
+
+    try:
+        # Fetch all data
+        sql_query = "SELECT name, geom FROM estates_nairobi"
+        gdf = gpd.GeoDataFrame.from_postgis(sql_query, con=engine, geom_col='geom')
+        # Ensure CRS is set
+        gdf.to_crs("EPSG:4326", inplace=True)
+        
+        # Create a Point object for the given coordinates
+        point = shapely.Point(coords[0], coords[1])
+
+        # Filter GeoDataFrame by spatial containment
+        filtered_gdf = gdf[gdf.contains(point)]
+
+        if not filtered_gdf.empty:
+            # Convert to GeoJSON
+            geojson = filtered_gdf.to_json()
+            return JsonResponse({
+                "geojson": geojson,
+            })
+        else:
+            return JsonResponse({"message": "No neighborhood found for the given coordinates."}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
 
 def getAccessibility(request, table_name):
     if request.method == "GET":

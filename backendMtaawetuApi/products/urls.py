@@ -9,4 +9,5 @@ urlpatterns = [
     path('maps-wfs/<str:table_name>/',views.fetch_geojson_from_geoserver,name="getWFS"),
     path('maps-wms/<str:layername>/',views.get_wms_layer,name="getWMS"),
     path('get-map-stats/<str:tablename>/',views.getMapStats),
+    path('get-curent-neighbourhood/',views.getCurrentNeighbourhood),
 ]
