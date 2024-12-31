@@ -24,10 +24,10 @@ interface SheetComponentProps {
   statsData: {
     [key: string]: any; // This will accept any data object
   };
-  
+  areaName:string;
 }
 
-export function SheetComponent({ statsData }: SheetComponentProps) {
+export function SheetComponent({ statsData,areaName }: SheetComponentProps) {
   // Check if `access_index_percent` is available
   const accessIndexPercent = statsData.mean_access_index_percent
     ? parseFloat(statsData.mean_access_index_percent)
@@ -74,11 +74,11 @@ export function SheetComponent({ statsData }: SheetComponentProps) {
     <div>
       <Sheet>
       <SheetTrigger asChild>
-        <Button>View Stats</Button>
+        <Button>Analyse</Button>
       </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Statistics Overview</SheetTitle>
+            <SheetTitle>{areaName} Statistics Overview</SheetTitle>
             <SheetDescription>
               Visualizing the key statistics of the data.
             </SheetDescription>
