@@ -23,7 +23,7 @@ interface Suggestion {
   lon: string;
 }
 const Dashboard: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,6 +31,7 @@ const Dashboard: React.FC = () => {
   const [neighbourhoodName, setCurrentNeighborhoodName] = useState<string>("");
   const MAPTILER_KEY = "Zk2vXxVka5bwTvXQmJ0l";
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
+  const [activePanel, setActivePanel] = useState("select");
   // const [selectedLat, setSelectedLat] = useState<number | null>(null);
   // const [selectedLng, setSelectedLng] = useState<number | null>(null);
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
@@ -678,142 +679,169 @@ const Dashboard: React.FC = () => {
     "SO2 Air Quality Index Timeseries 2024": so2AirQualityIndexTimeseries2024,
   };
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="flex h-screen w-screen">
+    <div className="flex h-screen w-screen bg-white">
       {/* Sidebar */}
-      <aside
-        className={`z-20 bg-indigo-600 text-white p-5 flex flex-col space-y-6 transition-transform duration-300 ${
-          isSidebarOpen ? "w-64 md:w-64 sm:w-48 overflow-y-scroll" : "w-16"
-        }`} // Set a smaller width for small screens
-      >
-        <button className="text-white" onClick={toggleSidebar}>
+      <aside className="z-20 bg-indigo-600 text-white p-5 flex flex-col space-y-6 w-16">
+        <button className="text-white">
           <Menu color="white" />
         </button>
         <nav className="flex flex-col space-y-4">
           <a href="#" className="flex items-center space-x-3">
             <Home color="white" />
-            <span className={`${isSidebarOpen ? "block" : "hidden"}`}>
-              Home
-            </span>
           </a>
-          <div>
-            <button className="flex items-center space-x-3">
-              <Map color="white" />
-              <span className={`${isSidebarOpen ? "block" : "hidden"}`}>
-                Maps
-              </span>
-            </button>
-            {/* Dropdown to choose map */}
-            <div
-              className={`${
-                isSidebarOpen ? "block" : "hidden"
-              } ml-4  mt-2 space-y-2`}
-            >
-              {maps.map((mapName) => (
-                <SelectMenuMap
-                  key={mapName}
-                  items={mapData[mapName]}
-                  category={mapName}
-                  onClick={(name, apilink, legendUrl) => {
-                    const legendElement = document.getElementById("legend");
-                    const legendContent =
-                      document.getElementById("legend-content");
-
-                    if (!legendElement || !legendContent) {
-                      console.error("Legend elements are missing in the DOM.");
-                      return;
-                    }
-
-                    if (apilink.includes("maps-wms")) {
-                      addWMSLayer(mapRef.current, name, apilink, name);
-                      showLegend(legendUrl, name); // Show legend for the new layer
-                    } else {
-                      addGeoJsonLayer(mapRef.current, apilink, name, "name");
-                    }
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          <div>
-            <button className="flex items-center space-x-3">
-              <List color="white" />
-              <span className={`${isSidebarOpen ? "block" : "hidden"}`}>
-                Layers
-              </span>
-            </button>
-
-            {/* Legend with hide/remove buttons */}
-            <div
-              className={`${
-                isSidebarOpen ? "block" : "hidden"
-              } ml-1 mt-2 space-y-2`}
-            >
-              {loadedLayers.map((layer) => (
-                <div
-                  key={layer}
-                  className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300  hover:bg-green-300"
-                >
-                  <div className="overflow-hidden w-3/4">
-                    <span>{layer}</span>
-                  </div>
-                  <div className="flex mt-1">
-                    <DropDownComponent />
-                    {/* Remove Button */}
-                    <button
-                      className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
-                      onClick={() => removeLayer(layer)}
-                    >
-                      <div className="flex flex-row align-middle justify-center">
-                        <div>{<X size="16" />}</div>
-                      </div>
-                    </button>{" "}
-                    {/* Hide Button */}
-                    <ToggleButton layerId={layer} map={mapRef.current} />
-                    {/* Use the ToggleButton */}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <a href="#" className="flex items-center space-x-3">
+            <Map color="white" />
+          </a>
+          <a href="#" className="flex items-center space-x-3">
+            <List color="white" />
+          </a>
           <a href="#" className="flex items-center space-x-3">
             <LayoutDashboard color="white" />
-            <span className={`${isSidebarOpen ? "block" : "hidden"}`}>
-              Dashboard
-            </span>
           </a>
         </nav>
       </aside>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        <div className="flex flex-row items-center justify-between  bg-gray-100 shadow-md">
+        <div className="flex flex-row items-center justify-between bg-white shadow-md p-2">
           <Search
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             suggestions={suggestions}
-            setSuggestions={setSuggestions} // Allow clearing of suggestions
-            flyTo={flyTo} // Pass flyTo as a prop to Header
-            fetchSuggestions={fetchSuggestions} // Pass fetchSuggestions to update dynamically
+            setSuggestions={setSuggestions}
+            flyTo={flyTo}
+            fetchSuggestions={fetchSuggestions}
           />
         </div>
 
         {/* Map and content area */}
-        <div className="flex-grow rounded-sm">
-          <div id="map" className="w-full h-full" />
+        <div className="flex-grow relative">
+          <div id="map" className="w-full h-full rounded-sm" />
+
+          {/* Map toggleable panels */}
+          <div className="absolute top-2 left-8 bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
+            {/* Toggle Buttons */}
+            <div className="flex justify-between mb-4">
+              <button
+                onClick={() => setActivePanel("select")}
+                className={`px-4 py-2 rounded-md ${
+                  activePanel === "select"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-200 text-indigo-600"
+                }`}
+              >
+                Select Layers
+              </button>
+              <button
+                onClick={() => setActivePanel("loaded")}
+                className={`px-4 py-2 rounded-md ${
+                  activePanel === "loaded"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-200 text-indigo-600"
+                }`}
+              >
+                Loaded Layers
+              </button>
+            </div>
+
+            {/* Panels */}
+            {activePanel === "select" ? (
+              <div>
+                <h4 className="font-semibold text-indigo-600 mb-2">
+                  Map Categories
+                </h4>
+                <p className="text-gray-600 text-sm mb-4">
+                  Select a category to view and interact with its corresponding
+                  map layers.
+                </p>
+                <div className="space-y-2">
+                  {maps.map((mapName) => (
+                    <SelectMenuMap
+                      key={mapName}
+                      items={mapData[mapName]}
+                      category={mapName}
+                      onClick={(name, apilink, legendUrl) => {
+                        const legendElement = document.getElementById("legend");
+                        const legendContent =
+                          document.getElementById("legend-content");
+
+                        if (!legendElement || !legendContent) {
+                          console.error(
+                            "Legend elements are missing in the DOM."
+                          );
+                          return;
+                        }
+
+                        if (apilink.includes("maps-wms")) {
+                          addWMSLayer(mapRef.current, name, apilink, name);
+                          showLegend(legendUrl, name); // Show legend for the new layer
+                        } else {
+                          addGeoJsonLayer(
+                            mapRef.current,
+                            apilink,
+                            name,
+                            "name"
+                          );
+                        }
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h4 className="font-semibold text-indigo-600 mb-2">
+                  Loaded Layers
+                </h4>
+                <div className={`ml-1 mt-2 space-y-2`}>
+                  {loadedLayers.map((layer) => (
+                    <div
+                      key={layer}
+                      className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300 hover:bg-green-300"
+                    >
+                      {/* Layer Name */}
+                      <div className="overflow-hidden w-3/4">
+                        <span>{layer}</span>
+                      </div>
+                      {/* Layer Controls */}
+                      <div className="flex mt-1">
+                        <DropDownComponent />
+                        {/* Remove Button */}
+                        <button
+                          className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
+                          onClick={() => removeLayer(layer)}
+                        >
+                          <div className="flex flex-row align-middle justify-center">
+                            <div>{<X size="16" />}</div>
+                          </div>
+                        </button>
+                        {/* Toggle Button */}
+                        <ToggleButton layerId={layer} map={mapRef.current} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Legend */}
           <div
             id="legend"
             className="absolute bottom-4 right-4 bg-white p-4 rounded-md shadow-md border border-gray-300 hidden"
           >
-            <h4 className="font-semibold mb-2">Legend</h4>
-            <ul id="legend-content" className="text-sm space-y-1"></ul>
+            <h4 className="font-semibold mb-2 text-indigo-600">Legend</h4>
+            <ul
+              id="legend-content"
+              className="text-sm space-y-1 text-gray-700"
+            ></ul>
           </div>
+
           <Toaster />
           <BottomSlidePanel
-            // lat={selectedLat}
-            // lng={selectedLng}
             onClose={() => setIsPanelVisible(false)}
             onLocationSelect={(lng, lat) =>
               console.log("Location selected:", lng, lat)

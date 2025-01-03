@@ -168,7 +168,7 @@ def getAccessibility(request, table_name):
 @functools.cache
 def fetch_geojson_from_geoserver(request,table_name):
     # GeoServer WFS endpoint URL
-    wfs_url = "http://3.80.129.244:8080/geoserver/mtaawetu/wms"
+    wfs_url = "http://34.66.220.78:8080/geoserver/personal/wms"
 
     # Layer name (ensure this is the correct workspace and layer name)
     layer_name = f"mtaawetu:{table_name}"
