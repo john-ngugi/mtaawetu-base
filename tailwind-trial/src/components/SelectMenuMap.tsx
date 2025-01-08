@@ -16,12 +16,12 @@ interface items {
   id: number;
   name: string;
   apilink: string;
-  legendUrl: string|null;
+  legendUrl: string | null;
 }
 interface props {
   items: items[];
   category: string;
-  onClick: (name: string, apilink: string,legendUrl: string | null) => void;
+  onClick: (name: string, apilink: string, legendUrl: string | null) => void;
 }
 
 // const people = ;
@@ -31,7 +31,7 @@ export default function Example({ items, category, onClick }: props) {
 
   return (
     <Listbox value={selected} onChange={setSelected}>
-      <Label className="block text-sm font-medium leading-6 text-white">
+      <Label className="block text-sm font-medium leading-6 text-gray-500">
         {category}
       </Label>
       <div className="relative mt-2">
@@ -69,7 +69,9 @@ export default function Example({ items, category, onClick }: props) {
               <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white">
                 <Button
                   text="Add"
-                  onClick={() => onClick(item.name, item.apilink, item.legendUrl)}
+                  onClick={() =>
+                    onClick(item.name, item.apilink, item.legendUrl)
+                  }
                 />
               </span>
             </ListboxOption>

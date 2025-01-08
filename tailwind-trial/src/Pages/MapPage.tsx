@@ -646,7 +646,7 @@ const Dashboard: React.FC = () => {
       {
         id: 1,
         name: "NDVI",
-        apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+        apilink: `http://127.0.0.1:8000/products/maps-wms/NDVI_modified_Nairobi`,
         legendUrl:
           "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDVI_modified_Nairobi",
       },
