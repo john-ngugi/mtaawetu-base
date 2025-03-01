@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import {
   Label,
   Listbox,
@@ -12,26 +11,37 @@ import {
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Button from "../components/Button";
 
-interface items {
+interface Items {
   id: number;
   name: string;
   apilink: string;
   legendUrl: string | null;
 }
-interface props {
-  items: items[];
+
+interface Props {
+  items: Items[];
   category: string;
   onClick: (name: string, apilink: string, legendUrl: string | null) => void;
 }
 
-// const people = ;
+export default function Example({ items, category, onClick }: Props) {
+  const [selected, setSelected] = useState<Items | null>(null);
 
-export default function Example({ items, category, onClick }: props) {
-  const [selected, setSelected] = useState(items[0]);
+  useEffect(() => {
+    if (items.length > 0) {
+      setSelected(items[0]);
+    }
+  }, [items]);
+
+  const handleChange = (newValue: Items) => {
+    setSelected(newValue);
+  };
+
+  if (!selected) return <div>Loading...</div>;
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
-      <Label className="block text-sm font-medium leading-6 text-gray-500">
+    <Listbox value={selected} onChange={handleChange}>
+      <Label className="block text-sm font-medium leading-6 text-indigo-400">
         {category}
       </Label>
       <div className="relative mt-2">
@@ -47,10 +57,7 @@ export default function Example({ items, category, onClick }: props) {
           </span>
         </ListboxButton>
 
-        <ListboxOptions
-          transition
-          className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-        >
+        <ListboxOptions className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           {items.map((item) => (
             <ListboxOption
               key={item.id}
@@ -81,5 +88,3 @@ export default function Example({ items, category, onClick }: props) {
     </Listbox>
   );
 }
-
-//

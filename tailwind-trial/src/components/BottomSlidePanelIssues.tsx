@@ -1,181 +1,103 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import maplibregl from "maplibre-gl";
-import KisiiForm from "../components/KisiiForm";
+// import KisiiForm from "../components/KisiiForm";
+
+/// <reference types="react" />
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "gen-search-widget": any;
+    }
+  }
+}
 
 interface props {
-  // lat: number | null;
-  // lng: number | null;
   onLocationSelect: (lng: number, lat: number) => void;
   isVisible: boolean;
   onClose: () => void;
 }
-function BottomSlidePanel({
-  // lat,
-  // lng,
-  isVisible,
-  // onLocationSelect,
-  onClose,
-}: props) {
+function BottomSlidePanel({ isVisible, onClose }: props) {
   // const [location, setLocation] = useState<maplibregl.LngLat>(
   //   new maplibregl.LngLat(0, 0)
   // ); // Initial values
 
   const [isPopVisible, setIsPopVisible] = useState(false); // State to manage visibility
 
-  const handleClose = () => {
-    setIsPopVisible(false); // Hide the message when the button is clicked
-  };
+  // const handleClose = () => {
+  //   setIsPopVisible(false); // Hide the message when the button is clicked
+  // };
 
   // const handleMapClick = (lng: number, lat: number) => {
   //   setLocation(new maplibregl.LngLat(lng, lat));
   //   onLocationSelect(lng, lat); // Center map to the clicked location
   // };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cloud.google.com/ai/gen-app-builder/client?hl=en_US";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script); // Cleanup on unmount
+    };
+  }, []);
+
   return (
     <>
       <div
-        className={`w-full md:right-0 md:w-1/2  z-10 fixed bottom-0  md:h-1/2 h-72 bg-white shadow-lg transition-transform duration-300 ${
+        className={` rounded-lg w-full md:right-0 md:w-2/6 z-10 fixed bottom-0 md:h-1/2 h-72 bg-white shadow-lg transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <section className="issues-form-section rounded h-full">
-          {" "}
-          {/* Make this full height */}
-          <div className=" w-full h-full p-5">
-            <div
-              className="flex justify-between items-center"
-              id="issues-header"
-            >
-              {/* <h3
-                className="title-name text-gray-700 text-lg font-semibold"
-                id="issues-title"
-              >
-                Location: {lat} <span className="mr-2">{lng}</span>
-              </h3> */}
-              <button
-                className="text-center outline pl-2 pr-2 outline-1 rounded outline-gray-400 close-button text-gray-400 hover:text-white hover:bg-green-600"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                <span className="close-icon text-2xl text-center">&times;</span>
-              </button>
-            </div>
-            <hr className="my-2" />
-            {isPopVisible && ( // Render the div conditionally based on the state
-              <div className=" rounded-sm message-info-popup p-1 md:p-3 bg-green-700 flex flex-row justify-between">
-                <p className="text-sm text-white md:text-base">
-                  Your issues were submitted successfully
-                </p>
-                <button
-                  className="text-center   outline p-1 m-1 md:pl-2 md:pr-2 outline-1 rounded outline-white close-button  text-white hover:text-white hover:bg-green-600"
-                  onClick={handleClose} // Call the function on click
-                  aria-label="Close"
-                >
-                  <span className="close-icon md:text-2xl text-center">
-                    &times;
-                  </span>
-                </button>
-              </div>
-            )}
-            {/* Adjust the scrolling area */}
-            <div className=" rounded overflow-y-auto h-full bg-white">
-              {" "}
-              {/* Set height relative to the panel */}
-              <form
-                id="popupForm"
-                className="flex flex-col p-2 text-gray-700 font-semibold"
-              >
-                <div className="flex flex-col  md:justify-around">
-                  <div>
-                    <KisiiForm
-                      options={[
-                        "Residents",
-                        "Traders",
-                        "project implementer",
-                        "Funding Agencies",
-                        "Other Interested Parties",
-                      ]}
-                      heading="Category of Complaint"
-                    />
-                    <KisiiForm
-                      options={[
-                        "Service Related",
-                        "project Related",
-                        "Enforcement Related",
-                        "Revenue Related",
-                        "Approval related",
-                      ]}
-                      heading="Category of Grivance"
-                    />
-                  </div>
-                  <div className="ml-2">
-                    <h3 className="mt-2 mb-2 font-bold text-lg font-Nunito">
-                      Grivance Description
-                    </h3>
-                    <label className="block mb-1 text-sm text-slate-800 mt-2">
-                      What are the three main problems in this neighbourhood
-                      (choose any three)
-                    </label>
-                    {[
-                      "Poor roads",
-                      "Water availability (hakuna maji)",
-                      "Sewer and sanitation",
-                      "Solid Waste (taka taka)",
-                      "Noise (kelele)",
-                      "Crime (wizi)",
-                      "Air pollution (hewa mbaya)",
-                      "Transport (hakuna matatu karibu)",
-                      "Illegal / unplanned development (nyumba haramu)",
-                    ].map((issue) => (
-                      <div
-                        className="font-Nunito text-md text-gray-700"
-                        key={issue}
-                      >
-                        <input
-                          className="issues-checkbox mr-2"
-                          type="checkbox"
-                          id={issue.replace(/\s+/g, "")}
-                          value={issue}
-                        />
-                        <label
-                          className="text-sm md:text-base "
-                          htmlFor={issue.replace(/\s+/g, "")}
-                        >
-                          {issue}
-                        </label>
-                      </div>
-                    ))}
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="otherIssues"
-                        className="text-gray-700 mt-2 mb-2"
-                      >
-                        Other (please specify in the space below)
-                      </label>
-                      <textarea
-                        className="p-2 text-sm w-full rounded h-28 text-gray-600 outline outline-1 outline-gray-300"
-                        id="otherIssues"
-                        rows={3}
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full flex justify-center align-middle mt-3">
-                  <input
-                    className="w-full rounded-md px-1 p-3 text-sm text-white bg-blue-500 hover:bg-blue-700 md:w-1/2 mt-3 issues-submit-btn"
-                    type="button"
-                    value="Submit"
-                    onClick={() => {
-                      // Handle form submission logic here
-                      // alert("Form submitted!");
-                      setIsPopVisible(true);
-                    }}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
+        {/* Search Widget */}
+        <gen-search-widget
+          configId="9dd5cc6e-937a-4bb4-a642-b4c61ccf0592"
+          triggerId="searchWidgetTrigger"
+        ></gen-search-widget>
+
+        {/* Search Input */}
+        <div className="d-flex flex-col h-100 w-100">
+          <button
+            className="text-center outline float-end pl-2 pr-2 mt-3 me-5 outline-1 rounded outline-gray-400 close-button text-gray-400 hover:text-white hover:bg-blue-400"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <span className="close-icon text-2xl text-center">&times;</span>
+          </button>
+
+          <input
+            className="w-3/4 ms-5 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-400 transition duration-300 ease-in-out mt-2"
+            type="search"
+            placeholder={`Ask me something !`}
+            id="searchWidgetTrigger"
+          />
+        </div>
+        <div className="px-6 py-4 mt-3 text-gray-600 text-sm md:text-base">
+          <p className="font-medium">
+            👋 Hi there! I’m{" "}
+            <span className="text-blue-500 font-semibold">Street Smart AI</span>
+            . I’m here to help you discover insights and get detailed
+            information about any <span className="font-semibold">mtaa</span>{" "}
+            (neighborhood) in Nairobi.
+          </p>
+          <p className="mt-1">
+            🌍 Whether you’re curious about local amenities, infrastructure, or
+            community satisfaction, I’ve got you covered. Just type in a
+            question or request, and I’ll analyze data from around the city to
+            provide you with personalized insights.
+          </p>
+          <p className="mt-2">
+            🗺️ I can even show you key statistics and map highlights to guide
+            your understanding of the area. Get informed about ongoing issues,
+            available services, and the overall condition of any neighborhood.
+          </p>
+          <p className="mt-3">
+            Click on the search bar above to start exploring! 🚀 Ask me anything
+            about a mtaa and more!
+          </p>
+        </div>
       </div>
     </>
   );
