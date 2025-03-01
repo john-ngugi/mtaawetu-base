@@ -125,7 +125,7 @@ def getCurrentNeighbourhood(request):
 
         # Filter GeoDataFrame by spatial containment
         filtered_gdf = gdf[gdf.contains(point)]
-
+        print(filtered_gdf)
         if not filtered_gdf.empty:
             # Convert to GeoJSON
             geojson = filtered_gdf.to_json()
@@ -297,7 +297,10 @@ import traceback
 
 @csrf_exempt
 def getMapStats(request, tablename):
+    print(tablename)
+    print(f"Request method: {request.method}")
     if request.method == "POST":
+        print(request.body)
         try:
             # Validate table name
             if not tablename or not tablename.isidentifier():
@@ -416,3 +419,70 @@ def get_wms_layer(request, layername):
             "success": False,
             "error": str(e)
         }, status=500)
+        
+
+
+LAYER_NAME_MAPPING = {
+    # NO2 Layers
+    "JAN NO2": "no2_janmea",
+    "FEB NO2": "no2_febmea",
+    "MAR NO2": "no2_marmea",
+    "APR NO2": "no2_aprmea",
+    "MAY NO2": "no2_maymea",
+    "JUN NO2": "no2_junmea",
+    "JUL NO2": "no2_julmea",
+    "AUG NO2": "no2_augmea",
+    "SEP NO2": "no2_sepmea",
+    "OCT NO2": "no2_octmea",
+    "NOV NO2": "no2_novmea",
+    "DEC NO2": "no2_decmea",
+
+    # SO2 Layers
+    "JAN SO2": "so2_janmea",
+    "FEB SO2": "so2_febmea",
+    "MAR SO2": "so2_marmea",
+    "APR SO2": "so2_aprmea",
+    "MAY SO2": "so2_maymea",
+    "JUN SO2": "so2_junmea",
+    "JUL SO2": "so2_julmea",
+    "AUG SO2": "so2_augmea",
+    "SEP SO2": "so2_sepmea",
+    "OCT SO2": "so2_octmea",
+    "NOV SO2": "so2_novmea",
+    "DEC SO2": "so2_decmea",
+}
+
+def query_layer(request):
+    engine = get_db_engine()
+    layer_name = request.GET.get("layer")
+    lng = request.GET.get("lng")
+    lat = request.GET.get("lat")
+
+    if not layer_name or not lng or not lat:
+        return JsonResponse({"error": "Missing required parameters"}, status=400)
+
+    # Map the user-friendly name to the actual database table name
+    table_name = LAYER_NAME_MAPPING.get(layer_name)
+    if not table_name:
+        return JsonResponse({"error": f"Layer '{layer_name}' not found"}, status=400)
+
+    try:
+        sql_query = f"SELECT name, geom, {table_name} FROM estates_nairobi"
+        gdf = gpd.GeoDataFrame.from_postgis(sql_query, con=engine, geom_col='geom')
+        # Ensure CRS is set
+        gdf.to_crs("EPSG:4326", inplace=True)
+        
+        # Create a Point object for the given coordinates
+        point = shapely.Point(lng, lat)
+
+        # Filter GeoDataFrame by spatial containment
+        filtered_gdf = gdf[gdf.contains(point)]
+        # print(filtered_gdf)
+        if not filtered_gdf.empty:
+            # Convert to GeoJSON
+            geojson = filtered_gdf.to_json()
+            return JsonResponse({
+                "geojson": geojson,
+            })
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)     

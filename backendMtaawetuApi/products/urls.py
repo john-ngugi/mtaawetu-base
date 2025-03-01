@@ -10,4 +10,5 @@ urlpatterns = [
     path('maps-wms/<str:layername>/',views.get_wms_layer,name="getWMS"),
     path('get-map-stats/<str:tablename>/',views.getMapStats),
     path('get-curent-neighbourhood/',views.getCurrentNeighbourhood),
+    path("query-layer/", views.query_layer, name="query_layer"),
 ]
