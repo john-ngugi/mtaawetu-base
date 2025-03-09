@@ -36,6 +36,8 @@ const Dashboard: React.FC = () => {
   // const [selectedLng, setSelectedLng] = useState<number | null>(null);
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
   const [isVisible, setIsPanelVisible] = useState(false);
+  const [isTimeSeriesVisible, setIsTimeSeriesVisible] = useState(false);
+  const timeSeriesRef = useRef(null);
   const ipAddress = "mtaawetu.com";
   var neighbourhoodName = "";
   // Function to fetch possible location suggestions (limited to 4 results)
@@ -704,6 +706,7 @@ const Dashboard: React.FC = () => {
     apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI_UN_${month.id}_2024`,
     legendUrl: `https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI_UN_${month.id}_2024`,
   }));
+
   const maps: (
     | "Accessibility"
     | "Design Of Road Network"
@@ -712,6 +715,7 @@ const Dashboard: React.FC = () => {
     | "Air Quality"
     | "NO2 Air Quality Index Timeseries 2024"
     | "SO2 Air Quality Index Timeseries 2024"
+    | "PM2.5 2025 Timeseries"
   )[] = [
     "Accessibility",
     "Design Of Road Network",
@@ -720,6 +724,7 @@ const Dashboard: React.FC = () => {
     "Air Quality",
     "NO2 Air Quality Index Timeseries 2024",
     "SO2 Air Quality Index Timeseries 2024",
+    "PM2.5 2025 Timeseries",
   ];
 
   const mapData = {
@@ -806,8 +811,18 @@ const Dashboard: React.FC = () => {
           "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI",
       },
     ],
+
     "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
     "SO2 Air Quality Index Timeseries 2024": so2AirQualityIndexTimeseries2024,
+    "PM2.5 2025 Timeseries": [
+      {
+        id: 1,
+        name: "PM2.5 JAN Nairobi 2025",
+        apilink: `https://${ipAddress}/products/maps-wms/PM_25_JAN_Nairobi_2025`,
+        legendUrl:
+          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:PM_25_JAN_Nairobi_2025",
+      },
+    ],
   };
 
   // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -822,7 +837,10 @@ const Dashboard: React.FC = () => {
         <nav className="flex flex-col space-y-6 items-center">
           <a href="#" className="flex flex-col items-center space-y-1">
             <Home color="white" />
-            <span className="text-xs font-bold uppercase">Home</span>
+            <span className="text-xs font-bold uppercase">
+              County <br />
+              Select
+            </span>
           </a>
           <a href="#" className="flex flex-col items-center space-y-1">
             <Map color="white" />
@@ -855,114 +873,124 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Map and content area */}
-        <div className="flex-grow relative">
+        <div className="flex-grow relative overflow-hidden">
           <div id="map" className="w-full h-full rounded-sm" />
-
-          {/* Map toggleable panels */}
-          <div className="absolute top-2 left-8 bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
-            {/* Toggle Buttons */}
-            <div className="flex justify-between mb-4">
-              <button
-                onClick={() => setActivePanel("select")}
-                className={`px-4 py-2 rounded-md ${
-                  activePanel === "select"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-blue-500"
-                }`}
-              >
-                Select Layers
-              </button>
-              <button
-                onClick={() => setActivePanel("loaded")}
-                className={`px-4 py-2 rounded-md ${
-                  activePanel === "loaded"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-blue-500"
-                }`}
-              >
-                Loaded Layers
-              </button>
+          {/* Parent wrapper for both panels */}
+          <div className="absolute top-2 left-8 flex gap-4 h-full">
+            {/* Time Series Panel (Side by Side) */}
+            <div className="bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
+              <h4 className="font-semibold text-blue-600 mb-2">Time Series</h4>
+              <p className="text-gray-600 text-sm mb-4">
+                Select a category to view and interact with its corresponding
+                map layers.
+              </p>
+              <div className="space-y-2">
+                {maps.map((mapName) => (
+                  <SelectMenuMap
+                    key={mapName}
+                    items={mapData[mapName]}
+                    category={mapName}
+                    onClick={(name, apilink, legendUrl) => {
+                      if (apilink.includes("maps-wms")) {
+                        addWMSLayer(mapRef.current, name, apilink, name);
+                        showLegend(legendUrl, name);
+                      } else {
+                        addGeoJsonLayer(mapRef.current, apilink, name, "name");
+                      }
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* Panels */}
-            {activePanel === "select" ? (
-              <div>
-                <h4 className="font-semibold text-blue-600 mb-2">
-                  Map Categories
-                </h4>
-                <p className="text-gray-600 text-sm mb-4">
-                  Select a category to view and interact with its corresponding
-                  map layers.
-                </p>
-                <div className="space-y-2">
-                  {maps.map((mapName) => (
-                    <SelectMenuMap
-                      key={mapName}
-                      items={mapData[mapName]}
-                      category={mapName}
-                      onClick={(name, apilink, legendUrl) => {
-                        const legendElement = document.getElementById("legend");
-                        const legendContent =
-                          document.getElementById("legend-content");
-
-                        if (!legendElement || !legendContent) {
-                          console.error(
-                            "Legend elements are missing in the DOM."
-                          );
-                          return;
-                        }
-
-                        if (apilink.includes("maps-wms")) {
-                          addWMSLayer(mapRef.current, name, apilink, name);
-                          showLegend(legendUrl, name); // Show legend for the new layer
-                        } else {
-                          addGeoJsonLayer(
-                            mapRef.current,
-                            apilink,
-                            name,
-                            "name"
-                          );
-                        }
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div>
-                <h4 className="font-semibold text-blue-500 mb-2">
+            {/* Layers Panel */}
+            <div className="bg-white ps-4 pe-4 pb-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
+              {/* Toggle Buttons */}
+              <div className=" sticky top-0 left-0  z-10 bg-white pt-4 mt-0 flex justify-between mb-4 ">
+                <button
+                  onClick={() => setActivePanel("select")}
+                  className={`px-4 py-2 rounded-md ${
+                    activePanel === "select"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-blue-500"
+                  }`}
+                >
+                  Select Layers
+                </button>
+                <button
+                  onClick={() => setActivePanel("loaded")}
+                  className={`px-4 py-2 rounded-md ${
+                    activePanel === "loaded"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-blue-500"
+                  }`}
+                >
                   Loaded Layers
-                </h4>
-                <div className={`ml-1 mt-2 space-y-2`}>
-                  {loadedLayers.map((layer) => (
-                    <div
-                      key={layer}
-                      className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300 hover:bg-green-300"
-                    >
-                      {/* Layer Name */}
-                      <div className="overflow-hidden w-3/4">
-                        <span>{layer}</span>
-                      </div>
-                      {/* Layer Controls */}
-                      <div className="flex mt-1">
-                        <DropDownComponent />
-                        {/* Remove Button */}
-                        <button
-                          className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
-                          onClick={() => removeLayer(layer)}
-                        >
-                          <div className="flex flex-row align-middle justify-center">
-                            <div>{<X size="16" />}</div>
-                          </div>
-                        </button>
-                        {/* Toggle Button */}
-                        <ToggleButton layerId={layer} map={mapRef.current} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                </button>
               </div>
-            )}
+
+              {/* Panels */}
+              {activePanel === "select" ? (
+                <div>
+                  <h4 className="font-semibold text-blue-600 mb-2 ">
+                    Map Categories
+                  </h4>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Select a category to view and interact with its
+                    corresponding map layers.
+                  </p>
+                  <div className="space-y-2">
+                    {maps.map((mapName) => (
+                      <SelectMenuMap
+                        key={mapName}
+                        items={mapData[mapName]}
+                        category={mapName}
+                        onClick={(name, apilink, legendUrl) => {
+                          if (apilink.includes("maps-wms")) {
+                            addWMSLayer(mapRef.current, name, apilink, name);
+                            showLegend(legendUrl, name);
+                          } else {
+                            addGeoJsonLayer(
+                              mapRef.current,
+                              apilink,
+                              name,
+                              "name"
+                            );
+                          }
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <h4 className="font-semibold text-blue-500 mb-2">
+                    Loaded Layers
+                  </h4>
+                  <div className="ml-1 mt-2 space-y-2">
+                    {loadedLayers.map((layer) => (
+                      <div
+                        key={layer}
+                        className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300 hover:bg-green-300"
+                      >
+                        <div className="overflow-hidden w-3/4">
+                          <span>{layer}</span>
+                        </div>
+                        <div className="flex mt-1">
+                          <DropDownComponent />
+                          <button
+                            className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
+                            onClick={() => removeLayer(layer)}
+                          >
+                            <X size="16" />
+                          </button>
+                          <ToggleButton layerId={layer} map={mapRef.current} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Legend */}

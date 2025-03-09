@@ -235,7 +235,7 @@ export function SheetComponent({ statsData, areaName }: SheetComponentProps) {
           {/* <Button color="#3E63DD">Analyse</Button> */}
           <Button className="bg-blue-800 hover:bg-blue-500">Analyse</Button>
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="overflow-y-scroll">
           <SheetHeader>
             <SheetTitle>{areaName} Statistics Overview</SheetTitle>
             <SheetDescription>

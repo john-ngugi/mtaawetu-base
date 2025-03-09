@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,12 +15,16 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #440283;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #6a02a7;
+}
+
+*{
+  font-family: "Lato", sans-serif;
 }
 @layer base {
   :root {
