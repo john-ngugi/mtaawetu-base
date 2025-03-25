@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { Home, Map, List, LayoutDashboard, Menu, X } from "lucide-react";
+import {
+  Home,
+  Map,
+  List,
+  LayoutDashboard,
+  Menu,
+  X,
+  TimerReset,
+} from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import * as turf from "@turf/turf";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -22,8 +30,18 @@ interface Suggestion {
   lat: string;
   lon: string;
 }
+
+interface Items {
+  id: number;
+  category: string;
+  name: string;
+  apilink: string;
+  legendUrl: string | null;
+  county: string | null;
+}
+
 const Dashboard: React.FC = () => {
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -678,183 +696,300 @@ const Dashboard: React.FC = () => {
     //   await fetchSuggestions(searchQuery);
     // }
   };
-  const months = [
-    { id: 1, name: "JAN" },
-    { id: 2, name: "FEB" },
-    { id: 3, name: "MAR" },
-    { id: 4, name: "APR" },
-    { id: 5, name: "MAY" },
-    { id: 6, name: "JUN" },
-    { id: 7, name: "JUL" },
-    { id: 8, name: "AUG" },
-    { id: 9, name: "SEP" },
-    { id: 10, name: "OCT" },
-    { id: 11, name: "NOV" },
-    { id: 12, name: "DEC" },
-  ];
+  // const months = [
+  //   { id: 1, name: "JAN" },
+  //   { id: 2, name: "FEB" },
+  //   { id: 3, name: "MAR" },
+  //   { id: 4, name: "APR" },
+  //   { id: 5, name: "MAY" },
+  //   { id: 6, name: "JUN" },
+  //   { id: 7, name: "JUL" },
+  //   { id: 8, name: "AUG" },
+  //   { id: 9, name: "SEP" },
+  //   { id: 10, name: "OCT" },
+  //   { id: 11, name: "NOV" },
+  //   { id: 12, name: "DEC" },
+  // ];
 
-  const no2AirQualityIndexTimeseries2024 = months.map((month) => ({
-    id: month.id,
-    name: `${month.name} NO2`,
-    apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI_UN_${month.id}_2024`,
-    legendUrl:
-      "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
-  }));
-  const so2AirQualityIndexTimeseries2024 = months.map((month) => ({
-    id: month.id,
-    name: `${month.name} SO2`,
-    apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI_UN_${month.id}_2024`,
-    legendUrl: `https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI_UN_${month.id}_2024`,
-  }));
+  // const no2AirQualityIndexTimeseries2024 = months.map((month) => ({
+  //   id: month.id,
+  //   name: `${month.name} NO2`,
+  //   apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI_UN_${month.id}_2024`,
+  //   legendUrl:
+  //     "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
+  // }));
+  // const so2AirQualityIndexTimeseries2024 = months.map((month) => ({
+  //   id: month.id,
+  //   name: `${month.name} SO2`,
+  //   apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI_UN_${month.id}_2024`,
+  //   legendUrl: `https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI_UN_${month.id}_2024`,
+  // }));
 
-  const maps: (
-    | "Accessibility"
-    | "Design Of Road Network"
-    | "Opportunity"
-    | "Indices"
-    | "Air Quality"
-    | "NO2 Air Quality Index Timeseries 2024"
-    | "SO2 Air Quality Index Timeseries 2024"
-    | "PM2.5 2025 Timeseries"
-  )[] = [
-    "Accessibility",
-    "Design Of Road Network",
-    "Opportunity",
-    "Indices",
-    "Air Quality",
-    "NO2 Air Quality Index Timeseries 2024",
-    "SO2 Air Quality Index Timeseries 2024",
-    "PM2.5 2025 Timeseries",
-  ];
+  // const maps: (
+  //   | "Accessibility"
+  //   | "Design Of Road Network"
+  //   | "Opportunity"
+  //   | "Indices"
+  // )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices"];
 
-  const mapData = {
-    Accessibility: [
-      {
-        id: 1,
-        name: "estates_nairobi",
-        apilink: `https://${ipAddress}/products/maps-wfs/estates_nairobi/`,
-        legendUrl: null,
-      },
-      {
-        id: 2,
-        name: "nbihealthaccess",
-        apilink: `https://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
-        legendUrl: null,
-      },
-      {
-        id: 3,
-        name: "schoolaccessindexwalk",
-        apilink: `https://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
-        legendUrl: null,
-      },
-      {
-        id: 4,
-        name: "jobaccessindex",
-        apilink: `https://${ipAddress}/products/maps-wfs/jobaccessindex/`,
-        legendUrl: null,
-      },
-    ],
-    //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
-    //"http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
-    "Design Of Road Network": [
-      {
-        id: 1,
-        name: "sdna_1000meters_2018",
-        apilink: `https://${ipAddress}/products/maps/sdna_1000m2018/`,
-        legendUrl: null,
-      },
-      {
-        id: 2,
-        name: "Traffic Patterns",
-        apilink: "https://example.com/traffic-patterns",
-        legendUrl: null,
-      },
-    ],
-    Opportunity: [
-      {
-        id: 1,
-        name: "hospital_opportunity_25min",
-        apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity_25min/`,
-        legendUrl: null,
-      },
-    ],
-    Indices: [
-      {
-        id: 1,
-        name: "NDVI",
-        apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
-        legendUrl:
-          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDVI_modified_Nairobi",
-      },
-      {
-        id: 2,
-        name: "NDBI",
-        apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
-        legendUrl:
-          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDBI_Nairobi",
-      },
-    ],
+  // const timeData: (
+  //   | "NO2 Air Quality Index Timeseries 2024"
+  //   | "SO2 Air Quality Index Timeseries 2024"
+  //   | "PM2.5 2025 Timeseries"
+  // )[] = [
+  //   "NO2 Air Quality Index Timeseries 2024",
+  //   "SO2 Air Quality Index Timeseries 2024",
+  //   "PM2.5 2025 Timeseries",
+  // ];
+  // const timeSeriesData = {
+  //   // "Air Quality": [
+  //   //   {
+  //   //     id: 1,
+  //   //     name: "NO2",
+  //   //     apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI`,
+  //   //     legendUrl:
+  //   //       "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
+  //   //   },
+  //   //   {
+  //   //     id: 2,
+  //   //     name: "SO2",
+  //   //     apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
+  //   //     legendUrl:
+  //   //       "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI",
+  //   //   },
+  //   // ],
 
-    "Air Quality": [
-      {
-        id: 1,
-        name: "NO2",
-        apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI`,
-        legendUrl:
-          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
-      },
-      {
-        id: 2,
-        name: "SO2",
-        apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
-        legendUrl:
-          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI",
-      },
-    ],
+  //   "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
+  //   "SO2 Air Quality Index Timeseries 2024": so2AirQualityIndexTimeseries2024,
+  //   "PM2.5 2025 Timeseries": [
+  //     {
+  //       id: 1,
+  //       name: "PM2.5 JAN Nairobi 2025",
+  //       apilink: `https://${ipAddress}/products/maps-wms/PM_25_JAN_Nairobi_2025`,
+  //       legendUrl:
+  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:PM_25_JAN_Nairobi_2025",
+  //     },
+  //   ],
+  // };
+  // const mapData = {
+  //   Accessibility: [
+  //     {
+  //       id: 1,
+  //       name: "estates_nairobi",
+  //       apilink: `https://${ipAddress}/products/maps-wfs/estates_nairobi/`,
+  //       legendUrl: null,
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "nbihealthaccess",
+  //       apilink: `https://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
+  //       legendUrl: null,
+  //     },
+  //     {
+  //       id: 3,
+  //       name: "schoolaccessindexwalk",
+  //       apilink: `https://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
+  //       legendUrl: null,
+  //     },
+  //     {
+  //       id: 4,
+  //       name: "jobaccessindex",
+  //       apilink: `https://${ipAddress}/products/maps-wfs/jobaccessindex/`,
+  //       legendUrl: null,
+  //     },
+  //   ],
+  //   //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
+  //   //"http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
+  //   "Design Of Road Network": [
+  //     {
+  //       id: 1,
+  //       name: "sdna_1000meters_2018",
+  //       apilink: `https://${ipAddress}/products/maps/sdna_1000m2018/`,
+  //       legendUrl: null,
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Traffic Patterns",
+  //       apilink: "https://example.com/traffic-patterns",
+  //       legendUrl: null,
+  //     },
+  //   ],
+  //   Opportunity: [
+  //     {
+  //       id: 1,
+  //       name: "hospital_opportunity_25min",
+  //       apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity_25min/`,
+  //       legendUrl: null,
+  //     },
+  //   ],
+  //   Indices: [
+  //     {
+  //       id: 1,
+  //       name: "NDVI",
+  //       apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
+  //       legendUrl:
+  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDVI_modified_Nairobi",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "NDBI",
+  //       apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
+  //       legendUrl:
+  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDBI_Nairobi",
+  //     },
+  //   ],
+  // };
 
-    "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
-    "SO2 Air Quality Index Timeseries 2024": so2AirQualityIndexTimeseries2024,
-    "PM2.5 2025 Timeseries": [
-      {
-        id: 1,
-        name: "PM2.5 JAN Nairobi 2025",
-        apilink: `https://${ipAddress}/products/maps-wms/PM_25_JAN_Nairobi_2025`,
-        legendUrl:
-          "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:PM_25_JAN_Nairobi_2025",
-      },
-    ],
+  type MapDataType = {
+    map_layers: Items[];
   };
 
+  type TimeSeriesItem = {
+    id: number;
+    category: string;
+    name: string;
+    timestamp: string;
+    value: number;
+    apilink: string; // Ensure it's always a string
+    legendUrl: string; // Ensure it's always a string
+    county: string;
+  };
+
+  type TimeSeriesDataType = {
+    [category: string]: TimeSeriesItem[];
+  };
+
+  const [mapData, setMapData] = useState<MapDataType>({ map_layers: [] });
+  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataType>({
+    time_series: [],
+  });
+
+  const fetchTimeSeriesData = async (): Promise<{
+    time_series: TimeSeriesItem[];
+  }> => {
+    const response = await fetch("http://127.0.0.1:8000/data/api/time-series/");
+    const data = await response.json();
+
+    return {
+      time_series: data.map((item: any) => ({
+        id: item.id,
+        category: item.category,
+        name: item.name,
+        timestamp: item.timestamp,
+        value: item.value,
+        apilink: item.apilink || "", // Ensure apilink exists
+        legendUrl: item.legend_url || "", // Ensure legendUrl exists
+        county: item.county,
+      })),
+    };
+  };
+
+  const fetchMapData = async (): Promise<{ map_layers: Items[] }> => {
+    const response = await fetch(`http://127.0.0.1:8000/data/api/map-layers/`);
+    const data = await response.json();
+
+    return {
+      map_layers: data.map((item: any) => ({
+        id: item.id,
+        category: item.category,
+        name: item.name,
+        apilink: item.apilink,
+        legendUrl: item.legend_url, // Ensure correct mapping
+        county: item.county,
+      })),
+    };
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      const mapDataResponse = await fetchMapData();
+      setMapData(mapDataResponse); // ✅ Now it matches { map_layers: Items[] }
+
+      const timeSeriesResponse = await fetchTimeSeriesData();
+      setTimeSeriesData(timeSeriesResponse);
+    };
+
+    loadData();
+  }, []);
+
+  const groupedTimeSeries = timeSeriesData.time_series.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = [];
+    }
+    acc[item.category].push(item);
+    return acc;
+  }, {} as Record<string, TimeSeriesItem[]>);
+
   // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  const handleMapClick = () => {
+    setIsTimeSeriesVisible(true);
+  };
+
+  const handleOtherClick = () => {
+    setIsTimeSeriesVisible(false);
+  };
 
   return (
     <div className="flex h-screen w-screen bg-white">
       {/* Sidebar */}
-      <aside className="z-20 bg-blue-400 text-white p-5 flex flex-col space-y-6 w-16 items-center">
-        <button className="text-white">
+      <aside
+        className={`z-20 bg-blue-400 text-white p-5 flex flex-col space-y-6 h-full 
+      transition-all duration-300 ease-in-out 
+      ${isSidebarOpen ? "w-48" : "w-16"}`}
+      >
+        {/* Toggle Button */}
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="text-white"
+        >
           <Menu color="white" />
         </button>
-        <nav className="flex flex-col space-y-6 items-center">
-          <a href="#" className="flex flex-col items-center space-y-1">
+
+        {/* Navigation Links */}
+        <nav className="flex flex-col space-y-6 items-start">
+          <a
+            href="#"
+            className="flex items-center space-x-3"
+            onClick={handleOtherClick}
+          >
             <Home color="white" />
-            <span className="text-xs font-bold uppercase">
-              County <br />
-              Select
-            </span>
+            {isSidebarOpen && (
+              <span className="text-xs font-bold uppercase">County Select</span>
+            )}
           </a>
-          <a href="#" className="flex flex-col items-center space-y-1">
-            <Map color="white" />
-            <span className="text-xs font-bold uppercase">Map</span>
+
+          <a
+            href="#"
+            onClick={handleMapClick}
+            className="flex items-center space-x-3"
+          >
+            <TimerReset color="white" />
+            {isSidebarOpen && (
+              <span className="text-xs font-bold uppercase">Time Series</span>
+            )}
           </a>
-          <a href="#" className="flex flex-col items-center space-y-1">
+
+          <a
+            href="#"
+            onClick={handleOtherClick}
+            className="flex items-center space-x-3"
+          >
             <List color="white" />
-            <span className="text-xs font-bold uppercase">List</span>
+            {isSidebarOpen && (
+              <span className="text-xs font-bold uppercase">List</span>
+            )}
           </a>
-          <a href="#" className="flex flex-col items-center space-y-1">
+
+          <a
+            href="#"
+            onClick={handleOtherClick}
+            className="flex items-center space-x-3"
+          >
             <LayoutDashboard color="white" />
-            <span className="text-xs font-bold uppercase">
-              Dash <br></br>board
-            </span>
+            {isSidebarOpen && (
+              <span className="text-xs font-bold uppercase">Dashboard</span>
+            )}
           </a>
         </nav>
       </aside>
@@ -873,39 +1008,59 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Map and content area */}
-        <div className="flex-grow relative overflow-hidden">
+        <div className="flex-grow relative overflow-hidden flex">
           <div id="map" className="w-full h-full rounded-sm" />
+
           {/* Parent wrapper for both panels */}
           <div className="absolute top-2 left-8 flex gap-4 h-full">
-            {/* Time Series Panel (Side by Side) */}
-            <div className="bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
-              <h4 className="font-semibold text-blue-600 mb-2">Time Series</h4>
+            {/* Time Series Panel (Sliding from Left) */}
+            <div
+              className={`bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll
+              transition-transform duration-300 ease-in-out 
+              ${
+                isTimeSeriesVisible
+                  ? "translate-x-0"
+                  : "-translate-x-full opacity-0"
+              }
+            `}
+            >
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="font-semibold text-blue-600">Time Series</h4>
+                <button
+                  onClick={() => setIsTimeSeriesVisible(false)}
+                  className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
+                >
+                  <X size="20" />
+                </button>
+              </div>
               <p className="text-gray-600 text-sm mb-4">
                 Select a category to view and interact with its corresponding
                 map layers.
               </p>
               <div className="space-y-2">
-                {maps.map((mapName) => (
+                {Object.entries(groupedTimeSeries).map(([category, items]) => (
                   <SelectMenuMap
-                    key={mapName}
-                    items={mapData[mapName]}
-                    category={mapName}
+                    key={category}
+                    items={items} // All items in this category
+                    category={category}
                     onClick={(name, apilink, legendUrl) => {
-                      if (apilink.includes("maps-wms")) {
-                        addWMSLayer(mapRef.current, name, apilink, name);
-                        showLegend(legendUrl, name);
-                      } else {
-                        addGeoJsonLayer(mapRef.current, apilink, name, "name");
-                      }
+                      addWMSLayer(mapRef.current, name, apilink, name);
+                      showLegend(legendUrl, name);
                     }}
                   />
                 ))}
               </div>
             </div>
-            {/* Layers Panel */}
-            <div className="bg-white ps-4 pe-4 pb-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll">
+
+            {/* Layers Panel (Pushed when Time Series is Visible) */}
+            <div
+              className={`absolute left-2 bg-white ps-4 pe-4 pb-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll
+                transition-transform duration-300 ease-in-out ${
+                  isTimeSeriesVisible ? "translate-x-80" : "left-1"
+                }`}
+            >
               {/* Toggle Buttons */}
-              <div className=" sticky top-0 left-0  z-10 bg-white pt-4 mt-0 flex justify-between mb-4 ">
+              <div className="sticky top-0 left-0 bottom-4 z-10 bg-white pt-4 mt-0 flex justify-between mb-4">
                 <button
                   onClick={() => setActivePanel("select")}
                   className={`px-4 py-2 rounded-md ${
@@ -931,7 +1086,7 @@ const Dashboard: React.FC = () => {
               {/* Panels */}
               {activePanel === "select" ? (
                 <div>
-                  <h4 className="font-semibold text-blue-600 mb-2 ">
+                  <h4 className="font-semibold text-blue-600 mb-2">
                     Map Categories
                   </h4>
                   <p className="text-gray-600 text-sm mb-4">
@@ -939,11 +1094,11 @@ const Dashboard: React.FC = () => {
                     corresponding map layers.
                   </p>
                   <div className="space-y-2">
-                    {maps.map((mapName) => (
+                    {mapData.map_layers.map((item) => (
                       <SelectMenuMap
-                        key={mapName}
-                        items={mapData[mapName]}
-                        category={mapName}
+                        key={item.id}
+                        items={[item]} // Ensure it's an array
+                        category={item.category}
                         onClick={(name, apilink, legendUrl) => {
                           if (apilink.includes("maps-wms")) {
                             addWMSLayer(mapRef.current, name, apilink, name);

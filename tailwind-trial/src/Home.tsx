@@ -5,19 +5,21 @@ import CTASection from "./Cta";
 import Team from "./Team";
 import Stats from "./Stats";
 import Footer from "./Footer";
+// import CtaTop from "./CtaTop";
+import CtaTop from "./CtaTop";
+
 function Home() {
   return (
-<>
+    <>
       <Header />
-      
-        <Features />
-        <WhatWeDo />
-        <CTASection />
-        <Stats />
-        <Team />
-        <Footer />
-        </>
-  
+      <Features />
+      <CtaTop />
+      <WhatWeDo />
+      <CTASection />
+      <Stats />
+      <Team />
+      <Footer />
+    </>
   );
 }
 
