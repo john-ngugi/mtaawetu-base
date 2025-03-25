@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/",include("coreApi.urls")),
     path("products/",include("products.urls")),
+    path('data/',include('mapdatacontroler.urls')),
 ]

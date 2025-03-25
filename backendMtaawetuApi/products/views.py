@@ -125,7 +125,7 @@ def getCurrentNeighbourhood(request):
 
         # Filter GeoDataFrame by spatial containment
         filtered_gdf = gdf[gdf.contains(point)]
-        print(filtered_gdf)
+        # print(filtered_gdf)
         if not filtered_gdf.empty:
             # Convert to GeoJSON
             geojson = filtered_gdf.to_json()
@@ -359,6 +359,7 @@ def getMapStats(request, tablename):
 
         except Exception as e:
             error_message = f"{str(e)}\n{traceback.format_exc()}"
+            print(error_message, traceback)
             return JsonResponse({"error": error_message}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
