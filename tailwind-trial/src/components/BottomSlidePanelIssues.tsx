@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TryAIButton from "../components/AiButton";
-
+import { X } from "lucide-react";
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -17,7 +17,7 @@ interface Props {
 
 function BottomSlidePanel({ isVisible, onClose }: Props) {
   const [isExpanded, setIsExpanded] = useState(false); // Expands only once
-
+  const [isBottomNoteVisible, setIsBottomNoteVisible] = useState(true); // For future use
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cloud.google.com/ai/gen-app-builder/client?hl=en_US";
@@ -31,9 +31,11 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
 
   return (
     <div
-      className={`rounded-lg w-full md:right-0 md:w-1/4 z-10 fixed bottom-0 bg-white shadow-lg transition-all duration-300 ${
+      className={`rounded-lg w-full md:right-0 md:w-2/6 z-10 fixed bottom-0 bg-white shadow-lg transition-all duration-300 ${
         isVisible ? "translate-y-0" : "translate-y-full"
-      } ${isExpanded ? "h-5/6" : "h-32"}`} // Starts small, expands when button is clicked
+      } ${isExpanded ? "h-5/6" : "h-32"} ${
+        isBottomNoteVisible ? "inline" : "h-0"
+      }`} // Starts small, expands when button is clicked
     >
       {/* Search Widget */}
       <gen-search-widget
@@ -58,13 +60,19 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
 
         {/* Try AI Button - Expands but does NOT collapse */}
         {!isExpanded && (
-          <div className="flex justify-center items-center mt-4">
+          <div className={`justify-center items-center mt-4 flex`}>
             <TryAIButton onClick={() => setIsExpanded(true)} />
             <p className="text-gray-500 text-sm mt-2 text-center px-4">
               👋 Meet{" "}
               <span className="text-blue-500 font-medium">Street Smart AI</span>
               ! Discover insights & explore Nairobi’s neighborhoods easily.
             </p>
+            <button
+              onClick={() => setIsBottomNoteVisible(false)}
+              className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
+            >
+              <X size="20" />
+            </button>
           </div>
         )}
       </div>

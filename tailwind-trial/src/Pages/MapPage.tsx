@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import {
-  Home,
-  Map,
-  List,
-  LayoutDashboard,
-  Menu,
-  X,
-  TimerReset,
-} from "lucide-react";
+import { Home, List, LayoutDashboard, Menu, X, TimerReset } from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import * as turf from "@turf/turf";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -41,7 +33,7 @@ interface Items {
 }
 
 const Dashboard: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,9 +47,16 @@ const Dashboard: React.FC = () => {
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
   const [isVisible, setIsPanelVisible] = useState(false);
   const [isTimeSeriesVisible, setIsTimeSeriesVisible] = useState(false);
-  const timeSeriesRef = useRef(null);
-  const ipAddress = "mtaawetu.com";
+  const [isPanelsVisible, setPanelsVisible] = useState(true);
+  const [mapData, setMapData] = useState<MapDataType>({ map_layers: [] });
+  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataType>({
+    time_series: [],
+  });
+
+  // const timeSeriesRef = useRef(null);
+  const ipAddress = "http://127.0.0.1:8000";
   var neighbourhoodName = "";
+
   // Function to fetch possible location suggestions (limited to 4 results)
   const fetchSuggestions = async (input: string) => {
     try {
@@ -138,6 +137,12 @@ const Dashboard: React.FC = () => {
         }
 
         if (id == "estates_nairobi") {
+          let currentStyle = map.getStyle();
+          if (currentStyle.name != "Streets") {
+            map.setStyle(
+              `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`
+            );
+          }
           // Generate a random color for each feature
           function getRandomColor() {
             let randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -212,7 +217,7 @@ const Dashboard: React.FC = () => {
 
           map.addLayer(
             {
-              id: id,
+              id: "custom_prefix" + id,
               type: "fill",
               source: id,
               layout: {},
@@ -226,9 +231,9 @@ const Dashboard: React.FC = () => {
         } else if (data.geomType === "MultiLineString") {
           map.addLayer(
             {
-              id: id,
+              id: "custom_prefix" + id,
               type: "line",
-              source: id,
+              source: "custom_prefix" + id,
               layout: {
                 "line-join": "round",
                 "line-cap": "round",
@@ -258,14 +263,14 @@ const Dashboard: React.FC = () => {
 
         toast.success(`Layer ${id} added successfully`);
 
-        map.on("click", id, async (e) => {
+        map.on("click", "custom_prefix" + id, async (e) => {
           const { lng, lat } = e.lngLat;
 
           // First fetch: Get the neighborhood
           const fetchNeighborhood = async () => {
             try {
               const response = await fetch(
-                `http://127.0.0.1:8000/products/get-curent-neighbourhood/?coordinates=${lng},${lat}`,
+                `${ipAddress}/products/get-curent-neighbourhood/?coordinates=${lng},${lat}`,
                 {
                   method: "GET",
                   headers: {
@@ -340,7 +345,7 @@ const Dashboard: React.FC = () => {
 
               try {
                 const statsResponse = await fetch(
-                  `http://127.0.0.1:8000/products/get-map-stats/${encodeURIComponent(
+                  `${ipAddress}/products/get-map-stats/${encodeURIComponent(
                     id
                   )}/`,
                   {
@@ -396,6 +401,7 @@ const Dashboard: React.FC = () => {
                     <SheetComponent
                       statsData={statsData.response}
                       areaName={neighbourhoodName}
+                      percent={properties.percent}
                     />,
                     container
                   );
@@ -489,7 +495,7 @@ const Dashboard: React.FC = () => {
 
           try {
             const response = await fetch(
-              `http://127.0.0.1:8000/products/query-layer/?layer=${layerName}&lng=${lng}&lat=${lat}`
+              `${ipAddress}/products/get-curent-neighbourhood/?coordinates=${lng},${lat}`
             );
             const result = await response.json();
             console.log("Query Result:", result);
@@ -539,7 +545,7 @@ const Dashboard: React.FC = () => {
               // **Fetch Statistics**
               try {
                 const statsResponse = await fetch(
-                  `http://127.0.0.1:8000/products/get-map-stats/estates_nairobi/`,
+                  `${ipAddress}/products/get-map-stats/estates_nairobi/`,
                   {
                     method: "POST",
                     headers: {
@@ -859,15 +865,10 @@ const Dashboard: React.FC = () => {
     [category: string]: TimeSeriesItem[];
   };
 
-  const [mapData, setMapData] = useState<MapDataType>({ map_layers: [] });
-  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataType>({
-    time_series: [],
-  });
-
   const fetchTimeSeriesData = async (): Promise<{
     time_series: TimeSeriesItem[];
   }> => {
-    const response = await fetch("http://127.0.0.1:8000/data/api/time-series/");
+    const response = await fetch(`${ipAddress}/data/api/time-series/`);
     const data = await response.json();
 
     return {
@@ -885,7 +886,7 @@ const Dashboard: React.FC = () => {
   };
 
   const fetchMapData = async (): Promise<{ map_layers: Items[] }> => {
-    const response = await fetch(`http://127.0.0.1:8000/data/api/map-layers/`);
+    const response = await fetch(`${ipAddress}/data/api/map-layers/`);
     const data = await response.json();
 
     return {
@@ -915,6 +916,7 @@ const Dashboard: React.FC = () => {
   const groupedTimeSeries = timeSeriesData.time_series.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
+      3;
     }
     acc[item.category].push(item);
     return acc;
@@ -922,12 +924,16 @@ const Dashboard: React.FC = () => {
 
   // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const handleMapClick = () => {
+  const handleTabClick = () => {
     setIsTimeSeriesVisible(true);
   };
 
   const handleOtherClick = () => {
     setIsTimeSeriesVisible(false);
+  };
+
+  const handleHomeClick = () => {
+    setPanelsVisible(true);
   };
 
   return (
@@ -951,7 +957,7 @@ const Dashboard: React.FC = () => {
           <a
             href="#"
             className="flex items-center space-x-3"
-            onClick={handleOtherClick}
+            onClick={handleHomeClick}
           >
             <Home color="white" />
             {isSidebarOpen && (
@@ -961,7 +967,7 @@ const Dashboard: React.FC = () => {
 
           <a
             href="#"
-            onClick={handleMapClick}
+            onClick={handleTabClick}
             className="flex items-center space-x-3"
           >
             <TimerReset color="white" />
@@ -1057,8 +1063,19 @@ const Dashboard: React.FC = () => {
               className={`absolute left-2 bg-white ps-4 pe-4 pb-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll
                 transition-transform duration-300 ease-in-out ${
                   isTimeSeriesVisible ? "translate-x-80" : "left-1"
-                }`}
+                } ${isPanelsVisible ? "flex flex-col" : "hidden"}`}
             >
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="font-semibold text-blue-600 mt-1">
+                  Control Panel
+                </h4>
+                <button
+                  onClick={() => setPanelsVisible(false)}
+                  className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
+                >
+                  <X size="20" />
+                </button>
+              </div>
               {/* Toggle Buttons */}
               <div className="sticky top-0 left-0 bottom-4 z-10 bg-white pt-4 mt-0 flex justify-between mb-4">
                 <button

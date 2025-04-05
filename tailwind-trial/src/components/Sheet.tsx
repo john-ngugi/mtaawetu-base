@@ -38,21 +38,34 @@ interface SheetComponentProps {
     [key: string]: any; // This will accept any data object
   };
   areaName: string;
+  percent?: number;
 }
 
-export function SheetComponent({ statsData, areaName }: SheetComponentProps) {
+export function SheetComponent({
+  statsData,
+  areaName,
+  percent,
+}: SheetComponentProps) {
   // Check if `access_index_percent` is available
   const accessIndexPercent = statsData.mean_access_index_percent
     ? parseFloat(statsData.mean_access_index_percent)
     : null;
+  const data = () => {
+    if (percent) {
+      return percent;
+    } else {
+      return accessIndexPercent ?? 0; // Default to 0 if not available
+    }
+  };
 
+  const percentValue = percent;
   // Data for doughnut chart if `access_index_percent` exists
   const chartData = accessIndexPercent
     ? {
         labels: ["Access Index (%)", "Remaining"],
         datasets: [
           {
-            data: [accessIndexPercent, 100 - accessIndexPercent],
+            data: [data(), 100 - data()],
             backgroundColor: ["#003f88", "#e0e0e0"],
             hoverBackgroundColor: ["#5b9aff", "#cccccc"],
             borderWidth: 0,
@@ -228,6 +241,27 @@ export function SheetComponent({ statsData, areaName }: SheetComponentProps) {
     },
   };
 
+  const dataSo2 = [
+    statsData.mean_so2_janmea,
+    statsData.mean_so2_febmea,
+    statsData.mean_so2_marmea,
+    statsData.mean_so2_aprmea,
+    statsData.mean_so2_maymea,
+    statsData.mean_so2_junmea,
+    statsData.mean_so2_julmea,
+    statsData.mean_so2_augmea,
+    statsData.mean_so2_sepmea,
+    statsData.mean_so2_octmea,
+    statsData.mean_so2_novmea,
+    statsData.mean_so2_decmea,
+  ];
+
+  const calculateMaxValue = (data: number[]) => {
+    return Math.max(...data);
+  };
+  const calculateMinValue = (data: number[]) => {
+    return Math.min(...data);
+  };
   return (
     <div>
       <Sheet>
@@ -249,8 +283,25 @@ export function SheetComponent({ statsData, areaName }: SheetComponentProps) {
               <>
                 <Doughnut data={chartData!} options={chartOptions} />
                 <div style={{ marginTop: "10px", color: "#555" }}>
-                  <strong>Average Access Index Percentage:</strong>{" "}
-                  {accessIndexPercent.toFixed(2)}%
+                  {accessIndexPercent ? (
+                    <>
+                      <strong>Average Access Index Percentage:</strong>{" "}
+                      {accessIndexPercent.toFixed(2)}%
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <strong>
+                          Access Index Percentage in the area is :
+                        </strong>{" "}
+                        {(percentValue !== undefined
+                          ? percentValue
+                          : 0
+                        ).toFixed(2)}
+                        %{" "}
+                      </div>
+                    </>
+                  )}
                   <br />
                   <strong>Max Value:</strong>{" "}
                   {statsData.max_access_index || "N/A"}
@@ -291,6 +342,12 @@ export function SheetComponent({ statsData, areaName }: SheetComponentProps) {
                     burning fossil fuels and industrial processes. It can cause
                     respiratory problems and contributes to the formation of
                     acid rain, affecting ecosystems and human health.
+                    <br />
+                    <br />
+                    The maximum (SO<sub>2</sub>) experienced in the area is{" "}
+                    {calculateMaxValue(dataSo2)} µg/m³ and the minimum is{" "}
+                    {calculateMinValue(dataSo2)} µg/m³.
+                    <br />
                   </p>
                   <Bar data={barData_so2} options={barOptions_so2} />
                 </div>
