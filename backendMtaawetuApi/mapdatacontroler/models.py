@@ -23,6 +23,10 @@ class TimeSeriesLayer(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.county})"
+    
+    
+    class Meta:
+        ordering = ['month']  # Order by month in ascending order
 
 class MapLayer(models.Model):
     category = models.CharField(max_length=100)  # e.g., "Accessibility", "Indices"
