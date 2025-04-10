@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
   });
 
   // const timeSeriesRef = useRef(null);
-  const ipAddress = "http://127.0.0.1:8000";
+  const ipAddress = "https://mtaawetu.com";
   var neighbourhoodName = "";
 
   // Function to fetch possible location suggestions (limited to 4 results)
