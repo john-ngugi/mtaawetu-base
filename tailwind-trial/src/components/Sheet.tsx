@@ -18,7 +18,7 @@ import {
   LineElement,
   PointElement,
 } from "chart.js";
-import { Doughnut, Bar, Line } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import { Button } from "@/components/ui/button";
 // Register Chart.js components
 ChartJS.register(
@@ -193,53 +193,53 @@ export function SheetComponent({
   };
 
   // Line chart data for SO2 monthly stats
-  const lineData = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "SO2 Monthly Mean",
-        data: [
-          statsData.mean_so2_janmea,
-          statsData.mean_so2_febmea,
-          statsData.mean_so2_marmea,
-          statsData.mean_so2_aprmea,
-          statsData.mean_so2_maymea,
-          statsData.mean_so2_junmea,
-          statsData.mean_so2_julmea,
-          statsData.mean_so2_augmea,
-          statsData.mean_so2_sepmea,
-          statsData.mean_so2_octmea,
-          statsData.mean_so2_novmea,
-          statsData.mean_so2_decmea,
-        ],
-        borderColor: "#ff5722",
-        fill: false,
-      },
-    ],
-  };
+  // const lineData = {
+  //   labels: [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "SO2 Monthly Mean",
+  //       data: [
+  //         statsData.mean_so2_janmea,
+  //         statsData.mean_so2_febmea,
+  //         statsData.mean_so2_marmea,
+  //         statsData.mean_so2_aprmea,
+  //         statsData.mean_so2_maymea,
+  //         statsData.mean_so2_junmea,
+  //         statsData.mean_so2_julmea,
+  //         statsData.mean_so2_augmea,
+  //         statsData.mean_so2_sepmea,
+  //         statsData.mean_so2_octmea,
+  //         statsData.mean_so2_novmea,
+  //         statsData.mean_so2_decmea,
+  //       ],
+  //       borderColor: "#ff5722",
+  //       fill: false,
+  //     },
+  //   ],
+  // };
 
-  const lineOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top" as const,
-      },
-    },
-  };
+  // const lineOptions = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       display: true,
+  //       position: "top" as const,
+  //     },
+  //   },
+  // };
 
   const dataSo2 = [
     statsData.mean_so2_janmea,
@@ -283,23 +283,19 @@ export function SheetComponent({
               <>
                 <Doughnut data={chartData!} options={chartOptions} />
                 <div style={{ marginTop: "10px", color: "#555" }}>
-                  {accessIndexPercent ? (
-                    <>
-                      <strong>Average Access Index Percentage:</strong>{" "}
-                      {accessIndexPercent.toFixed(2)}%
-                    </>
-                  ) : (
+                  {percentValue !== undefined && percentValue ? (
                     <>
                       <div>
                         <strong>
                           Access Index Percentage in the area is :
                         </strong>{" "}
-                        {(percentValue !== undefined
-                          ? percentValue
-                          : 0
-                        ).toFixed(2)}
-                        %{" "}
+                        {percentValue}%
                       </div>
+                    </>
+                  ) : (
+                    <>
+                      <strong>Average Access Index Percentage:</strong>{" "}
+                      {accessIndexPercent?.toFixed(2) ?? "0.00"}%
                     </>
                   )}
                   <br />

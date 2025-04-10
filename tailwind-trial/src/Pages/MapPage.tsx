@@ -217,7 +217,7 @@ const Dashboard: React.FC = () => {
 
           map.addLayer(
             {
-              id: "custom_prefix" + id,
+              id: "prefix" + id,
               type: "fill",
               source: id,
               layout: {},
@@ -231,9 +231,9 @@ const Dashboard: React.FC = () => {
         } else if (data.geomType === "MultiLineString") {
           map.addLayer(
             {
-              id: "custom_prefix" + id,
+              id: "prefix" + id,
               type: "line",
-              source: "custom_prefix" + id,
+              source: "prefix" + id,
               layout: {
                 "line-join": "round",
                 "line-cap": "round",
@@ -263,7 +263,7 @@ const Dashboard: React.FC = () => {
 
         toast.success(`Layer ${id} added successfully`);
 
-        map.on("click", "custom_prefix" + id, async (e) => {
+        map.on("click", "prefix" + id, async (e) => {
           const { lng, lat } = e.lngLat;
 
           // First fetch: Get the neighborhood
