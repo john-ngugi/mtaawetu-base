@@ -60,13 +60,13 @@ MIDDLEWARE = [
 
 
 # Allow specific origins for security reasons
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-#     "http://localhost:3000",  
-#     "https://mtaawetu.com",# Frontend origin
-#     "http://34.66.220.78:3000",
-#     "http://127.0.0.1:8000"
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000",  
+    "https://mtaawetu.com",# Frontend origin
+    "http://34.66.220.78:3000",
+    "http://127.0.0.1:8000"
+]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
