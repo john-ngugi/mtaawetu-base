@@ -289,7 +289,37 @@ export function SheetComponent({
                         <strong>
                           Access Index Percentage in the area is :
                         </strong>{" "}
-                        {percentValue}%
+                        <span className="text-4xl">
+                          {" "}
+                          <strong>{percentValue}%</strong>
+                        </span>
+                        <div className="mt-5">
+                          <h2 className="text-blue-400">
+                            {" "}
+                            <strong>What this means: </strong>
+                          </h2>
+                          <p>
+                            <small>
+                              {" "}
+                              Accessibility Index measures how easily people can
+                              reach facilities, considering factors like travel
+                              time, distance, road networks, and transportation
+                              options. It helps identify underserved areas where
+                              residents may face challenges in accessing timely
+                              service delivery.
+                              <br />
+                              <br />
+                              By analyzing this index, policymakers and planners
+                              can better allocate resources, improve
+                              infrastructure, and ensure that services are
+                              equitably distributed across regions.
+                            </small>
+                            <br />
+                            <br />
+                            You have a {percentValue}% chance of accessing the
+                            selected service if you live in this area.
+                          </p>
+                        </div>
                       </div>
                     </>
                   ) : (

@@ -11,7 +11,7 @@ import Search from "../components/Search";
 import { SheetComponent } from "@/components/Sheet";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { calcPercentages } from "../utils/utils";
+import { calcPercentages, generateStyleFromProperty } from "../utils/utils";
 import DropDownComponent from "../components/Popover";
 import { showLegend } from "../utils/utils";
 import { hideLegend } from "../utils/utils";
@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
   });
 
   // const timeSeriesRef = useRef(null);
-  const ipAddress = "https://mtaawetu.com";
+  const ipAddress = "http://127.0.0.1:8000";
   var neighbourhoodName = "";
 
   // Function to fetch possible location suggestions (limited to 4 results)
@@ -137,12 +137,6 @@ const Dashboard: React.FC = () => {
         }
 
         if (id == "estates_nairobi") {
-          let currentStyle = map.getStyle();
-          if (currentStyle.name != "Streets") {
-            map.setStyle(
-              `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`
-            );
-          }
           // Generate a random color for each feature
           function getRandomColor() {
             let randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -167,6 +161,8 @@ const Dashboard: React.FC = () => {
           });
           fillColorExpression.push("#ffffff"); // Fallback color
 
+          const result = generateStyleFromProperty(geojsonData, "access_index");
+          console.log(result.expression);
           // Add the GeoJSON layer with dynamic coloring
           map.addLayer(
             {
@@ -217,7 +213,7 @@ const Dashboard: React.FC = () => {
 
           map.addLayer(
             {
-              id: "prefix" + id,
+              id: id,
               type: "fill",
               source: id,
               layout: {},
@@ -231,7 +227,7 @@ const Dashboard: React.FC = () => {
         } else if (data.geomType === "MultiLineString") {
           map.addLayer(
             {
-              id: "prefix" + id,
+              id: id,
               type: "line",
               source: "prefix" + id,
               layout: {
@@ -263,7 +259,7 @@ const Dashboard: React.FC = () => {
 
         toast.success(`Layer ${id} added successfully`);
 
-        map.on("click", "prefix" + id, async (e) => {
+        map.on("click", id, async (e) => {
           const { lng, lat } = e.lngLat;
 
           // First fetch: Get the neighborhood
@@ -400,7 +396,7 @@ const Dashboard: React.FC = () => {
                   ReactDOM.render(
                     <SheetComponent
                       statsData={statsData.response}
-                      areaName={neighbourhoodName}
+                      areaName={properties.name}
                       percent={properties.percent}
                     />,
                     container
@@ -702,149 +698,6 @@ const Dashboard: React.FC = () => {
     //   await fetchSuggestions(searchQuery);
     // }
   };
-  // const months = [
-  //   { id: 1, name: "JAN" },
-  //   { id: 2, name: "FEB" },
-  //   { id: 3, name: "MAR" },
-  //   { id: 4, name: "APR" },
-  //   { id: 5, name: "MAY" },
-  //   { id: 6, name: "JUN" },
-  //   { id: 7, name: "JUL" },
-  //   { id: 8, name: "AUG" },
-  //   { id: 9, name: "SEP" },
-  //   { id: 10, name: "OCT" },
-  //   { id: 11, name: "NOV" },
-  //   { id: 12, name: "DEC" },
-  // ];
-
-  // const no2AirQualityIndexTimeseries2024 = months.map((month) => ({
-  //   id: month.id,
-  //   name: `${month.name} NO2`,
-  //   apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI_UN_${month.id}_2024`,
-  //   legendUrl:
-  //     "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
-  // }));
-  // const so2AirQualityIndexTimeseries2024 = months.map((month) => ({
-  //   id: month.id,
-  //   name: `${month.name} SO2`,
-  //   apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI_UN_${month.id}_2024`,
-  //   legendUrl: `https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI_UN_${month.id}_2024`,
-  // }));
-
-  // const maps: (
-  //   | "Accessibility"
-  //   | "Design Of Road Network"
-  //   | "Opportunity"
-  //   | "Indices"
-  // )[] = ["Accessibility", "Design Of Road Network", "Opportunity", "Indices"];
-
-  // const timeData: (
-  //   | "NO2 Air Quality Index Timeseries 2024"
-  //   | "SO2 Air Quality Index Timeseries 2024"
-  //   | "PM2.5 2025 Timeseries"
-  // )[] = [
-  //   "NO2 Air Quality Index Timeseries 2024",
-  //   "SO2 Air Quality Index Timeseries 2024",
-  //   "PM2.5 2025 Timeseries",
-  // ];
-  // const timeSeriesData = {
-  //   // "Air Quality": [
-  //   //   {
-  //   //     id: 1,
-  //   //     name: "NO2",
-  //   //     apilink: `https://${ipAddress}/products/maps-wms/Nairobi_NO2_AQI`,
-  //   //     legendUrl:
-  //   //       "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_NO2_AQI",
-  //   //   },
-  //   //   {
-  //   //     id: 2,
-  //   //     name: "SO2",
-  //   //     apilink: `https://${ipAddress}/products/maps-wms/Nairobi_SO2_AQI`,
-  //   //     legendUrl:
-  //   //       "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:Nairobi_SO2_AQI",
-  //   //   },
-  //   // ],
-
-  //   "NO2 Air Quality Index Timeseries 2024": no2AirQualityIndexTimeseries2024,
-  //   "SO2 Air Quality Index Timeseries 2024": so2AirQualityIndexTimeseries2024,
-  //   "PM2.5 2025 Timeseries": [
-  //     {
-  //       id: 1,
-  //       name: "PM2.5 JAN Nairobi 2025",
-  //       apilink: `https://${ipAddress}/products/maps-wms/PM_25_JAN_Nairobi_2025`,
-  //       legendUrl:
-  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:PM_25_JAN_Nairobi_2025",
-  //     },
-  //   ],
-  // };
-  // const mapData = {
-  //   Accessibility: [
-  //     {
-  //       id: 1,
-  //       name: "estates_nairobi",
-  //       apilink: `https://${ipAddress}/products/maps-wfs/estates_nairobi/`,
-  //       legendUrl: null,
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "nbihealthaccess",
-  //       apilink: `https://${ipAddress}/products/maps-wfs/nbihealthaccess/`,
-  //       legendUrl: null,
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "schoolaccessindexwalk",
-  //       apilink: `https://${ipAddress}/products/maps-wfs/schoolaccessindexwalk/`,
-  //       legendUrl: null,
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "jobaccessindex",
-  //       apilink: `https://${ipAddress}/products/maps-wfs/jobaccessindex/`,
-  //       legendUrl: null,
-  //     },
-  //   ],
-  //   //"http://127.0.0.1:8000/products/maps-wfs/sdna_1000meters_2018/"
-  //   //"http://127.0.0.1:8000/products/maps/sdna_1000m2018/",
-  //   "Design Of Road Network": [
-  //     {
-  //       id: 1,
-  //       name: "sdna_1000meters_2018",
-  //       apilink: `https://${ipAddress}/products/maps/sdna_1000m2018/`,
-  //       legendUrl: null,
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Traffic Patterns",
-  //       apilink: "https://example.com/traffic-patterns",
-  //       legendUrl: null,
-  //     },
-  //   ],
-  //   Opportunity: [
-  //     {
-  //       id: 1,
-  //       name: "hospital_opportunity_25min",
-  //       apilink: `https://${ipAddress}/products/maps-wfs/hospital_opportunity_25min/`,
-  //       legendUrl: null,
-  //     },
-  //   ],
-  //   Indices: [
-  //     {
-  //       id: 1,
-  //       name: "NDVI",
-  //       apilink: `https://${ipAddress}/products/maps-wms/NDVI_modified_Nairobi`,
-  //       legendUrl:
-  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDVI_modified_Nairobi",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "NDBI",
-  //       apilink: `https://${ipAddress}/products/maps-wms/NDBI_Nairobi`,
-  //       legendUrl:
-  //         "https://mtaawetu.com/geoserver/personal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=personal:NDBI_Nairobi",
-  //     },
-  //   ],
-  // };
 
   type MapDataType = {
     map_layers: Items[];
@@ -864,6 +717,10 @@ const Dashboard: React.FC = () => {
   type TimeSeriesDataType = {
     [category: string]: TimeSeriesItem[];
   };
+
+  const [groupedMapLayers, setGroupedMapLayers] = useState<{
+    [category: string]: Items[];
+  }>({});
 
   const fetchTimeSeriesData = async (): Promise<{
     time_series: TimeSeriesItem[];
@@ -904,7 +761,17 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       const mapDataResponse = await fetchMapData();
-      setMapData(mapDataResponse); // ✅ Now it matches { map_layers: Items[] }
+      setMapData(mapDataResponse);
+
+      // Group by category
+      const grouped: { [category: string]: Items[] } = {};
+      mapDataResponse.map_layers.forEach((item) => {
+        if (!grouped[item.category]) {
+          grouped[item.category] = [];
+        }
+        grouped[item.category].push(item);
+      });
+      setGroupedMapLayers(grouped);
 
       const timeSeriesResponse = await fetchTimeSeriesData();
       setTimeSeriesData(timeSeriesResponse);
@@ -912,6 +779,18 @@ const Dashboard: React.FC = () => {
 
     loadData();
   }, []);
+
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     const mapDataResponse = await fetchMapData();
+  //     setMapData(mapDataResponse); // ✅ Now it matches { map_layers: Items[] }
+
+  //     const timeSeriesResponse = await fetchTimeSeriesData();
+  //     setTimeSeriesData(timeSeriesResponse);
+  //   };
+
+  //   loadData();
+  // }, []);
 
   const groupedTimeSeries = timeSeriesData.time_series.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -940,20 +819,20 @@ const Dashboard: React.FC = () => {
     <div className="flex h-screen w-screen bg-white">
       {/* Sidebar */}
       <aside
-        className={`z-20 bg-blue-400 text-white p-5 flex flex-col space-y-6 h-full 
+        className={`z-20 bg-blue-900 text-white p-5 flex flex-col space-y-6 h-full 
       transition-all duration-300 ease-in-out 
       ${isSidebarOpen ? "w-48" : "w-16"}`}
       >
         {/* Toggle Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="text-white"
+          className=" text-white"
         >
           <Menu color="white" />
         </button>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col space-y-6 items-start">
+        <nav className="mt-15 flex flex-col space-y-6 items-start">
           <a
             href="#"
             className="flex items-center space-x-3"
@@ -1002,7 +881,7 @@ const Dashboard: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        <div className="flex flex-row items-center justify-between bg-white shadow-lg p-1">
+        <div className="flex flex-row items-center justify-between bg-blue-900 shadow-lg p-1">
           <Search
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
@@ -1082,8 +961,8 @@ const Dashboard: React.FC = () => {
                   onClick={() => setActivePanel("select")}
                   className={`px-4 py-2 rounded-md ${
                     activePanel === "select"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-blue-500"
+                      ? "bg-blue-900 text-white"
+                      : "bg-gray-200 text-blue-800"
                   }`}
                 >
                   Select Layers
@@ -1092,8 +971,8 @@ const Dashboard: React.FC = () => {
                   onClick={() => setActivePanel("loaded")}
                   className={`px-4 py-2 rounded-md ${
                     activePanel === "loaded"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-blue-500"
+                      ? "bg-blue-900 text-white"
+                      : "bg-gray-200 text-blue-800"
                   }`}
                 >
                   Loaded Layers
@@ -1111,31 +990,33 @@ const Dashboard: React.FC = () => {
                     corresponding map layers.
                   </p>
                   <div className="space-y-2">
-                    {mapData.map_layers.map((item) => (
-                      <SelectMenuMap
-                        key={item.id}
-                        items={[item]} // Ensure it's an array
-                        category={item.category}
-                        onClick={(name, apilink, legendUrl) => {
-                          if (apilink.includes("maps-wms")) {
-                            addWMSLayer(mapRef.current, name, apilink, name);
-                            showLegend(legendUrl, name);
-                          } else {
-                            addGeoJsonLayer(
-                              mapRef.current,
-                              apilink,
-                              name,
-                              "name"
-                            );
-                          }
-                        }}
-                      />
-                    ))}
+                    {Object.entries(groupedMapLayers).map(
+                      ([category, items]) => (
+                        <SelectMenuMap
+                          key={category}
+                          items={items}
+                          category={category}
+                          onClick={(name, apilink, legendUrl) => {
+                            if (apilink.includes("maps-wms")) {
+                              addWMSLayer(mapRef.current, name, apilink, name);
+                              showLegend(legendUrl, name);
+                            } else {
+                              addGeoJsonLayer(
+                                mapRef.current,
+                                apilink,
+                                name,
+                                "name"
+                              );
+                            }
+                          }}
+                        />
+                      )
+                    )}
                   </div>
                 </div>
               ) : (
                 <div>
-                  <h4 className="font-semibold text-blue-500 mb-2">
+                  <h4 className="font-semibold text-blue-600 mb-2">
                     Loaded Layers
                   </h4>
                   <div className="ml-1 mt-2 space-y-2">
