@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import Month, TimeSeriesLayer, MapLayer
+from .models import Month, TimeSeriesLayer, MapLayer, CategoryDescription
 
 @admin.register(Month)
 class MonthAdmin(admin.ModelAdmin):
@@ -18,6 +18,11 @@ class TimeSeriesLayerAdmin(admin.ModelAdmin):
 
 @admin.register(MapLayer)
 class MapLayerAdmin(admin.ModelAdmin):
-    list_display = ("category", "name", "apilink")
-    list_filter = ("category",)
+    list_display = ( "name", "apilink")
+    # list_filter = ("category",)
     search_fields = ("name", "apilink")
+
+@admin.register(CategoryDescription)
+class CategoryDescriptionAdmin(admin.ModelAdmin):
+    list_display = ("category_name", "description")
+    search_fields = ("category_name", "description")
