@@ -25,13 +25,16 @@ interface Suggestion {
 
 interface Items {
   id: number;
-  category: string;
+  category: {
+    id: number;
+    category_name: string;
+    description: string;
+  };
   name: string;
   apilink: string;
   legendUrl: string | null;
   county: string | null;
 }
-
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMap, setCurrentMap] = useState("Map 1");
@@ -103,11 +106,30 @@ const Dashboard: React.FC = () => {
       // Fetch the GeoJSON data from the server
       const response = await fetch(url);
       const data = await response.json();
-      const data_with_percent_string = calcPercentages({
-        geojson: data.geoJson,
-        column: "access_index",
-      });
-      const data_with_percent = JSON.parse(data_with_percent_string);
+      let data_with_percent: any; // <-- Declare it outside
+
+      // First check: Does the original data.geoJson have "access_index"?
+      const hasAccessIndex =
+        data.geoJson &&
+        data.geoJson.features &&
+        data.geoJson.features.length > 0 &&
+        "access_index" in data.geoJson.features[0].properties;
+
+      if (hasAccessIndex) {
+        // Now it's safe to calculate percentages
+        const data_with_percent_string = calcPercentages({
+          geojson: data.geoJson,
+          column: "access_index",
+        });
+        data_with_percent = JSON.parse(data_with_percent_string); // <-- Assign it
+      } else {
+        data_with_percent = data.geoJson; // Use the original data.geoJson
+        // If the GeoJSON does not have "access_index", log a warning
+        console.warn(
+          "The GeoJSON does not have 'access_index' in its features."
+        );
+        // return; // Stop function
+      }
       const accessIndexKey = "percent";
       if (data && data.geoJson) {
         console.log(data.geoJson);
@@ -179,7 +201,7 @@ const Dashboard: React.FC = () => {
           );
         }
         // Add the layer based on the geometry type
-        else if (data.geomType === "MultiPolygon") {
+        else if (data.geomType === "MultiPolygon" && hasAccessIndex) {
           // Generate random colors for features based on properties
 
           const percentileColors = [
@@ -229,7 +251,7 @@ const Dashboard: React.FC = () => {
             {
               id: id,
               type: "line",
-              source: "prefix" + id,
+              source: id,
               layout: {
                 "line-join": "round",
                 "line-cap": "round",
@@ -249,7 +271,7 @@ const Dashboard: React.FC = () => {
               source: id,
               layout: {},
               paint: {
-                "fill-color": "#fff",
+                "fill-color": "#00BB77",
                 "fill-opacity": 0.3,
               },
             },
@@ -705,7 +727,11 @@ const Dashboard: React.FC = () => {
 
   type TimeSeriesItem = {
     id: number;
-    category: string;
+    category: {
+      id: number;
+      category_name: string;
+      description: string;
+    };
     name: string;
     timestamp: string;
     value: number;
@@ -719,7 +745,10 @@ const Dashboard: React.FC = () => {
   };
 
   const [groupedMapLayers, setGroupedMapLayers] = useState<{
-    [category: string]: Items[];
+    [category: string]: {
+      description: string;
+      items: Items[];
+    };
   }>({});
 
   const fetchTimeSeriesData = async (): Promise<{
@@ -731,13 +760,22 @@ const Dashboard: React.FC = () => {
     return {
       time_series: data.map((item: any) => ({
         id: item.id,
-        category: item.category,
+        category: {
+          category_name: item.category_fk
+            ? item.category_fk.category_name
+            : "Unknown", // Ensure category_name is accessed correctly
+          description: item.category_fk
+            ? item.category_fk.description
+            : "No description available", // Ensure description is accessed correctly
+        },
         name: item.name,
-        timestamp: item.timestamp,
-        value: item.value,
-        apilink: item.apilink || "", // Ensure apilink exists
-        legendUrl: item.legend_url || "", // Ensure legendUrl exists
+        apilink: item.apilink,
+        legendUrl: item.legend_url,
         county: item.county,
+        month: {
+          name: item.month.name,
+          number: item.month.number,
+        },
       })),
     };
   };
@@ -749,10 +787,14 @@ const Dashboard: React.FC = () => {
     return {
       map_layers: data.map((item: any) => ({
         id: item.id,
-        category: item.category,
+        category: {
+          id: item.category_fk.id,
+          category_name: item.category_fk.category_name,
+          description: item.category_fk.description,
+        },
         name: item.name,
         apilink: item.apilink,
-        legendUrl: item.legend_url, // Ensure correct mapping
+        legendUrl: item.legend_url,
         county: item.county,
       })),
     };
@@ -763,14 +805,28 @@ const Dashboard: React.FC = () => {
       const mapDataResponse = await fetchMapData();
       setMapData(mapDataResponse);
 
-      // Group by category
-      const grouped: { [category: string]: Items[] } = {};
+      // Group by category with description
+      const grouped: {
+        [categoryName: string]: {
+          description: string;
+          items: Items[];
+        };
+      } = {};
+
       mapDataResponse.map_layers.forEach((item) => {
-        if (!grouped[item.category]) {
-          grouped[item.category] = [];
+        const categoryKey = item.category.category_name;
+        const description = item.category.description;
+
+        if (!grouped[categoryKey]) {
+          grouped[categoryKey] = {
+            description,
+            items: [],
+          };
         }
-        grouped[item.category].push(item);
+
+        grouped[categoryKey].items.push(item);
       });
+
       setGroupedMapLayers(grouped);
 
       const timeSeriesResponse = await fetchTimeSeriesData();
@@ -792,14 +848,25 @@ const Dashboard: React.FC = () => {
   //   loadData();
   // }, []);
 
-  const groupedTimeSeries = timeSeriesData.time_series.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
-      3;
+  const groupedTimeSeries = timeSeriesData.time_series.reduce(
+    (acc, item) => {
+      const key = item.category.category_name;
+      if (!acc[key]) {
+        acc[key] = {
+          description: item.category.description,
+          items: [],
+        };
+      }
+      acc[key].items.push(item);
+      return acc;
+    },
+    {} as {
+      [category: string]: {
+        description: string;
+        items: TimeSeriesItem[];
+      };
     }
-    acc[item.category].push(item);
-    return acc;
-  }, {} as Record<string, TimeSeriesItem[]>);
+  );
 
   // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -900,7 +967,7 @@ const Dashboard: React.FC = () => {
           <div className="absolute top-2 left-8 flex gap-4 h-full">
             {/* Time Series Panel (Sliding from Left) */}
             <div
-              className={`bg-white p-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll
+              className={`bg-white border border-white-100 p-4 rounded-md shadow-md w-80 h-full overflow-auto
               transition-transform duration-300 ease-in-out 
               ${
                 isTimeSeriesVisible
@@ -923,11 +990,12 @@ const Dashboard: React.FC = () => {
                 map layers.
               </p>
               <div className="space-y-2">
-                {Object.entries(groupedTimeSeries).map(([category, items]) => (
+                {Object.entries(groupedTimeSeries).map(([category, group]) => (
                   <SelectMenuMap
                     key={category}
-                    items={items} // All items in this category
+                    items={group.items}
                     category={category}
+                    description={group.description} // Pass description
                     onClick={(name, apilink, legendUrl) => {
                       addWMSLayer(mapRef.current, name, apilink, name);
                       showLegend(legendUrl, name);
@@ -939,7 +1007,7 @@ const Dashboard: React.FC = () => {
 
             {/* Layers Panel (Pushed when Time Series is Visible) */}
             <div
-              className={`absolute left-2 bg-white ps-4 pe-4 pb-4 rounded-md shadow-md border border-gray-300 w-80 h-4/5 overflow-scroll
+              className={`absolute left-2  bg-white border border-white ps-4 pe-4 pb-4 rounded-md shadow-md w-80 h-full overflow-auto
                 transition-transform duration-300 ease-in-out ${
                   isTimeSeriesVisible ? "translate-x-80" : "left-1"
                 } ${isPanelsVisible ? "flex flex-col" : "hidden"}`}
@@ -956,7 +1024,7 @@ const Dashboard: React.FC = () => {
                 </button>
               </div>
               {/* Toggle Buttons */}
-              <div className="sticky top-0 left-0 bottom-4 z-10 bg-white pt-4 mt-0 flex justify-between mb-4">
+              <div className="sticky top-0 left-0 bottom-4 z-10 pt-4 mt-0 flex justify-between mb-4">
                 <button
                   onClick={() => setActivePanel("select")}
                   className={`px-4 py-2 rounded-md ${
@@ -991,11 +1059,12 @@ const Dashboard: React.FC = () => {
                   </p>
                   <div className="space-y-2">
                     {Object.entries(groupedMapLayers).map(
-                      ([category, items]) => (
+                      ([category, data]) => (
                         <SelectMenuMap
                           key={category}
-                          items={items}
+                          items={data.items}
                           category={category}
+                          description={data.description}
                           onClick={(name, apilink, legendUrl) => {
                             if (apilink.includes("maps-wms")) {
                               addWMSLayer(mapRef.current, name, apilink, name);
