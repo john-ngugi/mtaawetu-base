@@ -58,6 +58,64 @@ export function SheetComponent({
     }
   };
 
+  const setBarData = () => {
+    if (!statsData) return null;
+
+    const prefix = Object.keys(statsData).some((key) =>
+      key.startsWith("mean_no2")
+    )
+      ? "mean_no2"
+      : "no2";
+
+    const months = [
+      "janmea",
+      "febmea",
+      "marmea",
+      "aprmea",
+      "maymea",
+      "junmea",
+      "julmea",
+      "augmea",
+      "sepmea",
+      "octmea",
+      "novmea",
+      "decmea",
+    ];
+
+    const data = months.map((month) => statsData[`${prefix}_${month}`] ?? 0);
+
+    return data;
+  };
+
+  const setSo2BarData = () => {
+    if (!statsData) return null;
+
+    const prefix = Object.keys(statsData).some((key) =>
+      key.startsWith("mean_so2")
+    )
+      ? "mean_so2"
+      : "so2";
+
+    const months = [
+      "janmea",
+      "febmea",
+      "marmea",
+      "aprmea",
+      "maymea",
+      "junmea",
+      "julmea",
+      "augmea",
+      "sepmea",
+      "octmea",
+      "novmea",
+      "decmea",
+    ];
+
+    const data = months.map((month) => statsData[`${prefix}_${month}`] ?? 0);
+
+    return data;
+  };
+
   const percentValue = percent;
   // Data for doughnut chart if `access_index_percent` exists
   const chartData = accessIndexPercent
@@ -115,20 +173,7 @@ export function SheetComponent({
     datasets: [
       {
         label: "NO2 Monthly Mean",
-        data: [
-          statsData.mean_no2_janmea,
-          statsData.mean_no2_febmea,
-          statsData.mean_no2_marmea,
-          statsData.mean_no2_aprmea,
-          statsData.mean_no2_maymea,
-          statsData.mean_no2_junmea,
-          statsData.mean_no2_julmea,
-          statsData.mean_no2_augmea,
-          statsData.mean_no2_sepmea,
-          statsData.mean_no2_octmea,
-          statsData.mean_no2_novmea,
-          statsData.mean_no2_decmea,
-        ],
+        data: setBarData(),
         backgroundColor: "#4caf50",
       },
     ],
@@ -163,20 +208,7 @@ export function SheetComponent({
     datasets: [
       {
         label: "SO2 Monthly Mean",
-        data: [
-          statsData.mean_so2_janmea,
-          statsData.mean_so2_febmea,
-          statsData.mean_so2_marmea,
-          statsData.mean_so2_aprmea,
-          statsData.mean_so2_maymea,
-          statsData.mean_so2_junmea,
-          statsData.mean_so2_julmea,
-          statsData.mean_so2_augmea,
-          statsData.mean_so2_sepmea,
-          statsData.mean_so2_octmea,
-          statsData.mean_so2_novmea,
-          statsData.mean_so2_decmea,
-        ],
+        data: setSo2BarData(),
         backgroundColor: "#ff5722",
       },
     ],
@@ -262,6 +294,7 @@ export function SheetComponent({
   const calculateMinValue = (data: number[]) => {
     return Math.min(...data);
   };
+
   return (
     <div>
       <Sheet>
@@ -316,8 +349,13 @@ export function SheetComponent({
                             </small>
                             <br />
                             <br />
-                            You have a {percentValue}% chance of accessing the
-                            selected service if you live in this area.
+                            You have a{" "}
+                            <span className="text-blue-700">
+                              {" "}
+                              <strong>{percentValue}% </strong>
+                            </span>
+                            chance of accessing the selected service if you live
+                            in this area.
                           </p>
                         </div>
                       </div>
@@ -352,6 +390,19 @@ export function SheetComponent({
                     produced by vehicle emissions and industrial activities. It
                     can irritate the respiratory system and contribute to the
                     formation of ground-level ozone and smog.
+                    <br />
+                    Learn about the effects of NO<sub>2</sub> on human health
+                    and the environment here:{" "}
+                    <a
+                      href="https://www.env-health.org/wp-content/uploads/2023/06/NO2_briefing_EN.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 cursor-pointer text-underline"
+                      style={{ textDecoration: "underline" }}
+                    >
+                      {" "}
+                      NO<sub>2</sub> effects on human health{" "}
+                    </a>
                   </p>
                   <Bar data={barData} options={barOptions} />
                 </div>
@@ -381,7 +432,7 @@ export function SheetComponent({
             )}
 
             {/* Display all the stats in a list */}
-            <ul
+            {/* <ul
               style={{ marginTop: "20px", paddingLeft: "20px", color: "#555" }}
             >
               {Object.entries(statsData).map(([key, value]) => (
@@ -394,6 +445,7 @@ export function SheetComponent({
                 </li>
               ))}
             </ul>
+            */}
           </div>
         </SheetContent>
       </Sheet>

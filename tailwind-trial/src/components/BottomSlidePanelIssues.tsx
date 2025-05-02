@@ -68,7 +68,10 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
               ! Discover insights & explore Nairobi’s neighborhoods easily.
             </p>
             <button
-              onClick={() => setIsBottomNoteVisible(false)}
+              onClick={() => {
+                setIsBottomNoteVisible(false);
+                onClose(); // This will trigger the parent to hide the whole panel
+              }}
               className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
             >
               <X size="20" />
