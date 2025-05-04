@@ -10,8 +10,8 @@ declare global {
 }
 
 interface Props {
-  onLocationSelect: (lng: number, lat: number) => void;
-  isVisible: boolean;
+  onLocationSelect?: (lng: number, lat: number) => void; // Made optional
+  isVisible: boolean; // Changed from 'isOpen' to 'isVisible' to match usage
   onClose: () => void;
 }
 
@@ -65,7 +65,7 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
             <p className="text-gray-500 text-sm mt-2 text-center px-4">
               👋 Meet{" "}
               <span className="text-blue-500 font-medium">Street Smart AI</span>
-              ! Discover insights & explore Nairobi’s neighborhoods easily.
+              ! Discover insights & explore Nairobi's neighborhoods easily.
             </p>
             <button
               onClick={() => {
@@ -85,16 +85,16 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
         <div className="px-6 py-4 mt-3 text-gray-600 text-sm md:text-base align-middle justify-center">
           <TryAIButton onClick={() => setIsExpanded(true)} />
           <p className="text-sm">
-            👋 Hi there! I’m{" "}
+            👋 Hi there! I'm{" "}
             <span className="text-blue-500 font-semibold">Street Smart AI</span>
-            . I’m here to help you discover insights and get detailed
+            . I'm here to help you discover insights and get detailed
             information about any <span className="font-semibold">mtaa</span>{" "}
             (neighborhood) in Nairobi.
           </p>
           <p className="text-sm mt-1">
-            🌍 Whether you’re curious about local amenities, infrastructure, or
-            community satisfaction, I’ve got you covered. Just type in a
-            question or request, and I’ll analyze data from around the city to
+            🌍 Whether you're curious about local amenities, infrastructure, or
+            community satisfaction, I've got you covered. Just type in a
+            question or request, and I'll analyze data from around the city to
             provide you with personalized insights.
           </p>
           {/* <p className="mt-2">

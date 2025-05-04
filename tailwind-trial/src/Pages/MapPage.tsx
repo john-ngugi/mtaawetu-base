@@ -1,13 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { Home, List, LayoutDashboard, Menu, X, TimerReset } from "lucide-react";
+import {
+  Home,
+  List,
+  LayoutDashboard,
+  Menu,
+  X,
+  TimerReset,
+  Layers,
+  ArrowLeft,
+} from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import * as turf from "@turf/turf";
 import "maplibre-gl/dist/maplibre-gl.css";
 import SelectMenuMap from "../components/SelectMenuMap";
 import ToggleButton from "../components/ToggoleVisibilityBtn";
 import BottomSlidePanel from "../components/BottomSlidePanelIssues";
-import Search from "../components/Search";
+import SearchComponent from "../components/Search";
 import { SheetComponent } from "@/components/Sheet";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
@@ -16,13 +25,20 @@ import DropDownComponent from "../components/Popover";
 import { showLegend } from "../utils/utils";
 import { hideLegend } from "../utils/utils";
 // Define the type for suggestion (based on Nominatim response structure)
-interface Suggestion {
-  place_id: string;
-  display_name: string;
+// interface Suggestion {
+//   place_id: string;
+//   display_name: string;
+//   lat: string;
+//   lon: string;
+// }
+// Location interface to ensure type consistency
+interface LocationSuggestion {
+  place: string;
   lat: string;
   lon: string;
+  display_name?: string;
+  place_id?: string;
 }
-
 interface Items {
   id: number;
   category: {
@@ -40,7 +56,7 @@ const Dashboard: React.FC = () => {
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]); // Explicitly type suggestions as an array of Suggestion objects
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   // const [neighbourhoodName, setCurrentNeighborhoodName] = useState<string>("");
   const MAPTILER_KEY = "Zk2vXxVka5bwTvXQmJ0l";
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
@@ -58,37 +74,37 @@ const Dashboard: React.FC = () => {
 
   // const timeSeriesRef = useRef(null);
   const ipAddress = "http://127.0.0.1:8000";
-  var neighbourhoodName = "";
+  // var neighbourhoodName = "";
 
-  // Function to fetch possible location suggestions (limited to 4 results)
-  const fetchSuggestions = async (input: string) => {
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${input}, Kenya`
-      );
-      const data = await response.json();
-      setSuggestions(data.slice(0, 4));
-      // Extract relevant fields and sort alphabetically by display_name or city/town
-      const formattedSuggestions = data
-        .map((location: any) => {
-          const { display_name, lat, lon, address } = location;
-          // Extract city, town, or village, fallback to display_name if none exists
-          const place =
-            address?.city || address?.town || address?.village || display_name;
-          return {
-            place, // Display name (city/town/village)
-            lat,
-            lon,
-          };
-        })
-        .sort((a: any, b: any) => a.place.localeCompare(b.place)) // Sort alphabetically by place name
-        .slice(0, 4); // Limit to top 4 suggestions
+  // // Function to fetch possible location suggestions (limited to 4 results)
+  // const fetchSuggestions = async (input: string) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://nominatim.openstreetmap.org/search?format=json&q=${input}, Kenya`
+  //     );
+  //     const data = await response.json();
+  //     setSuggestions(data.slice(0, 4));
+  //     // Extract relevant fields and sort alphabetically by display_name or city/town
+  //     const formattedSuggestions = data
+  //       .map((location: any) => {
+  //         const { display_name, lat, lon, address } = location;
+  //         // Extract city, town, or village, fallback to display_name if none exists
+  //         const place =
+  //           address?.city || address?.town || address?.village || display_name;
+  //         return {
+  //           place, // Display name (city/town/village)
+  //           lat,
+  //           lon,
+  //         };
+  //       })
+  //       .sort((a: any, b: any) => a.place.localeCompare(b.place)) // Sort alphabetically by place name
+  //       .slice(0, 4); // Limit to top 4 suggestions
 
-      setSuggestions(formattedSuggestions); // Update the suggestions state
-    } catch (error) {
-      console.error("Error fetching location suggestions:", error);
-    }
-  };
+  //     setSuggestions(formattedSuggestions); // Update the suggestions state
+  //   } catch (error) {
+  //     console.error("Error fetching location suggestions:", error);
+  //   }
+  // };
 
   // Function to add the GeoJSON layer and handle feature click
   const addGeoJsonLayer = async (
@@ -308,7 +324,7 @@ const Dashboard: React.FC = () => {
                 const geojson = JSON.parse(data.geojson);
                 const centroid = turf.centroid(geojson);
                 const [longitude, latitude] = centroid.geometry.coordinates;
-                neighbourhoodName = geojson.features[0].properties.name;
+                // let neighbourhoodName = geojson.features[0].properties.name;
                 // console.log("Name", neighbourhoodName);
                 console.log("GeoJson", geojson);
                 // Remove the existing source and layer if they exist
@@ -613,13 +629,25 @@ const Dashboard: React.FC = () => {
 
                 const container = document.getElementById("sheet-container");
                 if (container) {
-                  ReactDOM.render(
-                    <SheetComponent
-                      statsData={statsData.response}
-                      areaName={neighbourhoodName}
-                    />,
-                    container
-                  );
+                  if (id == "population density") {
+                    ReactDOM.render(
+                      <SheetComponent
+                        statsData={statsData.response}
+                        areaName={neighbourhoodName}
+                        dataType="demographics"
+                      />,
+                      container
+                    );
+                  } else {
+                    ReactDOM.render(
+                      <SheetComponent
+                        statsData={statsData.response}
+                        areaName={neighbourhoodName}
+                        percent={properties.percent}
+                      />,
+                      container
+                    );
+                  }
                 }
               } catch (error) {
                 console.error("Error fetching statistics:", error);
@@ -883,181 +911,243 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen bg-white">
+    <div className="flex h-screen w-screen bg-slate-50">
       {/* Sidebar */}
       <aside
-        className={`z-20 bg-blue-900 text-white p-5 flex flex-col space-y-6 h-full 
-      transition-all duration-300 ease-in-out 
-      ${isSidebarOpen ? "w-48" : "w-16"}`}
+        className={`z-30 bg-gradient-to-b from-blue-900 to-blue-800 text-white flex flex-col h-full transition-all duration-300 ease-in-out ${
+          isSidebarOpen ? "w-64" : "w-20"
+        }`}
       >
-        {/* Toggle Button */}
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className=" text-white"
-        >
-          <Menu color="white" />
-        </button>
+        {/* Logo Area */}
+        <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
+          {isSidebarOpen && (
+            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
+              GeoViz
+            </h1>
+          )}
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="p-2 rounded-md hover:bg-blue-700/50 transition-colors"
+            aria-label="Toggle sidebar"
+          >
+            {isSidebarOpen ? <ArrowLeft size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
 
         {/* Navigation Links */}
-        <nav className="mt-15 flex flex-col space-y-6 items-start">
-          <a
-            href="#"
-            className="flex items-center space-x-3"
-            onClick={handleHomeClick}
-          >
-            <Home color="white" />
-            {isSidebarOpen && (
-              <span className="text-xs font-bold uppercase">County Select</span>
-            )}
-          </a>
+        <nav className="flex-1 p-4">
+          <div className={`space-y-1 ${isSidebarOpen ? "mt-2" : "mt-6"}`}>
+            <button
+              onClick={handleHomeClick}
+              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
+            >
+              <Home
+                size={isSidebarOpen ? 18 : 22}
+                className={`${!isSidebarOpen && "mx-auto"}`}
+              />
+              {isSidebarOpen && (
+                <span className="ml-3 font-medium">County Select</span>
+              )}
+            </button>
 
-          <a
-            href="#"
-            onClick={handleTabClick}
-            className="flex items-center space-x-3"
-          >
-            <TimerReset color="white" />
-            {isSidebarOpen && (
-              <span className="text-xs font-bold uppercase">Time Series</span>
-            )}
-          </a>
+            <button
+              onClick={handleTabClick}
+              className={`flex items-center w-full p-3 rounded-lg transition-colors ${
+                isTimeSeriesVisible ? "bg-blue-700/70" : "hover:bg-blue-700/50"
+              }`}
+            >
+              <TimerReset
+                size={isSidebarOpen ? 18 : 22}
+                className={`${!isSidebarOpen && "mx-auto"}`}
+              />
+              {isSidebarOpen && (
+                <span className="ml-3 font-medium">Time Series</span>
+              )}
+            </button>
 
-          <a
-            href="#"
-            onClick={handleOtherClick}
-            className="flex items-center space-x-3"
-          >
-            <List color="white" />
-            {isSidebarOpen && (
-              <span className="text-xs font-bold uppercase">List</span>
-            )}
-          </a>
+            <button
+              onClick={handleOtherClick}
+              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
+            >
+              <List
+                size={isSidebarOpen ? 18 : 22}
+                className={`${!isSidebarOpen && "mx-auto"}`}
+              />
+              {isSidebarOpen && (
+                <span className="ml-3 font-medium">List View</span>
+              )}
+            </button>
 
-          <a
-            href="#"
-            onClick={handleOtherClick}
-            className="flex items-center space-x-3"
-          >
-            <LayoutDashboard color="white" />
-            {isSidebarOpen && (
-              <span className="text-xs font-bold uppercase">Dashboard</span>
-            )}
-          </a>
+            <button
+              onClick={handleOtherClick}
+              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
+            >
+              <LayoutDashboard
+                size={isSidebarOpen ? 18 : 22}
+                className={`${!isSidebarOpen && "mx-auto"}`}
+              />
+              {isSidebarOpen && (
+                <span className="ml-3 font-medium">Dashboard</span>
+              )}
+            </button>
+          </div>
         </nav>
+
+        {/* Footer Area */}
+        {isSidebarOpen && (
+          <div className="p-4 border-t border-blue-700/50">
+            <div className="text-xs text-blue-200/70">GeoViz Platform v2.0</div>
+          </div>
+        )}
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
-        <div className="flex flex-row items-center justify-between bg-blue-900 shadow-lg p-1">
-          <Search
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            flyTo={flyTo}
-            fetchSuggestions={fetchSuggestions}
-          />
-        </div>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Navigation Bar */}
+        <header className="z-20 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg px-4 py-3">
+          <div className="flex items-center justify-between">
+            <SearchComponent
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              suggestions={suggestions}
+              setSuggestions={setSuggestions}
+              flyTo={flyTo}
+            />
+            <div className="flex items-center space-x-4">
+              <button
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition"
+                onClick={() => setPanelsVisible(!isPanelsVisible)}
+              >
+                <Layers size={18} />
+              </button>
+            </div>
+          </div>
+        </header>
 
         {/* Map and content area */}
-        <div className="flex-grow relative overflow-hidden flex">
-          <div id="map" className="w-full h-full rounded-sm" />
+        <div className="flex-grow relative overflow-hidden">
+          <div id="map" className="w-full h-full" />
 
-          {/* Parent wrapper for both panels */}
-          <div className="absolute top-2 left-8 flex gap-4 h-full">
-            {/* Time Series Panel (Sliding from Left) */}
+          {/* Panel Container */}
+          <div
+            className={`absolute top-0 ${
+              isSidebarOpen ? "left-64" : "left-20"
+            } h-full transition-all duration-300`}
+          >
+            {/* Time Series Panel */}
             <div
-              className={`bg-white border border-white-100 p-4 rounded-md shadow-md w-80 h-full overflow-auto
-              transition-transform duration-300 ease-in-out 
-              ${
-                isTimeSeriesVisible
-                  ? "translate-x-0"
-                  : "-translate-x-full opacity-0"
-              }
-            `}
+              className={`absolute top-4 h-[calc(100%-10rem)] bg-white border-r border-gray-200 shadow-lg w-80 transition-transform transform duration-300 ease-out
+                ${
+                  isTimeSeriesVisible
+                    ? "translate-x-0 opacity-100 pointer-events-auto"
+                    : "-translate-x-full opacity-0 pointer-events-none"
+                }
+              `}
             >
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-semibold text-blue-600">Time Series</h4>
-                <button
-                  onClick={() => setIsTimeSeriesVisible(false)}
-                  className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
-                >
-                  <X size="20" />
-                </button>
+              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-semibold text-blue-800">Time Series</h3>
+                  <button
+                    onClick={() => setIsTimeSeriesVisible(false)}
+                    className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  View and analyze temporal data trends
+                </p>
               </div>
-              <p className="text-gray-600 text-sm mb-4">
-                Select a category to view and interact with its corresponding
-                map layers.
-              </p>
-              <div className="space-y-2">
-                {Object.entries(groupedTimeSeries).map(([category, group]) => (
-                  <SelectMenuMap
-                    key={category}
-                    items={group.items}
-                    category={category}
-                    description={group.description} // Pass description
-                    onClick={(name, apilink, legendUrl) => {
-                      addWMSLayer(mapRef.current, name, apilink, name);
-                      showLegend(legendUrl, name);
-                    }}
-                  />
-                ))}
+
+              <div
+                className="p-4 overflow-y-auto"
+                style={{ height: "calc(100% - 82px)" }}
+              >
+                <div className="space-y-3">
+                  {Object.entries(groupedTimeSeries).map(
+                    ([category, group]) => (
+                      <SelectMenuMap
+                        key={category}
+                        items={group.items}
+                        category={category}
+                        description={group.description}
+                        onClick={(name, apilink, legendUrl) => {
+                          addWMSLayer(mapRef.current, name, apilink, name);
+                          showLegend(legendUrl, name);
+                        }}
+                      />
+                    )
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Layers Panel (Pushed when Time Series is Visible) */}
+            {/* Layers Control Panel */}
             <div
-              className={`absolute left-2  bg-white border border-white ps-4 pe-4 pb-4 rounded-md shadow-md w-80 h-full overflow-auto
-                transition-transform duration-300 ease-in-out ${
-                  isTimeSeriesVisible ? "translate-x-80" : "left-1"
-                } ${isPanelsVisible ? "flex flex-col" : "hidden"}`}
+              className={`absolute top-4 bg-white rounded-lg shadow-xl border border-gray-200 w-80 max-h-[calc(100%-2rem)] transition-all duration-300 ${
+                isTimeSeriesVisible ? "left-[332px]" : "left-1"
+              } ${
+                isPanelsVisible
+                  ? "opacity-100"
+                  : "opacity-0 pointer-events-none"
+              }`}
+              style={{
+                transform: isPanelsVisible
+                  ? "translateX(0)"
+                  : "translateX(-20px)",
+                overflow: "hidden",
+              }}
             >
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-semibold text-blue-600 mt-1">
-                  Control Panel
-                </h4>
-                <button
-                  onClick={() => setPanelsVisible(false)}
-                  className="text-gray-500 hover:text-red-500 transition duration-200 ease-in-out"
-                >
-                  <X size="20" />
-                </button>
-              </div>
-              {/* Toggle Buttons */}
-              <div className="sticky top-0 left-0 bottom-4 z-10 pt-4 mt-0 flex justify-between mb-4">
-                <button
-                  onClick={() => setActivePanel("select")}
-                  className={`px-4 py-2 rounded-md ${
-                    activePanel === "select"
-                      ? "bg-blue-900 text-white"
-                      : "bg-gray-200 text-blue-800"
-                  }`}
-                >
-                  Select Layers
-                </button>
-                <button
-                  onClick={() => setActivePanel("loaded")}
-                  className={`px-4 py-2 rounded-md ${
-                    activePanel === "loaded"
-                      ? "bg-blue-900 text-white"
-                      : "bg-gray-200 text-blue-800"
-                  }`}
-                >
-                  Loaded Layers
-                </button>
+              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white sticky top-0 z-10">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-semibold text-blue-800">
+                    Layer Controls
+                  </h3>
+                  <button
+                    onClick={() => setPanelsVisible(false)}
+                    className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
               </div>
 
-              {/* Panels */}
-              {activePanel === "select" ? (
-                <div>
-                  <h4 className="font-semibold text-blue-600 mb-2">
-                    Map Categories
-                  </h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Select a category to view and interact with its
-                    corresponding map layers.
-                  </p>
-                  <div className="space-y-2">
+              {/* Toggle Buttons */}
+              <div className="sticky top-[73px] z-10 bg-white border-b border-gray-200">
+                <div className="flex p-2 gap-2">
+                  <button
+                    onClick={() => setActivePanel("select")}
+                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                      activePanel === "select"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Select Layers
+                  </button>
+                  <button
+                    onClick={() => setActivePanel("loaded")}
+                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                      activePanel === "loaded"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Loaded Layers
+                  </button>
+                </div>
+              </div>
+
+              {/* Panel Content */}
+              <div
+                className="overflow-y-hidden p-4"
+                style={{ maxHeight: "calc(100% - 130px)" }}
+              >
+                {activePanel === "select" ? (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600">
+                      Select map layers to display on your visualization.
+                    </p>
                     {Object.entries(groupedMapLayers).map(
                       ([category, data]) => (
                         <SelectMenuMap
@@ -1082,36 +1172,53 @@ const Dashboard: React.FC = () => {
                       )
                     )}
                   </div>
-                </div>
-              ) : (
-                <div>
-                  <h4 className="font-semibold text-blue-600 mb-2">
-                    Loaded Layers
-                  </h4>
-                  <div className="ml-1 mt-2 space-y-2">
-                    {loadedLayers.map((layer) => (
-                      <div
-                        key={layer}
-                        className="rounded-md px-2 py-2 flex items-center justify-between ring-1 ring-inset ring-gray-300 hover:bg-green-300"
-                      >
-                        <div className="overflow-hidden w-3/4">
-                          <span>{layer}</span>
-                        </div>
-                        <div className="flex mt-1">
-                          <DropDownComponent />
-                          <button
-                            className="rounded-md px-1 py-1 mr-2 text-sm text-white bg-red-500 hover:bg-red-700"
-                            onClick={() => removeLayer(layer)}
-                          >
-                            <X size="16" />
-                          </button>
-                          <ToggleButton layerId={layer} map={mapRef.current} />
-                        </div>
+                ) : (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600 mb-2">
+                      Currently active map layers. Manage visibility and
+                      settings.
+                    </p>
+                    {loadedLayers.length === 0 ? (
+                      <div className="text-center py-8 text-gray-500">
+                        <Layers size={32} className="mx-auto mb-2 opacity-50" />
+                        <p>No layers loaded</p>
+                        <p className="text-sm mt-1">
+                          Switch to Select Layers to add data
+                        </p>
                       </div>
-                    ))}
+                    ) : (
+                      <div className="space-y-2">
+                        {loadedLayers.map((layer) => (
+                          <div
+                            key={layer}
+                            className="rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between hover:bg-blue-50 transition-colors"
+                          >
+                            <div className="overflow-hidden">
+                              <span className="text-sm font-medium text-gray-700">
+                                {layer}
+                              </span>
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <ToggleButton
+                                layerId={layer}
+                                map={mapRef.current}
+                              />
+                              <DropDownComponent />
+                              <button
+                                className="p-1 rounded-md text-red-600 hover:bg-red-50"
+                                onClick={() => removeLayer(layer)}
+                                title="Remove layer"
+                              >
+                                <X size={16} />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
 
