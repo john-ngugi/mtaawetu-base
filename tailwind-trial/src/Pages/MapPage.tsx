@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Home,
   List,
@@ -9,6 +10,8 @@ import {
   TimerReset,
   Layers,
   ArrowLeft,
+  ChevronDown,
+  ArrowRight,
 } from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import * as turf from "@turf/turf";
@@ -52,15 +55,18 @@ interface Items {
   county: string | null;
 }
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
+  const [isBottomPanelVisible, setIsBottomPanelVisible] = useState(false);
   // const [neighbourhoodName, setCurrentNeighborhoodName] = useState<string>("");
   const MAPTILER_KEY = "Zk2vXxVka5bwTvXQmJ0l";
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
   const [activePanel, setActivePanel] = useState("select");
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const [selectedLat, setSelectedLat] = useState<number | null>(null);
   // const [selectedLng, setSelectedLng] = useState<number | null>(null);
   // const [boundCoords, setBoundCoords] = useState<maplibregl.LngLatBoundsLike>();
@@ -73,7 +79,7 @@ const Dashboard: React.FC = () => {
   });
 
   // const timeSeriesRef = useRef(null);
-  const ipAddress = "http://127.0.0.1:8000";
+  const ipAddress = "https://mtaawetu.com";
   // var neighbourhoodName = "";
 
   // // Function to fetch possible location suggestions (limited to 4 results)
@@ -910,102 +916,68 @@ const Dashboard: React.FC = () => {
     setPanelsVisible(true);
   };
 
+  // Function to show legends
+  // const showLegend = (legendUrl, name) => {
+  //   const legend = document.getElementById("legend");
+  //   const legendContent = document.getElementById("legend-content");
+
+  //   if (legend) {
+  //     legend.classList.remove("hidden");
+  //   }
+
+  //   if (legendUrl) {
+  //     // Clear previous content
+  //     legendContent.innerHTML = "";
+
+  //     // Create image element for the legend
+  //     const img = document.createElement("img");
+  //     img.src = legendUrl;
+  //     img.alt = `Legend for ${name}`;
+  //     img.style.maxWidth = "100%";
+
+  //     legendContent.appendChild(img);
+  //   } else {
+  //     legendContent.innerHTML = "<li>No legend available for this layer</li>";
+  //   }
+  // };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        isMobileMenuOpen &&
+        !(event.target as HTMLElement)?.closest("aside")
+      ) {
+        setMobileMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
-    <div className="flex h-screen w-screen bg-slate-50">
-      {/* Sidebar */}
-      <aside
-        className={`z-30 bg-gradient-to-b from-blue-900 to-blue-800 text-white flex flex-col h-full transition-all duration-300 ease-in-out ${
-          isSidebarOpen ? "w-64" : "w-20"
-        }`}
-      >
-        {/* Logo Area */}
-        <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
-          {isSidebarOpen && (
-            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
+    <div className="flex flex-col h-screen w-screen bg-slate-50 overflow-hidden">
+      {/* Header - Responsive for both mobile and desktop */}
+      <header className="z-20 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg px-4 py-3">
+        <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center">
+            {/* Fixed: Separated mobile menu button and sidebar toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-md text-white hover:bg-blue-700/50 transition-colors mr-2 lg:hidden"
+              aria-label="Toggle menu"
+            >
+              <Menu size={18} />
+            </button>
+            {/* <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white hidden sm:block">
               GeoViz
-            </h1>
-          )}
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded-md hover:bg-blue-700/50 transition-colors"
-            aria-label="Toggle sidebar"
-          >
-            {isSidebarOpen ? <ArrowLeft size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-
-        {/* Navigation Links */}
-        <nav className="flex-1 p-4">
-          <div className={`space-y-1 ${isSidebarOpen ? "mt-2" : "mt-6"}`}>
-            <button
-              onClick={handleHomeClick}
-              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
-            >
-              <Home
-                size={isSidebarOpen ? 18 : 22}
-                className={`${!isSidebarOpen && "mx-auto"}`}
-              />
-              {isSidebarOpen && (
-                <span className="ml-3 font-medium">County Select</span>
-              )}
-            </button>
-
-            <button
-              onClick={handleTabClick}
-              className={`flex items-center w-full p-3 rounded-lg transition-colors ${
-                isTimeSeriesVisible ? "bg-blue-700/70" : "hover:bg-blue-700/50"
-              }`}
-            >
-              <TimerReset
-                size={isSidebarOpen ? 18 : 22}
-                className={`${!isSidebarOpen && "mx-auto"}`}
-              />
-              {isSidebarOpen && (
-                <span className="ml-3 font-medium">Time Series</span>
-              )}
-            </button>
-
-            <button
-              onClick={handleOtherClick}
-              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
-            >
-              <List
-                size={isSidebarOpen ? 18 : 22}
-                className={`${!isSidebarOpen && "mx-auto"}`}
-              />
-              {isSidebarOpen && (
-                <span className="ml-3 font-medium">List View</span>
-              )}
-            </button>
-
-            <button
-              onClick={handleOtherClick}
-              className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors"
-            >
-              <LayoutDashboard
-                size={isSidebarOpen ? 18 : 22}
-                className={`${!isSidebarOpen && "mx-auto"}`}
-              />
-              {isSidebarOpen && (
-                <span className="ml-3 font-medium">Dashboard</span>
-              )}
-            </button>
+            </h1> */}
           </div>
-        </nav>
 
-        {/* Footer Area */}
-        {isSidebarOpen && (
-          <div className="p-4 border-t border-blue-700/50">
-            <div className="text-xs text-blue-200/70">GeoViz Platform v2.0</div>
-          </div>
-        )}
-      </aside>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Navigation Bar */}
-        <header className="z-20 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg px-4 py-3">
-          <div className="flex items-center justify-between">
+          <div className="flex-1 max-w-md mx-4 lg:max-w-xl">
             <SearchComponent
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -1013,243 +985,517 @@ const Dashboard: React.FC = () => {
               setSuggestions={setSuggestions}
               flyTo={flyTo}
             />
-            <div className="flex items-center space-x-4">
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <button
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition hidden md:flex items-center"
+              onClick={() => setIsTimeSeriesVisible(!isTimeSeriesVisible)}
+            >
+              <TimerReset size={18} />
+              <span className="ml-2 text-sm hidden xl:inline">Time Series</span>
+            </button>
+            <button
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition flex items-center"
+              onClick={() => setPanelsVisible(!isPanelsVisible)}
+            >
+              <Layers size={18} />
+              <span className="ml-2 text-sm hidden xl:inline">Layers</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <div className="flex flex-1 relative overflow-hidden">
+        {/* Mobile Navigation Drawer Overlay */}
+        <div
+          className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 lg:hidden ${
+            isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+
+        {/* Desktop Sidebar / Mobile Menu - Always visible on desktop */}
+        <aside
+          className={`fixed top-0 left-0 z-50 bg-gradient-to-b from-blue-900 to-blue-800 text-white flex flex-col h-full transition-all duration-300 ease-in-out lg:static lg:block lg:z-30 ${
+            isMobileMenuOpen ? "w-64" : "w-0 lg:w-20"
+          } ${isSidebarOpen ? "lg:w-64" : "lg:w-20"}`}
+        >
+          {/* Logo/Close button area */}
+          <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
+            {(isMobileMenuOpen || isSidebarOpen) && (
+              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
+                Mtaa wetu
+              </h1>
+            )}
+            {/* Fixed: Clarified the button toggle logic */}
+            <button
+              onClick={() => {
+                if (window.innerWidth < 1024) {
+                  setMobileMenuOpen(false);
+                } else {
+                  setIsSidebarOpen(!isSidebarOpen);
+                }
+              }}
+              className="p-2 rounded-md hover:bg-blue-700/50 transition-colors"
+              aria-label="Toggle sidebar"
+            >
+              {isMobileMenuOpen ? (
+                <X size={20} />
+              ) : isSidebarOpen ? (
+                <ArrowLeft size={20} />
+              ) : (
+                <Menu size={20} />
+              )}
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex-1 p-4">
+            <div className={`space-y-3 ${isSidebarOpen ? "mt-2" : "mt-6"}`}>
               <button
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition"
-                onClick={() => setPanelsVisible(!isPanelsVisible)}
+                onClick={() => {
+                  handleHomeClick();
+                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                }}
+                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
               >
-                <Layers size={18} />
+                <Home
+                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                  className={`${
+                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                  } group-hover:scale-110 transition-transform`}
+                />
+                {(isMobileMenuOpen || isSidebarOpen) && (
+                  <span className="ml-3 font-medium">County Select</span>
+                )}
+                {!isMobileMenuOpen && !isSidebarOpen && (
+                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                    County Select
+                  </div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  handleTabClick();
+                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                }}
+                className={`flex items-center w-full p-3 rounded-lg transition-colors group ${
+                  isTimeSeriesVisible
+                    ? "bg-blue-700/70"
+                    : "hover:bg-blue-700/50"
+                }`}
+              >
+                <TimerReset
+                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                  className={`${
+                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                  } group-hover:scale-110 transition-transform`}
+                />
+                {(isMobileMenuOpen || isSidebarOpen) && (
+                  <span className="ml-3 font-medium">Time Series</span>
+                )}
+                {!isMobileMenuOpen && !isSidebarOpen && (
+                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                    Time Series
+                  </div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/notebooks");
+                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                }}
+                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
+              >
+                <List
+                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                  className={`${
+                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                  } group-hover:scale-110 transition-transform`}
+                />
+                {(isMobileMenuOpen || isSidebarOpen) && (
+                  <span className="ml-3 font-medium">List View</span>
+                )}
+                {!isMobileMenuOpen && !isSidebarOpen && (
+                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                    List View
+                  </div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  handleOtherClick();
+                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                }}
+                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
+              >
+                <LayoutDashboard
+                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                  className={`${
+                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                  } group-hover:scale-110 transition-transform`}
+                />
+                {(isMobileMenuOpen || isSidebarOpen) && (
+                  <span className="ml-3 font-medium">Dashboard</span>
+                )}
+                {!isMobileMenuOpen && !isSidebarOpen && (
+                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                    Dashboard
+                  </div>
+                )}
+              </button>
+            </div>
+          </nav>
+          {!isMobileMenuOpen && isSidebarOpen && (
+            <div className="mt-auto p-4 border-t border-blue-700/50">
+              <div className="text-xs text-blue-200/70">
+                Mtaa Wetu Platform v2.0
+              </div>
+            </div>
+          )}
+          {/* Footer Area - Always visible */}
+        </aside>
+
+        {/* Map Container with proper sidebar margin on desktop */}
+        <div
+          id="map"
+          className="flex-1 relative transition-all duration-300"
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          {/* Street Smart AI Button - Desktop Positioning */}
+          <button
+            onClick={() => setIsBottomPanelVisible(true)}
+            className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 z-20
+                    bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full 
+                    shadow-lg flex items-center space-x-2 transition-all duration-300"
+          >
+            <span className="hidden sm:inline">Ask Street Smart AI</span>
+            <span className="sm:hidden">AI Help</span>
+            <ChevronDown size={16} />
+          </button>
+        </div>
+
+        {/* Panel Container - Improved Desktop Experience */}
+        <div className="fixed inset-0 pointer-events-none z-30">
+          {/* Time Series Panel - Bottom Sheet on Mobile, Side Panel on Desktop */}
+          {/* Fixed: Corrected pointer-events logic to ensure clickability */}
+          <div
+            className={`bg-white border-t border-gray-200 shadow-lg transition-all duration-300 ease-out
+              ${
+                isTimeSeriesVisible
+                  ? "pointer-events-auto"
+                  : "pointer-events-none"
+              }
+              ${
+                isTimeSeriesVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-full opacity-0"
+              }
+              lg:absolute lg:inset-y-0 lg:left-auto lg:translate-y-0 lg:right-0 lg:bottom-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
+              ${!isTimeSeriesVisible && "lg:translate-x-full lg:opacity-0"}
+            `}
+            style={{
+              position: "fixed",
+              height: "90vh",
+              maxHeight: "90vh",
+              borderTopLeftRadius: "1rem",
+              borderTopRightRadius: "1rem",
+              bottom: "0",
+              left: "0",
+              width: "100%",
+              paddingBottom: "70px",
+              ...(!isTimeSeriesVisible && { transform: "translateY(100%)" }),
+              ...(window.innerWidth >= 1024 && {
+                position: "fixed",
+                bottom: "0",
+                top: "0",
+                right: "0",
+                left: "auto",
+                width: "25%",
+                height: "100%",
+                maxHeight: "100%",
+                borderTopLeftRadius: "0",
+                borderTopRightRadius: "0",
+                paddingBottom: "0",
+                transform: isTimeSeriesVisible
+                  ? "translateX(0)"
+                  : "translateX(100%)",
+              }),
+            }}
+          >
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white sticky top-0 z-10">
+              {/* Mobile handle for drag */}
+              <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4 lg:hidden"></div>
+
+              <div className="flex justify-between items-center">
+                <h3 className="font-semibold text-blue-800">Time Series</h3>
+                <button
+                  onClick={() => setIsTimeSeriesVisible(false)}
+                  className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <p className="text-sm text-gray-600 mt-1">
+                View and analyze temporal data trends
+              </p>
+            </div>
+
+            <div
+              className="p-4 overflow-y-auto pb-20 lg:pb-4"
+              style={{
+                height:
+                  window.innerWidth >= 1024
+                    ? "calc(100% - 86px)"
+                    : "calc(100% - 110px)",
+              }}
+            >
+              <div className="space-y-3">
+                {Object.entries(groupedTimeSeries).map(([category, group]) => (
+                  <SelectMenuMap
+                    key={category}
+                    items={group.items}
+                    category={category}
+                    description={group.description}
+                    onClick={(name, apilink, legendUrl) => {
+                      addWMSLayer(mapRef.current, name, apilink, name);
+                      showLegend(legendUrl, name);
+                      if (window.innerWidth < 1024)
+                        setIsTimeSeriesVisible(false);
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Layers Control Panel - Improved Desktop Positioning */}
+          {/* Fixed: Corrected pointer-events logic to ensure clickability */}
+          <div
+            className={`bg-white border-t border-gray-200 shadow-lg transition-all duration-300
+              ${isPanelsVisible ? "pointer-events-auto" : "pointer-events-none"}
+              ${
+                isPanelsVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-full opacity-0"
+              }
+              lg:absolute lg:inset-y-0 lg:translate-y-0 lg:translate-x-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
+              ${!isPanelsVisible && "lg:translate-x-full lg:opacity-0"}
+            `}
+            style={{
+              position: "fixed",
+              bottom: "0",
+              left: "0",
+              height: "90vh",
+              maxHeight: "90vh",
+              width: "100%",
+              borderTopLeftRadius: "1rem",
+              borderTopRightRadius: "1rem",
+              paddingBottom: "70px",
+              zIndex: isPanelsVisible && isTimeSeriesVisible ? "40" : "30",
+              ...(!isPanelsVisible && { transform: "translateY(100%)" }),
+              ...(window.innerWidth >= 1024 && {
+                position: "fixed",
+                bottom: "0",
+                top: "0",
+                right: isTimeSeriesVisible ? "25%" : "0",
+                left: "auto",
+                width: "25%",
+                height: "100%",
+                maxHeight: "100%",
+                borderTopLeftRadius: "0",
+                borderTopRightRadius: "0",
+                paddingBottom: "0",
+                transform: isPanelsVisible
+                  ? "translateX(0)"
+                  : "translateX(100%)",
+              }),
+            }}
+          >
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white sticky top-0 z-10">
+              {/* Mobile handle for drag */}
+              <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4 lg:hidden"></div>
+
+              <div className="flex justify-between items-center">
+                <h3 className="font-semibold text-blue-800">Layer Controls</h3>
+                <button
+                  onClick={() => setPanelsVisible(false)}
+                  className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Toggle Buttons */}
+            <div className="sticky top-[73px] z-10 bg-white border-b border-gray-200">
+              <div className="flex p-2 gap-2">
+                <button
+                  onClick={() => setActivePanel("select")}
+                  className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                    activePanel === "select"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  Select Layers
+                </button>
+                <button
+                  onClick={() => setActivePanel("loaded")}
+                  className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                    activePanel === "loaded"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  Loaded Layers
+                </button>
+              </div>
+            </div>
+
+            {/* Panel Content */}
+            <div
+              className="overflow-y-auto p-4 lg:pb-4"
+              style={{
+                height:
+                  window.innerWidth >= 1024
+                    ? "calc(100% - 125px)"
+                    : "calc(100% - 130px)",
+              }}
+            >
+              {activePanel === "select" ? (
+                <div className="space-y-4">
+                  <p className="text-sm text-gray-600">
+                    Select map layers to display on your visualization.
+                  </p>
+                  {Object.entries(groupedMapLayers).map(([category, data]) => (
+                    <SelectMenuMap
+                      key={category}
+                      items={data.items}
+                      category={category}
+                      description={data.description}
+                      onClick={(name, apilink, legendUrl) => {
+                        if (apilink.includes("maps-wms")) {
+                          addWMSLayer(mapRef.current, name, apilink, name);
+                          showLegend(legendUrl, name);
+                        } else {
+                          addGeoJsonLayer(
+                            mapRef.current,
+                            apilink,
+                            name,
+                            "name"
+                          );
+                        }
+                        if (window.innerWidth < 1024) setPanelsVisible(false);
+                      }}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    Currently active map layers. Manage visibility and settings.
+                  </p>
+                  {loadedLayers.length === 0 ? (
+                    <div className="text-center py-8 text-gray-500">
+                      <Layers size={32} className="mx-auto mb-2 opacity-50" />
+                      <p>No layers loaded</p>
+                      <p className="text-sm mt-1">
+                        Switch to Select Layers to add data
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      {loadedLayers.map((layer) => (
+                        <div
+                          key={layer}
+                          className="rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between hover:bg-blue-50 transition-colors"
+                        >
+                          <div className="overflow-hidden">
+                            <span className="text-sm font-medium text-gray-700 truncate">
+                              {layer}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <ToggleButton
+                              layerId={layer}
+                              map={mapRef.current}
+                            />
+                            <DropDownComponent />
+                            <button
+                              className="p-1 rounded-md text-red-600 hover:bg-red-50"
+                              onClick={() => removeLayer(layer)}
+                              title="Remove layer"
+                            >
+                              <X size={16} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Legend - Better Desktop Positioning */}
+        <div
+          id="legend"
+          className="fixed bottom-24 right-4 md:bottom-16 bg-white p-3 rounded-md shadow-md border border-gray-300 hidden max-w-[90%] md:max-w-xs lg:max-w-sm z-20 transition-all duration-300"
+        >
+          <div className="flex justify-between items-center mb-1">
+            <h4 className="font-semibold text-blue-500">Legend</h4>
+            <div className="flex space-x-1">
+              <button
+                id="toggle-legend-size"
+                className="p-1 rounded-full hover:bg-gray-100 text-gray-500 hidden md:block"
+                title="Toggle size"
+              >
+                <ArrowRight size={16} />
+              </button>
+              <button
+                onClick={() => {
+                  const legend = document.getElementById("legend");
+                  if (legend) {
+                    legend.classList.add("hidden");
+                  }
+                }}
+                className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+              >
+                <X size={16} />
               </button>
             </div>
           </div>
-        </header>
-
-        {/* Map and content area */}
-        <div className="flex-grow relative overflow-hidden">
-          <div id="map" className="w-full h-full" />
-
-          {/* Panel Container */}
-          <div
-            className={`absolute top-0 ${
-              isSidebarOpen ? "left-64" : "left-20"
-            } h-full transition-all duration-300`}
-          >
-            {/* Time Series Panel */}
-            <div
-              className={`absolute top-4 h-[calc(100%-10rem)] bg-white border-r border-gray-200 shadow-lg w-80 transition-transform transform duration-300 ease-out
-                ${
-                  isTimeSeriesVisible
-                    ? "translate-x-0 opacity-100 pointer-events-auto"
-                    : "-translate-x-full opacity-0 pointer-events-none"
-                }
-              `}
-            >
-              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-semibold text-blue-800">Time Series</h3>
-                  <button
-                    onClick={() => setIsTimeSeriesVisible(false)}
-                    className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  View and analyze temporal data trends
-                </p>
-              </div>
-
-              <div
-                className="p-4 overflow-y-auto"
-                style={{ height: "calc(100% - 82px)" }}
-              >
-                <div className="space-y-3">
-                  {Object.entries(groupedTimeSeries).map(
-                    ([category, group]) => (
-                      <SelectMenuMap
-                        key={category}
-                        items={group.items}
-                        category={category}
-                        description={group.description}
-                        onClick={(name, apilink, legendUrl) => {
-                          addWMSLayer(mapRef.current, name, apilink, name);
-                          showLegend(legendUrl, name);
-                        }}
-                      />
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Layers Control Panel */}
-            <div
-              className={`absolute top-4 bg-white rounded-lg shadow-xl border border-gray-200 w-80 max-h-[calc(100%-2rem)] transition-all duration-300 ${
-                isTimeSeriesVisible ? "left-[332px]" : "left-1"
-              } ${
-                isPanelsVisible
-                  ? "opacity-100"
-                  : "opacity-0 pointer-events-none"
-              }`}
-              style={{
-                transform: isPanelsVisible
-                  ? "translateX(0)"
-                  : "translateX(-20px)",
-                overflow: "hidden",
-              }}
-            >
-              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white sticky top-0 z-10">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-semibold text-blue-800">
-                    Layer Controls
-                  </h3>
-                  <button
-                    onClick={() => setPanelsVisible(false)}
-                    className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Toggle Buttons */}
-              <div className="sticky top-[73px] z-10 bg-white border-b border-gray-200">
-                <div className="flex p-2 gap-2">
-                  <button
-                    onClick={() => setActivePanel("select")}
-                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-                      activePanel === "select"
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Select Layers
-                  </button>
-                  <button
-                    onClick={() => setActivePanel("loaded")}
-                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-                      activePanel === "loaded"
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Loaded Layers
-                  </button>
-                </div>
-              </div>
-
-              {/* Panel Content */}
-              <div
-                className="overflow-y-hidden p-4"
-                style={{ maxHeight: "calc(100% - 130px)" }}
-              >
-                {activePanel === "select" ? (
-                  <div className="space-y-4">
-                    <p className="text-sm text-gray-600">
-                      Select map layers to display on your visualization.
-                    </p>
-                    {Object.entries(groupedMapLayers).map(
-                      ([category, data]) => (
-                        <SelectMenuMap
-                          key={category}
-                          items={data.items}
-                          category={category}
-                          description={data.description}
-                          onClick={(name, apilink, legendUrl) => {
-                            if (apilink.includes("maps-wms")) {
-                              addWMSLayer(mapRef.current, name, apilink, name);
-                              showLegend(legendUrl, name);
-                            } else {
-                              addGeoJsonLayer(
-                                mapRef.current,
-                                apilink,
-                                name,
-                                "name"
-                              );
-                            }
-                          }}
-                        />
-                      )
-                    )}
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <p className="text-sm text-gray-600 mb-2">
-                      Currently active map layers. Manage visibility and
-                      settings.
-                    </p>
-                    {loadedLayers.length === 0 ? (
-                      <div className="text-center py-8 text-gray-500">
-                        <Layers size={32} className="mx-auto mb-2 opacity-50" />
-                        <p>No layers loaded</p>
-                        <p className="text-sm mt-1">
-                          Switch to Select Layers to add data
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="space-y-2">
-                        {loadedLayers.map((layer) => (
-                          <div
-                            key={layer}
-                            className="rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between hover:bg-blue-50 transition-colors"
-                          >
-                            <div className="overflow-hidden">
-                              <span className="text-sm font-medium text-gray-700">
-                                {layer}
-                              </span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <ToggleButton
-                                layerId={layer}
-                                map={mapRef.current}
-                              />
-                              <DropDownComponent />
-                              <button
-                                className="p-1 rounded-md text-red-600 hover:bg-red-50"
-                                onClick={() => removeLayer(layer)}
-                                title="Remove layer"
-                              >
-                                <X size={16} />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Legend */}
-          <div
-            id="legend"
-            className="absolute bottom-4 right-4 bg-white p-4 rounded-md shadow-md border border-gray-300 hidden"
-          >
-            <h4 className="font-semibold mb-2 text-blue-500">Legend</h4>
-            <ul
-              id="legend-content"
-              className="text-sm space-y-1 text-gray-700"
-            ></ul>
-          </div>
-
-          <Toaster />
-          <BottomSlidePanel
-            onClose={() => setIsPanelVisible(false)}
-            onLocationSelect={(lng, lat) =>
-              console.log("Location selected:", lng, lat)
-            }
-            isVisible={isVisible}
-          />
+          <ul
+            id="legend-content"
+            className="text-sm space-y-1 text-gray-700 max-h-48 overflow-y-auto"
+          ></ul>
         </div>
+
+        <Toaster position="top-center" />
+
+        {/* Bottom Slide Panel - Better Desktop Integration */}
+        <BottomSlidePanel
+          isVisible={isBottomPanelVisible}
+          onClose={() => setIsBottomPanelVisible(false)}
+          onLocationSelect={(lng, lat) => {
+            console.log("Location selected:", lng, lat);
+            // Here you could add code to fly to the location or add a marker
+          }}
+        />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-
-/* NOTES: To reference the map variable for a flyTo function or any other map manipulation, you can store the map instance in a useRef so that it's accessible throughout your component lifecycle without being tied to state updates (which would cause re-renders).
-
-Here’s how you can modify your code to use useRef for the map instance and create a flyTo function: */

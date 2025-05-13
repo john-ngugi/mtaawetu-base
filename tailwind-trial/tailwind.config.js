@@ -56,7 +56,10 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+		  height: {
+			'screen-safe': 'calc(var(--vh, 1vh) * 100)',
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
