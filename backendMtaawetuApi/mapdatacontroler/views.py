@@ -2,8 +2,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import viewsets
-from .models import Month, TimeSeriesLayer, MapLayer
-from .serializers import MonthSerializer, TimeSeriesLayerSerializer, MapLayerSerializer
+from .models import Notebook
+from .models import Month, TimeSeriesLayer, MapLayer, Notebook
+from .serializers import MonthSerializer, TimeSeriesLayerSerializer, MapLayerSerializer,NotebookSerializer
 
 class MonthViewSet(viewsets.ModelViewSet):
     queryset = Month.objects.all()
@@ -16,3 +17,9 @@ class TimeSeriesLayerViewSet(viewsets.ModelViewSet):
 class MapLayerViewSet(viewsets.ModelViewSet):
     queryset = MapLayer.objects.all()
     serializer_class = MapLayerSerializer
+# notebooks/views.py
+from rest_framework import viewsets
+
+class NotebookViewSet(viewsets.ReadOnlyModelViewSet):  # Only GET endpoints
+    queryset = Notebook.objects.all()
+    serializer_class = NotebookSerializer

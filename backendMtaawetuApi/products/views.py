@@ -299,70 +299,111 @@ import traceback
 def getMapStats(request, tablename):
     print(tablename)
     print(f"Request method: {request.method}")
+
     if request.method == "POST":
-        print(request.body)
-        try:
-            # Validate table name
-            if not tablename or not tablename.isidentifier():
-                return JsonResponse({"error": "Invalid or missing table name"}, status=400)
 
-            # Query to fetch numeric columns
-            column_query = f"""
-                SELECT column_name
-                FROM information_schema.columns
-                WHERE table_name = '{tablename}'
-                AND data_type IN ('integer', 'double precision', 'numeric', 'real')
-                AND column_name NOT IN ('gid', 'id');
-            """
+        data = json.loads(request.body)
+        lat = data['coordinates']['lat']
+        lng = data['coordinates']['lng']
+        print(lat,lng)
+        # Validate table name (basic protection)
+        if not tablename or not tablename.isidentifier():
+            return JsonResponse({"error": "Invalid or missing table name"}, status=400)
 
-            with connection.cursor() as cursor:
-                # Fetch numeric columns
-                cursor.execute(column_query)
-                columns = cursor.fetchall()
+        if tablename == 'estates_nairobi':
+                try:
+                    column_query = f"""
+                        SELECT *
+                        FROM {tablename}
+                        WHERE ST_Contains(
+                            geom,
+                            ST_Transform(ST_SetSRID(ST_MakePoint(%s,%s), 4326), 3857)
+                        )
+                        LIMIT 1;
+                    """
 
-                if not columns:
-                    return JsonResponse({"response": "No numeric columns found"}, safe=False)
+                    with connection.cursor() as cursor:
+                        cursor.execute(column_query, (lng, lat))
+                        row = cursor.fetchone()
 
-                # Prepare statistics query dynamically
-                numeric_columns = [col[0] for col in columns]
-                stats_parts = []
-                
-                # Add statistics for numeric columns
-                for col in numeric_columns:
+                        if row is None:
+                            return JsonResponse({"error": "No polygon contains the point."}, status=404)
+
+                        # Get column names from cursor.description
+                        col_names = [desc[0] for desc in cursor.description]
+
+                        # Create a dict of column_name: value
+                        result = dict(zip(col_names, row))
+
+                    return JsonResponse({'response': result})
+
+                # return JsonResponse({"error": "Unsupported table"}, status=400)
+
+                except Exception as e:
+                    error_message = f"{str(e)}\n{traceback.format_exc()}"
+                    print(error_message)
+                    return JsonResponse({"error": error_message}, status=500)
+        
+        else:    
+            try:
+
+                # Query to fetch numeric columns
+                column_query = f"""
+                    SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_name = '{tablename}'
+                    AND data_type IN ('integer', 'double precision', 'numeric', 'real')
+                    AND column_name NOT IN ('gid', 'id');
+                """
+
+                with connection.cursor() as cursor:
+                    # Fetch numeric columns
+                    cursor.execute(column_query)
+                    columns = cursor.fetchall()
+
+                    if not columns:
+                        return JsonResponse({"response": "No numeric columns found"}, safe=False)
+
+                    # Prepare statistics query dynamically
+                    numeric_columns = [col[0] for col in columns]
+                    stats_parts = []
+                    
+                    # Add statistics for numeric columns
+                    for col in numeric_columns:
+                        stats_parts.extend([
+                            f"AVG({col}) AS mean_{col}",
+                            f"SUM({col}) AS sum_{col}",
+                            f"STDDEV({col}) AS stddev_{col}",
+                            f"VARIANCE({col}) AS variance_{col}",
+                            f"MIN({col}) AS min_{col}",
+                            f"MAX({col}) AS max_{col}"
+                        ])
+                    
+                    # Add PostGIS statistics for the geom column
                     stats_parts.extend([
-                        f"AVG({col}) AS mean_{col}",
-                        f"SUM({col}) AS sum_{col}",
-                        f"STDDEV({col}) AS stddev_{col}",
-                        f"VARIANCE({col}) AS variance_{col}",
-                        f"MIN({col}) AS min_{col}",
-                        f"MAX({col}) AS max_{col}"
+                        "ST_Extent(geom) AS geom_extent",  # Bounding box
+                        "ST_Area(ST_Union(geom)) AS total_area"  # Total area
                     ])
-                
-                # Add PostGIS statistics for the geom column
-                stats_parts.extend([
-                    "ST_Extent(geom) AS geom_extent",  # Bounding box
-                    "ST_Area(ST_Union(geom)) AS total_area"  # Total area
-                ])
 
-                # Combine all parts into the final query
-                stats_query = f"SELECT {', '.join(stats_parts)} FROM {tablename};"
+                    # Combine all parts into the final query
+                    stats_query = f"SELECT {', '.join(stats_parts)} FROM {tablename};"
 
-                # Execute the statistics query
-                cursor.execute(stats_query)
-                results = cursor.fetchone()
+                    # Execute the statistics query
+                    cursor.execute(stats_query)
+                    results = cursor.fetchone()
 
-            # Map results to keys
-            response_keys = stats_parts  # Using the order of the stats_parts
-            response = dict(zip([key.split(' AS ')[1] for key in stats_parts], results))
+                # Map results to keys
+                response_keys = stats_parts  # Using the order of the stats_parts
+                response = dict(zip([key.split(' AS ')[1] for key in stats_parts], results))
 
-            return JsonResponse({"response": response}, safe=False)
+                return JsonResponse({"response": response}, safe=False)
 
-        except Exception as e:
-            error_message = f"{str(e)}\n{traceback.format_exc()}"
-            print(error_message, traceback)
-            return JsonResponse({"error": error_message}, status=500)
-
-    return JsonResponse({"error": "Invalid request method"}, status=405)
+            except Exception as e:
+                error_message = f"{str(e)}\n{traceback.format_exc()}"
+                print(error_message, traceback)
+                return JsonResponse({"error": error_message}, status=500)
+    else:
+        return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 

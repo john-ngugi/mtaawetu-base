@@ -14,7 +14,7 @@ class Month(models.Model):
         return self.name
 class CategoryDescription(models.Model):
     category_name = models.CharField(max_length=100, unique=True,blank=True,)
-    description = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return f"{self.category_name}: {self.description}"
@@ -27,6 +27,7 @@ class TimeSeriesLayer(models.Model):
     county = models.ForeignKey(County, on_delete=models.CASCADE, null=True, blank=True)
     apilink = models.URLField()
     legend_url = models.URLField(null=True, blank=True)
+    year = models.IntegerField(default=2024)
     
     def __str__(self):
         return f"{self.name} ({self.county})"
@@ -44,3 +45,11 @@ class MapLayer(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.county})"
+
+class Notebook(models.Model):
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to='notebooks/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
