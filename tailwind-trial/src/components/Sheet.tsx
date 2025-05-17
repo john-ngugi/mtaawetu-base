@@ -536,14 +536,16 @@ export function SheetComponent({
 
       case DATA_TYPES.DEMOGRAPHICS:
         // Handle demographic data
+        // Fix for the first code snippet (Demographic Information section)
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-bold">Demographic Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.entries(statsData)
                 .filter(
-                  ([key, value]) =>
-                    typeof value === "number" || !isNaN(parseFloat(value))
+                  (
+                    [, value] // Using underscore to indicate unused variable
+                  ) => typeof value === "number" || !isNaN(parseFloat(value))
                 )
                 .map(([key, value]) => (
                   <div key={key} className="p-4 border rounded-lg">
@@ -592,14 +594,16 @@ export function SheetComponent({
       case DATA_TYPES.GENERIC:
       default:
         // Default view for any data
+        // Fix for the second code snippet (Data Overview section)
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-bold">Data Overview</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.entries(statsData)
                 .filter(
-                  ([key, value]) =>
-                    typeof value === "number" || !isNaN(parseFloat(value))
+                  (
+                    [, value] // Using underscore to indicate unused variable
+                  ) => typeof value === "number" || !isNaN(parseFloat(value))
                 )
                 .slice(0, 6) // Limit to 6 items for this view
                 .map(([key, value]) => (
@@ -615,7 +619,6 @@ export function SheetComponent({
                   </div>
                 ))}
             </div>
-            <Bar data={createGenericDataView()} options={chartOptions} />
           </div>
         );
     }
