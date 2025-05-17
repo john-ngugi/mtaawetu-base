@@ -18,7 +18,7 @@ interface Props {
 
 function BottomSlidePanel({ isVisible, onClose }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const panelRef = useRef(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   // Load Google AI search widget script
   useEffect(() => {
@@ -36,10 +36,10 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
 
   // Handle click outside to close panel
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: MouseEvent) {
       if (
         panelRef.current &&
-        !panelRef.current.contains(event.target) &&
+        !panelRef.current.contains(event.target as Node) &&
         isVisible &&
         !isExpanded
       ) {
@@ -58,11 +58,11 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
     let touchStart = 0;
     let touchEnd = 0;
 
-    function handleTouchStart(e) {
+    function handleTouchStart(e: TouchEvent) {
       touchStart = e.targetTouches[0].clientY;
     }
 
-    function handleTouchMove(e) {
+    function handleTouchMove(e: TouchEvent) {
       touchEnd = e.targetTouches[0].clientY;
     }
 
@@ -81,16 +81,24 @@ function BottomSlidePanel({ isVisible, onClose }: Props) {
 
     const panel = panelRef.current;
     if (panel) {
-      panel.addEventListener("touchstart", handleTouchStart);
-      panel.addEventListener("touchmove", handleTouchMove);
-      panel.addEventListener("touchend", handleTouchEnd);
+      panel.addEventListener("touchstart", handleTouchStart as EventListener);
+      panel.addEventListener("touchmove", handleTouchMove as EventListener);
+      panel.addEventListener("touchend", handleTouchEnd as EventListener);
 
       return () => {
-        panel.removeEventListener("touchstart", handleTouchStart);
-        panel.removeEventListener("touchmove", handleTouchMove);
-        panel.removeEventListener("touchend", handleTouchEnd);
+        panel.removeEventListener(
+          "touchstart",
+          handleTouchStart as EventListener
+        );
+        panel.removeEventListener(
+          "touchmove",
+          handleTouchMove as EventListener
+        );
+        panel.removeEventListener("touchend", handleTouchEnd as EventListener);
       };
     }
+
+    return undefined;
   }, [isExpanded, onClose]);
 
   return (

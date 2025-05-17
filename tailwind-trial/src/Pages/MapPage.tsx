@@ -111,7 +111,8 @@ const Dashboard: React.FC = () => {
   //     console.error("Error fetching location suggestions:", error);
   //   }
   // };
-
+  console.log(mapData);
+  console.log(isVisible);
   // Function to add the GeoJSON layer and handle feature click
   const addGeoJsonLayer = async (
     map: maplibregl.Map | null,
