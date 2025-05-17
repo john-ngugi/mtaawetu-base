@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   Home,
-  List,
-  LayoutDashboard,
+  // List,
+  // LayoutDashboard,
   Menu,
   X,
   TimerReset,
@@ -55,7 +55,7 @@ interface Items {
   county: string | null;
 }
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMap, setCurrentMap] = useState("Map 1");
   const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
@@ -909,9 +909,9 @@ const Dashboard: React.FC = () => {
     setIsTimeSeriesVisible(true);
   };
 
-  const handleOtherClick = () => {
-    setIsTimeSeriesVisible(false);
-  };
+  // const handleOtherClick = () => {
+  //   setIsTimeSeriesVisible(false);
+  // };
 
   const handleHomeClick = () => {
     setPanelsVisible(true);
@@ -1105,7 +1105,7 @@ const Dashboard: React.FC = () => {
                 )}
               </button>
 
-              <button
+              {/* <button
                 onClick={() => {
                   navigate("/notebooks");
                   if (window.innerWidth < 1024) setMobileMenuOpen(false);
@@ -1149,7 +1149,7 @@ const Dashboard: React.FC = () => {
                     Dashboard
                   </div>
                 )}
-              </button>
+              </button> */}
             </div>
           </nav>
           {!isMobileMenuOpen && isSidebarOpen && (

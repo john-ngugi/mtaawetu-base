@@ -4,7 +4,7 @@ import HomePage from "./Home";
 import MapPage from "../src/Pages/MapPage";
 import Authentication from "../src/Pages/Login";
 // import { Notebook } from "lucide-react";
-import Notebooks from "../src/Pages/Notebooks";
+// import Notebooks from "../src/Pages/Notebooks";
 function App() {
   return (
     <Router>
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Authentication />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/notebooks" element={<Notebooks />}></Route>
+        {/* <Route path="/notebooks" element={<Notebooks />}></Route> */}
       </Routes>
     </Router>
   );
