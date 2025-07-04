@@ -54,3 +54,7 @@ class NotebookSerializer(serializers.ModelSerializer):
                 nb = nbformat.read(f, as_version=4)
 
         return nb  # ← will be serialized as a nested JSON dict
+    
+    
+    
+    
