@@ -27,6 +27,11 @@ import { calcPercentages, generateStyleFromProperty } from "../utils/utils";
 import DropDownComponent from "../components/Popover";
 import { showLegend } from "../utils/utils";
 import { hideLegend } from "../utils/utils";
+import LogoutButton from "@/components/LogoutButton";
+import { User } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+
+import { useNavigate } from "react-router-dom";
 // Define the type for suggestion (based on Nominatim response structure)
 // interface Suggestion {
 //   place_id: string;
@@ -78,6 +83,19 @@ const Dashboard: React.FC = () => {
     time_series: [],
   });
 
+  // 2. Add this in your component (after other state declarations)
+  const { user } = useAuth(); // Get user from auth context
+
+  // Helper function to get user initials
+  const getUserInitials = (username: string) => {
+    return username
+      .split(" ")
+      .map((name) => name.charAt(0).toUpperCase())
+      .join("")
+      .slice(0, 2);
+  };
+
+  const navigate = useNavigate();
   // const timeSeriesRef = useRef(null);
   const ipAddress = "https://mtaawetu.com";
   // var neighbourhoodName = "";
@@ -619,7 +637,7 @@ const Dashboard: React.FC = () => {
                         ${Object.entries(properties)
                           .map(
                             ([key, value]) =>
-                              `<li><strong>${key}:</strong> ${value}</li>`
+                              `<li><strong>${key}</strong> <br/> ${value}</li>`
                           )
                           .join("")}
                       </ul>
@@ -693,7 +711,7 @@ const Dashboard: React.FC = () => {
     //https://api.maptiler.com/maps/streets-v2-light/style.json?key=Zk2vXxVka5bwTvXQmJ0l
     //https://api.maptiler.com/maps/streets-v2-dark/style.json?key=Zk2vXxVka5bwTvXQmJ0l
     const map = new maplibregl.Map({
-      style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
+      style: `https://api.maptiler.com/maps/streets-v2-light/style.json?key=${MAPTILER_KEY}`,
       center: [36.8219, -1.2921],
       zoom: 12.5,
       // pitch: 60,
@@ -962,23 +980,25 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col h-screen w-screen bg-slate-50 overflow-hidden">
       {/* Header - Responsive for both mobile and desktop */}
-      <header className="z-20 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg px-4 py-3">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center">
-            {/* Fixed: Separated mobile menu button and sidebar toggle */}
+      <header className="z-20 bg-gradient-to-r from-blue-50 to-white shadow-lg px-4 py-3">
+        <div className="flex flex-col lg:flex-row lg:justify-between mx-auto gap-4 lg:gap-0">
+          <div className="flex">
+            {/* Mobile menu button - only visible on mobile */}
             <button
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md text-white hover:bg-blue-700/50 transition-colors mr-2 lg:hidden"
+              className="p-2 rounded-md text-white bg-blue-800 hover:bg-blue-700/50 transition-colors mr-2 lg:hidden"
               aria-label="Toggle menu"
             >
               <Menu size={18} />
             </button>
-            {/* <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white hidden sm:block">
-              GeoViz
-            </h1> */}
+            {/* Logo - always visible, positioned to the left */}
+            <h1 className="font-Zaine text-4xl font-bold bg-clip-text text-transparent bg-blue-800 ms-5">
+              mtaawetu
+            </h1>
           </div>
 
-          <div className="flex-1 max-w-md mx-4 lg:max-w-xl">
+          {/* Search bar - full width on mobile, smaller on desktop */}
+          <div className="w-full flex flex-col md:flex-row items-center justify-between lg:w-1/4 md:w-3/4 space-y-2 md:space-y-0 md:space-x-2">
             <SearchComponent
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -986,24 +1006,47 @@ const Dashboard: React.FC = () => {
               setSuggestions={setSuggestions}
               flyTo={flyTo}
             />
+
+            {/* User block - hidden on mobile, shown inline on md+ screens */}
+            <div className="hidden md:flex items-center space-x-4">
+              {user && (
+                <div
+                  className="flex items-center space-x-2 cursor-pointer hover:bg-blue-50 rounded-lg p-2 transition-colors"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-semibold text-xs">
+                      {getUserInitials(user.username || user.email || "U")}
+                    </span>
+                  </div>
+                  <div className="hidden xl:block">
+                    <p className="text-sm font-medium text-gray-700">
+                      {user.username || "User"}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {user.is_paid_user ? "Premium" : "Free"}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          {/* Buttons - hidden on desktop, visible on mobile */}
+          {/* <div className="flex items-center space-x-2 lg:hidden">
             <button
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition hidden md:flex items-center"
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition flex items-center"
               onClick={() => setIsTimeSeriesVisible(!isTimeSeriesVisible)}
             >
               <TimerReset size={18} />
-              <span className="ml-2 text-sm hidden xl:inline">Time Series</span>
             </button>
             <button
               className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition flex items-center"
               onClick={() => setPanelsVisible(!isPanelsVisible)}
             >
               <Layers size={18} />
-              <span className="ml-2 text-sm hidden xl:inline">Layers</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </header>
 
@@ -1025,16 +1068,16 @@ const Dashboard: React.FC = () => {
         >
           {/* Logo/Close button area */}
           <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
-            {(isMobileMenuOpen || isSidebarOpen) && (
-              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
+            {/* {(isMobileMenuOpen || isSidebarOpen) && (
+              <h1 className=" font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-Zaine text-3xl">
                 Mtaa wetu
               </h1>
-            )}
+            )} */}
             {/* Fixed: Clarified the button toggle logic */}
             <button
               onClick={() => {
                 if (window.innerWidth < 1024) {
-                  setMobileMenuOpen(false);
+                  setMobileMenuOpen(!isMobileMenuOpen);
                 } else {
                   setIsSidebarOpen(!isSidebarOpen);
                 }
@@ -1062,18 +1105,18 @@ const Dashboard: React.FC = () => {
                 }}
                 className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
               >
-                <Home
+                <Layers
                   size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
                   className={`${
                     !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
                   } group-hover:scale-110 transition-transform`}
                 />
                 {(isMobileMenuOpen || isSidebarOpen) && (
-                  <span className="ml-3 font-medium">County Select</span>
+                  <span className="ml-3 font-medium">Layer select</span>
                 )}
                 {!isMobileMenuOpen && !isSidebarOpen && (
                   <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    County Select
+                    Layer Select
                   </div>
                 )}
               </button>
@@ -1152,8 +1195,71 @@ const Dashboard: React.FC = () => {
               </button> */}
             </div>
           </nav>
-          {!isMobileMenuOpen && isSidebarOpen && (
+          {(isMobileMenuOpen || isSidebarOpen) && user && (
             <div className="mt-auto p-4 border-t border-blue-700/50">
+              <div
+                className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-700/50 transition-colors cursor-pointer group"
+                onClick={() => {
+                  navigate("/dashboard"); // or your route to UserDashboard
+                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                }}
+              >
+                {/* User Avatar Circle */}
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-800 font-semibold text-sm">
+                    {getUserInitials(user.username || user.email || "U")}
+                  </span>
+                </div>
+                {/* User Info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium text-sm truncate">
+                    {user.username || "User"}
+                  </p>
+                  <p className="text-blue-200 text-xs truncate">{user.email}</p>
+                  <p className="text-blue-300 text-xs">
+                    {user.is_paid_user ? "Premium" : "Free"} Account
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Collapsed User Icon - When sidebar is collapsed */}
+          {!isMobileMenuOpen && !isSidebarOpen && user && (
+            <div className="mt-auto p-4 border-t border-blue-700/50">
+              <div className="relative group">
+                <button
+                  onClick={() => navigate("/dashboard")}
+                  className="w-full p-2 rounded-lg hover:bg-blue-700/50 transition-colors flex justify-center"
+                >
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-800 font-semibold text-xs">
+                      {getUserInitials(user.username || user.email || "U")}
+                    </span>
+                  </div>
+                </button>
+                {/* Tooltip */}
+                <div className="absolute left-20 bottom-0 hidden lg:group-hover:flex bg-blue-800 text-white py-2 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div>
+                    <p className="font-medium text-sm">
+                      {user.username || "User"}
+                    </p>
+                    <p className="text-xs text-blue-200">
+                      {user.is_paid_user ? "Premium" : "Free"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {isSidebarOpen && (
+            <div className="absolute bottom-10 mt-auto p-4  border-blue-700/50">
+              <LogoutButton />
+            </div>
+          )}
+
+          {!isMobileMenuOpen && isSidebarOpen && (
+            <div className="absolute bottom-0 mt-auto p-4 border-t border-blue-700/50">
               <div className="text-xs text-blue-200/70">
                 Mtaa Wetu Platform v2.0
               </div>

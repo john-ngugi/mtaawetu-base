@@ -8,7 +8,8 @@ export default {
   theme: {
   	extend: {
   		fontFamily: {
-  			Nunito: ["Nunito", "sans-serif"]
+  			Nunito: ["Nunito", "sans-serif"],
+			Zaine: ["Zain", "sans-serif"],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

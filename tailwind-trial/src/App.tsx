@@ -1,20 +1,48 @@
 // import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import HomePage from "./Home";
-import MapPage from "../src/Pages/MapPage";
-import Authentication from "../src/Pages/Login";
-// import { Notebook } from "lucide-react";
-// import Notebooks from "../src/Pages/Notebooks";
+import MapPage from "./Pages/MapPage";
+import Authentication from "./Pages/Login";
+import UserDashboard from "./components/UserDashboard";
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Authentication />} />
-        <Route path="/map" element={<MapPage />} />
-        {/* <Route path="/notebooks" element={<Notebooks />}></Route> */}
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public route */}
+          <Route path="/login" element={<Authentication />} />
+
+          {/* Protected routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/map"
+            element={
+              <ProtectedRoute>
+                <MapPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <UserDashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
