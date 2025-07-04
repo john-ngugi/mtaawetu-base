@@ -98,37 +98,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   // const timeSeriesRef = useRef(null);
   const ipAddress = "https://mtaawetu.com";
-  // var neighbourhoodName = "";
-
-  // // Function to fetch possible location suggestions (limited to 4 results)
-  // const fetchSuggestions = async (input: string) => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://nominatim.openstreetmap.org/search?format=json&q=${input}, Kenya`
-  //     );
-  //     const data = await response.json();
-  //     setSuggestions(data.slice(0, 4));
-  //     // Extract relevant fields and sort alphabetically by display_name or city/town
-  //     const formattedSuggestions = data
-  //       .map((location: any) => {
-  //         const { display_name, lat, lon, address } = location;
-  //         // Extract city, town, or village, fallback to display_name if none exists
-  //         const place =
-  //           address?.city || address?.town || address?.village || display_name;
-  //         return {
-  //           place, // Display name (city/town/village)
-  //           lat,
-  //           lon,
-  //         };
-  //       })
-  //       .sort((a: any, b: any) => a.place.localeCompare(b.place)) // Sort alphabetically by place name
-  //       .slice(0, 4); // Limit to top 4 suggestions
-
-  //     setSuggestions(formattedSuggestions); // Update the suggestions state
-  //   } catch (error) {
-  //     console.error("Error fetching location suggestions:", error);
-  //   }
-  // };
+ 
   console.log(mapData);
   console.log(isVisible);
   // Function to add the GeoJSON layer and handle feature click
