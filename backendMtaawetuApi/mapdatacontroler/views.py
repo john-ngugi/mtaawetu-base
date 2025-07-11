@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from .models import Notebook
 from .models import Month, TimeSeriesLayer, MapLayer, Notebook
 from .serializers import MonthSerializer, TimeSeriesLayerSerializer, MapLayerSerializer,NotebookSerializer
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 class MonthViewSet(viewsets.ModelViewSet):
     queryset = Month.objects.all()
@@ -13,10 +15,15 @@ class MonthViewSet(viewsets.ModelViewSet):
 class TimeSeriesLayerViewSet(viewsets.ModelViewSet):
     queryset = TimeSeriesLayer.objects.all()
     serializer_class = TimeSeriesLayerSerializer
-
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [AllowAny]  
+    
 class MapLayerViewSet(viewsets.ModelViewSet):
     queryset = MapLayer.objects.all()
-    serializer_class = MapLayerSerializer
+    serializer_class = MapLayerSerializer    
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [AllowAny]  
+    
 # notebooks/views.py
 from rest_framework import viewsets
 

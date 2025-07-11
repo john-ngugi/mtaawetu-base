@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Month, TimeSeriesLayer, MapLayer, CategoryDescription, Notebook
 import nbformat
 from nbconvert import HTMLExporter
+
+
 class MonthSerializer(serializers.ModelSerializer):
     class Meta:
         model = Month

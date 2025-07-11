@@ -27,9 +27,7 @@ SECRET_KEY = 'django-insecure-)4u^m#wxvd%q0%cl3pqy@*e5!8d0n6qt&c$8z8ety%o*fly=a&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -67,7 +65,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",  
     "https://mtaawetu.com",# Frontend origin
     "http://34.66.220.78:3000",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
+    "http://192.168.100.7:5173",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -92,6 +91,7 @@ AUTH_USER_MODEL = 'coreApi.CustomUser'  # Replace 'your_app' with your actual ap
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React development server
     "http://127.0.0.1:3000",
+    "http://192.168.100.7:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
