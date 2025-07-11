@@ -62,8 +62,8 @@ interface Items {
 const Dashboard: React.FC = () => {
   // const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentMap, setCurrentMap] = useState("Map 1");
-  const [loadedLayers, setLoadedLayers] = useState<string[]>(["Map 1"]);
+  const [currentMap, setCurrentMap] = useState("Basemap");
+  const [loadedLayers, setLoadedLayers] = useState<string[]>(["Basemap"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [isBottomPanelVisible, setIsBottomPanelVisible] = useState(false);
@@ -97,8 +97,8 @@ const Dashboard: React.FC = () => {
 
   const navigate = useNavigate();
   // const timeSeriesRef = useRef(null);
-  const ipAddress = "https://mtaawetu.com";
- 
+  const ipAddress = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
   console.log(mapData);
   console.log(isVisible);
   // Function to add the GeoJSON layer and handle feature click
@@ -707,7 +707,7 @@ const Dashboard: React.FC = () => {
     // });
     // Add popup on map click
     // addPopupOnMapClick(map);
-    setCurrentMap("map 1");
+    setCurrentMap("Basemap");
     return () => {
       map.remove(); // Clean up map on unmount
       mapRef.current = null;
@@ -781,7 +781,7 @@ const Dashboard: React.FC = () => {
     const data = await response.json();
 
     return {
-      time_series: data.map((item: any) => ({
+      time_series: data.results.map((item: any) => ({
         id: item.id,
         category: {
           category_name: item.category_fk
@@ -808,7 +808,7 @@ const Dashboard: React.FC = () => {
     const data = await response.json();
 
     return {
-      map_layers: data.map((item: any) => ({
+      map_layers: data.results.map((item: any) => ({
         id: item.id,
         category: {
           id: item.category_fk.id,
@@ -1035,206 +1035,184 @@ const Dashboard: React.FC = () => {
           className={`fixed top-0 left-0 z-50 bg-gradient-to-b from-blue-900 to-blue-800 text-white flex flex-col h-full transition-all duration-300 ease-in-out lg:static lg:block lg:z-30 ${
             isMobileMenuOpen ? "w-64" : "w-0 lg:w-20"
           } ${isSidebarOpen ? "lg:w-64" : "lg:w-20"}`}
+          style={{
+            // Hide content completely on mobile when closed
+            overflow:
+              isMobileMenuOpen || window.innerWidth >= 1024
+                ? "visible"
+                : "hidden",
+            // Ensure content is not visible when sidebar is closed on mobile
+            ...(window.innerWidth < 1024 &&
+              !isMobileMenuOpen && {
+                overflow: "hidden",
+                visibility: "hidden",
+              }),
+          }}
         >
-          {/* Logo/Close button area */}
-          <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
-            {/* {(isMobileMenuOpen || isSidebarOpen) && (
-              <h1 className=" font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-Zaine text-3xl">
-                Mtaa wetu
-              </h1>
-            )} */}
-            {/* Fixed: Clarified the button toggle logic */}
-            <button
-              onClick={() => {
-                if (window.innerWidth < 1024) {
-                  setMobileMenuOpen(!isMobileMenuOpen);
-                } else {
-                  setIsSidebarOpen(!isSidebarOpen);
-                }
-              }}
-              className="p-2 rounded-md hover:bg-blue-700/50 transition-colors"
-              aria-label="Toggle sidebar"
-            >
-              {isMobileMenuOpen ? (
-                <X size={20} />
-              ) : isSidebarOpen ? (
-                <ArrowLeft size={20} />
-              ) : (
-                <Menu size={20} />
-              )}
-            </button>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="flex-1 p-4">
-            <div className={`space-y-3 ${isSidebarOpen ? "mt-2" : "mt-6"}`}>
+          {/* Content wrapper to ensure proper hiding on mobile */}
+          <div
+            className={`h-full flex flex-col ${
+              !isMobileMenuOpen && window.innerWidth < 1024
+                ? "opacity-0"
+                : "opacity-100"
+            } transition-opacity duration-300`}
+          >
+            {/* Logo/Close button area */}
+            <div className="flex items-center justify-between p-4 border-b border-blue-700/50">
               <button
                 onClick={() => {
-                  handleHomeClick();
-                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                  if (window.innerWidth < 1024) {
+                    setMobileMenuOpen(!isMobileMenuOpen);
+                  } else {
+                    setIsSidebarOpen(!isSidebarOpen);
+                  }
                 }}
-                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
+                className="p-2 rounded-md hover:bg-blue-700/50 transition-colors"
+                aria-label="Toggle sidebar"
               >
-                <Layers
-                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
-                  className={`${
-                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
-                  } group-hover:scale-110 transition-transform`}
-                />
-                {(isMobileMenuOpen || isSidebarOpen) && (
-                  <span className="ml-3 font-medium">Layer select</span>
-                )}
-                {!isMobileMenuOpen && !isSidebarOpen && (
-                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Layer Select
-                  </div>
+                {isMobileMenuOpen ? (
+                  <X size={20} />
+                ) : isSidebarOpen ? (
+                  <ArrowLeft size={20} />
+                ) : (
+                  <Menu size={20} />
                 )}
               </button>
-
-              <button
-                onClick={() => {
-                  handleTabClick();
-                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
-                }}
-                className={`flex items-center w-full p-3 rounded-lg transition-colors group ${
-                  isTimeSeriesVisible
-                    ? "bg-blue-700/70"
-                    : "hover:bg-blue-700/50"
-                }`}
-              >
-                <TimerReset
-                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
-                  className={`${
-                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
-                  } group-hover:scale-110 transition-transform`}
-                />
-                {(isMobileMenuOpen || isSidebarOpen) && (
-                  <span className="ml-3 font-medium">Time Series</span>
-                )}
-                {!isMobileMenuOpen && !isSidebarOpen && (
-                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Time Series
-                  </div>
-                )}
-              </button>
-
-              {/* <button
-                onClick={() => {
-                  navigate("/notebooks");
-                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
-                }}
-                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
-              >
-                <List
-                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
-                  className={`${
-                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
-                  } group-hover:scale-110 transition-transform`}
-                />
-                {(isMobileMenuOpen || isSidebarOpen) && (
-                  <span className="ml-3 font-medium">List View</span>
-                )}
-                {!isMobileMenuOpen && !isSidebarOpen && (
-                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    List View
-                  </div>
-                )}
-              </button>
-
-              <button
-                onClick={() => {
-                  handleOtherClick();
-                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
-                }}
-                className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
-              >
-                <LayoutDashboard
-                  size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
-                  className={`${
-                    !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
-                  } group-hover:scale-110 transition-transform`}
-                />
-                {(isMobileMenuOpen || isSidebarOpen) && (
-                  <span className="ml-3 font-medium">Dashboard</span>
-                )}
-                {!isMobileMenuOpen && !isSidebarOpen && (
-                  <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Dashboard
-                  </div>
-                )}
-              </button> */}
             </div>
-          </nav>
-          {(isMobileMenuOpen || isSidebarOpen) && user && (
-            <div className="mt-auto p-4 border-t border-blue-700/50">
-              <div
-                className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-700/50 transition-colors cursor-pointer group"
-                onClick={() => {
-                  navigate("/dashboard"); // or your route to UserDashboard
-                  if (window.innerWidth < 1024) setMobileMenuOpen(false);
-                }}
-              >
-                {/* User Avatar Circle */}
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-800 font-semibold text-sm">
-                    {getUserInitials(user.username || user.email || "U")}
-                  </span>
-                </div>
-                {/* User Info */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-medium text-sm truncate">
-                    {user.username || "User"}
-                  </p>
-                  <p className="text-blue-200 text-xs truncate">{user.email}</p>
-                  <p className="text-blue-300 text-xs">
-                    {user.is_paid_user ? "Premium" : "Free"} Account
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Collapsed User Icon - When sidebar is collapsed */}
-          {!isMobileMenuOpen && !isSidebarOpen && user && (
-            <div className="mt-auto p-4 border-t border-blue-700/50">
-              <div className="relative group">
+            {/* Navigation Links */}
+            <nav className="flex-1 p-4">
+              <div className={`space-y-3 ${isSidebarOpen ? "mt-2" : "mt-6"}`}>
                 <button
-                  onClick={() => navigate("/dashboard")}
-                  className="w-full p-2 rounded-lg hover:bg-blue-700/50 transition-colors flex justify-center"
+                  onClick={() => {
+                    handleHomeClick();
+                    if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center w-full p-3 rounded-lg hover:bg-blue-700/50 transition-colors group"
                 >
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span className="text-blue-800 font-semibold text-xs">
-                      {getUserInitials(user.username || user.email || "U")}
-                    </span>
-                  </div>
+                  <Layers
+                    size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                    className={`${
+                      !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                    } group-hover:scale-110 transition-transform`}
+                  />
+                  {(isMobileMenuOpen || isSidebarOpen) && (
+                    <span className="ml-3 font-medium">Layer select</span>
+                  )}
+                  {!isMobileMenuOpen && !isSidebarOpen && (
+                    <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                      Layer Select
+                    </div>
+                  )}
                 </button>
-                {/* Tooltip */}
-                <div className="absolute left-20 bottom-0 hidden lg:group-hover:flex bg-blue-800 text-white py-2 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div>
-                    <p className="font-medium text-sm">
-                      {user.username || "User"}
-                    </p>
-                    <p className="text-xs text-blue-200">
-                      {user.is_paid_user ? "Premium" : "Free"}
-                    </p>
+
+                <button
+                  onClick={() => {
+                    handleTabClick();
+                    if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center w-full p-3 rounded-lg transition-colors group ${
+                    isTimeSeriesVisible
+                      ? "bg-blue-700/70"
+                      : "hover:bg-blue-700/50"
+                  }`}
+                >
+                  <TimerReset
+                    size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                    className={`${
+                      !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                    } group-hover:scale-110 transition-transform`}
+                  />
+                  {(isMobileMenuOpen || isSidebarOpen) && (
+                    <span className="ml-3 font-medium">Time Series</span>
+                  )}
+                  {!isMobileMenuOpen && !isSidebarOpen && (
+                    <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                      Time Series
+                    </div>
+                  )}
+                </button>
+              </div>
+            </nav>
+            {/* Bottom Section - User Info & Actions */}
+            <div className="mt-auto">
+              {/* User Section - Expanded sidebar or mobile menu */}
+              {(isMobileMenuOpen || isSidebarOpen) && user && (
+                <div className="p-4 border-t border-blue-700/50">
+                  <div
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-700/50 transition-colors cursor-pointer group"
+                    onClick={() => {
+                      navigate("/dashboard");
+                      if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                    }}
+                  >
+                    {/* User Avatar Circle */}
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-blue-800 font-semibold text-sm">
+                        {getUserInitials(user.username || user.email || "U")}
+                      </span>
+                    </div>
+                    {/* User Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white font-medium text-sm truncate">
+                        {user.username || "User"}
+                      </p>
+                      <p className="text-blue-200 text-xs truncate">
+                        {user.email}
+                      </p>
+                      <p className="text-blue-300 text-xs">
+                        {user.is_paid_user ? "Premium" : "Free"} Account
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Logout Button - Only show when sidebar is expanded */}
+                  {isSidebarOpen && (
+                    <div className="mt-3 px-3">
+                      <LogoutButton />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Collapsed User Icon - When sidebar is collapsed on desktop */}
+              {!isMobileMenuOpen && !isSidebarOpen && user && (
+                <div className="p-4 border-t border-blue-700/50">
+                  <div className="relative group">
+                    <button
+                      onClick={() => navigate("/dashboard")}
+                      className="w-full p-2 rounded-lg hover:bg-blue-700/50 transition-colors flex justify-center"
+                    >
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span className="text-blue-800 font-semibold text-xs">
+                          {getUserInitials(user.username || user.email || "U")}
+                        </span>
+                      </div>
+                    </button>
+                    {/* Tooltip */}
+                    <div className="absolute left-20 bottom-0 hidden lg:group-hover:flex bg-blue-800 text-white py-2 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div>
+                        <p className="font-medium text-sm">
+                          {user.username || "User"}
+                        </p>
+                        <p className="text-xs text-blue-200">
+                          {user.is_paid_user ? "Premium" : "Free"}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
-          {isSidebarOpen && (
-            <div className="absolute bottom-10 mt-auto p-4  border-blue-700/50">
-              <LogoutButton />
-            </div>
-          )}
+              )}
 
-          {!isMobileMenuOpen && isSidebarOpen && (
-            <div className="absolute bottom-0 mt-auto p-4 border-t border-blue-700/50">
-              <div className="text-xs text-blue-200/70">
-                Mtaa Wetu Platform v2.0
-              </div>
+              {/* Version Info - Only show when sidebar is expanded */}
+              {(isMobileMenuOpen || isSidebarOpen) && (
+                <div className="p-4 border-t border-blue-700/50">
+                  <div className="text-xs text-blue-200/70 text-center">
+                    Mtaa Wetu Platform v2.0
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+          </div>
           {/* Footer Area - Always visible */}
         </aside>
 
@@ -1266,19 +1244,15 @@ const Dashboard: React.FC = () => {
           {/* Fixed: Corrected pointer-events logic to ensure clickability */}
           <div
             className={`bg-white border-t border-gray-200 shadow-lg transition-all duration-300 ease-out
-              ${
-                isTimeSeriesVisible
-                  ? "pointer-events-auto"
-                  : "pointer-events-none"
-              }
-              ${
-                isTimeSeriesVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-full opacity-0"
-              }
-              lg:absolute lg:inset-y-0 lg:left-auto lg:translate-y-0 lg:right-0 lg:bottom-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
-              ${!isTimeSeriesVisible && "lg:translate-x-full lg:opacity-0"}
-            `}
+    ${isTimeSeriesVisible ? "pointer-events-auto" : "pointer-events-none"}
+    ${
+      isTimeSeriesVisible
+        ? "translate-y-0 opacity-100"
+        : "translate-y-full opacity-0"
+    }
+    lg:absolute lg:inset-y-0 lg:left-auto lg:translate-y-0 lg:right-0 lg:bottom-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
+    ${!isTimeSeriesVisible && "lg:translate-x-full lg:opacity-0"}
+  `}
             style={{
               position: "fixed",
               height: "90vh",
@@ -1293,12 +1267,12 @@ const Dashboard: React.FC = () => {
               ...(window.innerWidth >= 1024 && {
                 position: "fixed",
                 bottom: "0",
-                top: "0",
+                top: "80px", // Add top offset for navbar height
                 right: "0",
                 left: "auto",
                 width: "25%",
-                height: "100%",
-                maxHeight: "100%",
+                height: "calc(100vh - 80px)", // Subtract navbar height
+                maxHeight: "calc(100vh - 80px)", // Subtract navbar height
                 borderTopLeftRadius: "0",
                 borderTopRightRadius: "0",
                 paddingBottom: "0",
@@ -1358,15 +1332,15 @@ const Dashboard: React.FC = () => {
           {/* Fixed: Corrected pointer-events logic to ensure clickability */}
           <div
             className={`bg-white border-t border-gray-200 shadow-lg transition-all duration-300
-              ${isPanelsVisible ? "pointer-events-auto" : "pointer-events-none"}
-              ${
-                isPanelsVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-full opacity-0"
-              }
-              lg:absolute lg:inset-y-0 lg:translate-y-0 lg:translate-x-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
-              ${!isPanelsVisible && "lg:translate-x-full lg:opacity-0"}
-            `}
+    ${isPanelsVisible ? "pointer-events-auto" : "pointer-events-none"}
+    ${
+      isPanelsVisible
+        ? "translate-y-0 opacity-100"
+        : "translate-y-full opacity-0"
+    }
+    lg:absolute lg:inset-y-0 lg:translate-y-0 lg:translate-x-0 lg:border-l lg:border-t-0 lg:rounded-none lg:w-1/4 lg:h-full
+    ${!isPanelsVisible && "lg:translate-x-full lg:opacity-0"}
+  `}
             style={{
               position: "fixed",
               bottom: "0",
@@ -1382,12 +1356,12 @@ const Dashboard: React.FC = () => {
               ...(window.innerWidth >= 1024 && {
                 position: "fixed",
                 bottom: "0",
-                top: "0",
+                top: "80px", // Add top offset for navbar height
                 right: isTimeSeriesVisible ? "25%" : "0",
                 left: "auto",
                 width: "25%",
-                height: "100%",
-                maxHeight: "100%",
+                height: "calc(100vh - 80px)", // Subtract navbar height
+                maxHeight: "calc(100vh - 80px)", // Subtract navbar height
                 borderTopLeftRadius: "0",
                 borderTopRightRadius: "0",
                 paddingBottom: "0",
@@ -1528,7 +1502,7 @@ const Dashboard: React.FC = () => {
         {/* Legend - Better Desktop Positioning */}
         <div
           id="legend"
-          className="fixed bottom-24 right-4 md:bottom-16 bg-white p-3 rounded-md shadow-md border border-gray-300 hidden max-w-[90%] md:max-w-xs lg:max-w-sm z-20 transition-all duration-300"
+          className="fixed bottom-24 md:left-20 md:bottom-16 bg-white p-3 rounded-md shadow-md border border-gray-300 hidden max-w-[90%] md:max-w-xs lg:max-w-sm z-20 transition-all duration-300"
         >
           <div className="flex justify-between items-center mb-1">
             <h4 className="font-semibold text-blue-500">Legend</h4>
@@ -1538,7 +1512,7 @@ const Dashboard: React.FC = () => {
                 className="p-1 rounded-full hover:bg-gray-100 text-gray-500 hidden md:block"
                 title="Toggle size"
               >
-                <ArrowRight size={16} />
+                <ArrowLeft size={16} />
               </button>
               <button
                 onClick={() => {

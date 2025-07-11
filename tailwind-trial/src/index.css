@@ -16,13 +16,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #45028371;
-  border-radius: 2px;
+  background: #1c03a7fd;
+  border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b02a78f;
+  background: #3825e2;
 }
 
 *{

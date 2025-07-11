@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 function BtnGetStarted() {
   const navigate = useNavigate();
   return (
-    <a
-      href="#"
-      className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    <button
       onClick={() => navigate("/login")}
+      className="relative group px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-10"
     >
-      Get started
-    </a>
+      <span className="relative z-10">Get Started</span>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </button>
   );
 }
 

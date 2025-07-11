@@ -201,7 +201,7 @@ const SearchComponent: React.FC<SearchProps> = ({
       {isVisible && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          className="absolute mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+          className="absolute mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 z-9999 overflow-hidden"
           style={{ maxHeight: "350px", overflowY: "auto" }}
         >
           <div className="p-2">
