@@ -5335,3 +5335,3012 @@ AttributeError: type object 'OutstandingToken' has no attribute 'objects'
 "POST /api/token/refresh/ HTTP/1.1" 500 120334
 "POST /api/token/refresh/ HTTP/1.1" 500 120334
 "GET /api/packages/ HTTP/1.1" 200 849
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+D:\john\mtaawetu-base\backendMtaawetuApi\backendMtaawetuApi\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"OPTIONS /api/packages/ HTTP/1.1" 200 0
+"OPTIONS /api/packages/ HTTP/1.1" 200 0
+"GET /api/packages/ HTTP/1.1" 200 849
+"GET /api/packages/ HTTP/1.1" 200 849
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+- Broken pipe from ('127.0.0.1', 53917)
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89173449092269,-1.3043977711183317 HTTP/1.1" 500 94101
+"GET /products/get-curent-neighbourhood/?coordinates=36.89169955324098,-1.3033282768587355 HTTP/1.1" 500 94101
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89173449092269,-1.3043977711183317 HTTP/1.1" 500 94101
+"GET /products/get-curent-neighbourhood/?coordinates=36.89169955324098,-1.3033282768587355 HTTP/1.1" 500 94101
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89190490738747,-1.304774948536803 HTTP/1.1" 500 94094
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89190490738747,-1.304774948536803 HTTP/1.1" 500 94094
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89159752140114,-1.302447983478615 HTTP/1.1" 500 94094
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89159752140114,-1.302447983478615 HTTP/1.1" 500 94094
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89169478345411,-1.3017479147500097 HTTP/1.1" 500 94101
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89169478345411,-1.3017479147500097 HTTP/1.1" 500 94101
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"POST /api/token/refresh/ HTTP/1.1" 500 121235
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Watching for file changes with StatReloader
+"OPTIONS /api/packages/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/packages/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/packages/
+Unauthorized: /api/user/profile/
+"GET /api/packages/ HTTP/1.1" 401 172
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/packages/
+Unauthorized: /api/user/profile/
+"GET /api/packages/ HTTP/1.1" 401 172
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+"POST /api/token/refresh/ HTTP/1.1" 401 54
+"POST /api/token/refresh/ HTTP/1.1" 401 54
+"POST /api/token/refresh/ HTTP/1.1" 401 54
+"POST /api/token/refresh/ HTTP/1.1" 401 54
+"GET /api/packages/ HTTP/1.1" 200 849
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.89522358884514,-1.2531299241447584 HTTP/1.1" 200 0
+"OPTIONS /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.89522358884514,-1.2531299241447584 HTTP/1.1" 500 96048
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.82542010478747,-1.283362636729123 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.82542010478747,-1.283362636729123 HTTP/1.1" 500 96041
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+- Broken pipe from ('127.0.0.1', 58205)
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.798958627418756,-1.2762028306754587 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.798958627418756,-1.2762028306754587 HTTP/1.1" 500 96055
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.82312141568309,-1.284333456353508 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.82312141568309,-1.284333456353508 HTTP/1.1" 500 96041
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.81825851228956,-1.2777804167749593 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81825851228956,-1.2777804167749593 HTTP/1.1" 500 96048
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.818622661059635,-1.2851829232113658 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.818622661059635,-1.2851829232113658 HTTP/1.1" 500 96075
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.80891202716225,-1.274503890715394 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80891202716225,-1.274503890715394 HTTP/1.1" 500 96061
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.80482785090902,-1.2622829146795453 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80482785090902,-1.2622829146795453 HTTP/1.1" 500 96070
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.82303528946525,-1.2820634542378713 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.82303528946525,-1.2820634542378713 HTTP/1.1" 500 96070
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.7793019641459,-1.339610810396195 HTTP/1.1" 500 96028
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.78136547384901,-1.3371838142342938 HTTP/1.1" 500 96042
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.78075855923046,-1.3353635655377758 HTTP/1.1" 500 96042
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.79857902392803,-1.3071759016230828 HTTP/1.1" 500 96042
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.84735693984203,-1.3248303550232947 HTTP/1.1" 500 96042
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.844960812756256,-1.3251825603598348 HTTP/1.1" 500 96049
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.844960812756256,-1.3251825603598348 HTTP/1.1" 500 96049
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.844960812756256,-1.3251825603598348 HTTP/1.1" 500 96049
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.844960812756256,-1.3251825603598348 HTTP/1.1" 500 96049
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.844960812756256,-1.3251825603598348 HTTP/1.1" 500 96049
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.800335918845946,-1.293441344060625 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 818
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.800335918845946,-1.293441344060625 HTTP/1.1" 500 96048
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.80320702974865,-1.2741398320072221 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80320702974865,-1.2741398320072221 HTTP/1.1" 500 96048
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80320702974865,-1.2741398320072221 HTTP/1.1" 500 96048
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80320702974865,-1.2741398320072221 HTTP/1.1" 500 96048
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.81527522711795,-1.3182972750400808 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81527522711795,-1.3182972750400808 HTTP/1.1" 500 96048
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.805458735740075,-1.321412267008995 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.805458735740075,-1.321412267008995 HTTP/1.1" 500 96048
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.76654938678661,-1.290401070600538 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.76654938678661,-1.290401070600538 HTTP/1.1" 500 96041
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.766670769710316,-1.3003519266097925 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.766670769710316,-1.3003519266097925 HTTP/1.1" 500 96055
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.75629490378563,-1.2812707719188836 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.75629490378563,-1.2812707719188836 HTTP/1.1" 500 96048
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.75576585402521,-1.2812093955160577 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.75576585402521,-1.2812093955160577 HTTP/1.1" 500 96048
+Watching for file changes with StatReloader
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.765901789205486,-1.2627797196681598 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.765901789205486,-1.2627797196681598 HTTP/1.1" 500 96048
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.765901789205486,-1.2627797196681598 HTTP/1.1" 500 96054
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.77246144229218,-1.2678546706419809 HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.77246144229218,-1.2678546706419809 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.77246144229218,-1.2678546706419809 HTTP/1.1" 500 96047
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.78358178234234,-1.2855309008506453 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.78776342368985,-1.2874482677544563 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.78776342368985,-1.2874482677544563 HTTP/1.1" 500 96041
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123176
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.80226129515245,-1.290621271216267 HTTP/1.1" 200 0
+"OPTIONS /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 818
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.80226129515245,-1.290621271216267 HTTP/1.1" 500 96040
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.8031810136697,-1.2977578182496785 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.8031810136697,-1.2977578182496785 HTTP/1.1" 500 96040
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.77592484209339,-1.3277981602959414 HTTP/1.1" 200 0
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 301
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.77592484209339,-1.3277981602959414 HTTP/1.1" 500 96047
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+- Broken pipe from ('127.0.0.1', 61056)
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.94639803258312,-1.3649165538401604 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.94639803258312,-1.3649165538401604 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.94639803258312,-1.3649165538401604 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81649531488222,-1.2988435859209204 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81649531488222,-1.2988435859209204 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81649531488222,-1.2988435859209204 HTTP/1.1" 500 96041
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.81649531488222,-1.2988435859209204 HTTP/1.1" 500 96041
+D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 106, in getCurrentNeighbourhood
+    engine = get_db_engine()  # Use cached engine
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py", line 95, in get_db_engine
+    return create_engine(db_connection_url)
+  File "<string>", line 2, in create_engine
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\util\deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\create.py", line 546, in create_engine
+    u = _url.make_url(url)
+  File "D:\john\mtaa-wetu\Lib\site-packages\sqlalchemy\engine\url.py", line 846, in make_url
+    raise exc.ArgumentError(
+        f"Expected string or URL object, got {name_or_url!r}"
+    )
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got None
+"GET /products/get-curent-neighbourhood/?coordinates=36.85523456949164,-1.2846998535669911 HTTP/1.1" 500 95939
+D:\john\mtaawetu-base\backendMtaawetuApi\products\urls.py changed, reloading.
+Watching for file changes with StatReloader
+D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /products/get-curent-neighbourhood/
+"GET /products/get-curent-neighbourhood/?coordinates=36.835813301698096,-1.2752343479441919 HTTP/1.1" 404 5433
+D:\john\mtaawetu-base\backendMtaawetuApi\products\urls.py changed, reloading.
+Watching for file changes with StatReloader
+D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Internal Server Error: /products/get-curent-neighbourhood/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: getCurrentNeighbourhood() missing 1 required positional argument: 'coordinates'
+"GET /products/get-curent-neighbourhood/?coordinates=36.831543826664586,-1.2795258679133354 HTTP/1.1" 500 72009
+D:\john\mtaawetu-base\backendMtaawetuApi\products\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/get-curent-neighbourhood/?coordinates=36.81370053687752,-1.2829237400632536 HTTP/1.1" 200 4625
+"OPTIONS /products/get-map-stats/estates_nairobi/ HTTP/1.1" 200 0
+"POST /products/get-map-stats/estates_nairobi/ HTTP/1.1" 200 5871
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+"OPTIONS /api/user/profile/ HTTP/1.1" 200 0
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"OPTIONS /api/token/refresh/ HTTP/1.1" 200 0
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.814037339895975,-1.28937922322487 HTTP/1.1" 200 0
+"OPTIONS /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 0
+Internal Server Error: /products/get-curent-neighbourhood/
+"GET /products/get-curent-neighbourhood/?coordinates=36.814037339895975,-1.28937922322487 HTTP/1.1" 500 174
+Internal Server Error: /products/get-map-stats/nbihealthaccess/
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 500 818
+Watching for file changes with StatReloader
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.79285092242151,-1.2820754013791742 HTTP/1.1" 200 0
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /products/get-curent-neighbourhood/?coordinates=36.79285092242151,-1.2820754013791742 HTTP/1.1" 200 4526
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.7800062457581,-1.2806723241075986 HTTP/1.1" 200 0
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /products/get-curent-neighbourhood/?coordinates=36.7800062457581,-1.2806723241075986 HTTP/1.1" 200 4526
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.7737406054994,-1.280157468565207 HTTP/1.1" 200 0
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /products/get-curent-neighbourhood/?coordinates=36.7737406054994,-1.280157468565207 HTTP/1.1" 200 1850
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.76066073201184,-1.2814252253483858 HTTP/1.1" 200 0
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /products/get-curent-neighbourhood/?coordinates=36.76066073201184,-1.2814252253483858 HTTP/1.1" 200 1927
+"OPTIONS /products/get-curent-neighbourhood/?coordinates=36.776161724870576,-1.280199801361121 HTTP/1.1" 200 0
+"POST /products/get-map-stats/nbihealthaccess/ HTTP/1.1" 200 1176
+"GET /products/get-curent-neighbourhood/?coordinates=36.776161724870576,-1.280199801361121 HTTP/1.1" 200 1850
+"GET /products/get-curent-neighbourhood/?coordinates=36.76990611998792,-1.2831470871160633 HTTP/1.1" 200 1850
+"POST /products/get-map-stats/estates_nairobi/ HTTP/1.1" 200 3656
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+Not Found: /ws/chat/
+"GET /ws/chat/ HTTP/1.1" 404 2658
+Not Found: /ws/map-triggers/
+"GET /ws/map-triggers/ HTTP/1.1" 404 2682
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+Not Found: /ws/chat/
+"GET /ws/chat/ HTTP/1.1" 404 2658
+Not Found: /ws/map-triggers/
+"GET /ws/map-triggers/ HTTP/1.1" 404 2682
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Unauthorized: /api/user/profile/
+"GET /api/user/profile/ HTTP/1.1" 401 172
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"POST /api/token/refresh/ HTTP/1.1" 500 123385
+"POST /api/auth/login/ HTTP/1.1" 200 1065
+Not Found: /ws/chat/
+"GET /ws/chat/ HTTP/1.1" 404 2658
+- Broken pipe from ('127.0.0.1', 64378)
+Not Found: /ws/map-triggers/
+"GET /ws/map-triggers/ HTTP/1.1" 404 2682
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /api/user/profile/ HTTP/1.1" 200 534
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+"GET /data/api/map-layers/ HTTP/1.1" 200 3968
+"GET /data/api/time-series/ HTTP/1.1" 200 3877
+Not Found: /ws/chat/
+"GET /ws/chat/ HTTP/1.1" 404 2658
+Not Found: /ws/map-triggers/
+"GET /ws/map-triggers/ HTTP/1.1" 404 2682
+Watching for file changes with StatReloader
+D:\john\mtaawetu-base\backendMtaawetuApi\backendMtaawetuApi\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Unauthorized: /api/user/profile/
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+Internal Server Error: /api/token/refresh/
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'

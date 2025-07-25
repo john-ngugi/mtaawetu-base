@@ -1,0 +1,3709 @@
+Sent AI chat response: Hello back! How can I assist you?
+Sent AI chat response: Hello back! How can I assist you?
+Sent AI chat response: Invalid coordinates or zoom level. Please use: zoom map to <lng> <lat> [zoom]
+Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 80, in process_zoom_request
+    async_to_sync(send_map_trigger)(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        'zoomToLocation',
+        ^^^^^^^^^^^^^^^^^
+        {'lng': lng, 'lat': lat, 'zoom': zoom},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        username='AI'
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 187, in __call__
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sent AI chat response: Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sent AI chat response: Hello back! How can I assist you?
+Sent AI chat response: Please use format: zoom map to <lng> <lat> [zoom]
+Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 80, in process_zoom_request
+    
+    
+    ...<3 lines>...
+            # Extract GeoJSON (basic parsing, expects GeoJSON string after command)
+            ^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 187, in __call__
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sent AI chat response: Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sent AI chat response: Hello back! How can I assist you?
+Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 80, in process_zoom_request
+    
+    
+    ...<3 lines>...
+            # Extract GeoJSON (basic parsing, expects GeoJSON string after command)
+            ^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\asgiref\sync.py", line 187, in __call__
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sent AI chat response: Error processing zoom request: You cannot use AsyncToSync in the same thread as an async event loop - just await the async function directly.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 128, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 128, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "79a1a838-7ea7-438b-9b36-17dd2dd240dc",
+  "object": "chat.completion",
+  "created": 1753182032,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I assist you today?",
+        "reasoning_content": "Okay, the user has sent a simple greeting: \"hello\". This seems like a friendly opening to start a conversation. \n\nHmm, the instructions are clear - respond in a friendly and helpful manner with a concise plain text reply. Since it's a greeting, the example given is perfect: \"Hi there! How can I assist you today?\" \n\nThe user might be testing the waters or genuinely starting a conversation. Either way, keeping it warm and open-ended invites further interaction. No need to overthink this one - just mirror their friendliness while leaving the door wide open for their next move. \n\nThe response should be like a smile in text form - short, bright, and encouraging them to continue."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 155,
+    "total_tokens": 230,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 143
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sent AI chat response: Hi there! How can I assist you today?
+Sent AI chat response: Please use format: zoom map to <lng> <lat> [zoom] or zoom map to <lng>,<lat>,[zoom]
+Sending map trigger: functionName=zoomToLocation, params={'lng': 0.0, 'lat': 0.0, 'zoom': 10}
+Error sending map trigger: Invalid format specifier ' float, 'lat': float' for object of type 'str'
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\utils.py", line 47, in send_map_trigger
+    - For 'calculateCentroid', expect 'geojson' as a GeoJSON string and return centroid coordinates {'lng': float, 'lat': float}.
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier ' float, 'lat': float' for object of type 'str'
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: what should i call you?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "c0d5f5ca-b67d-4302-8d65-c8341efad44b",
+  "object": "chat.completion",
+  "created": 1753182123,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "You can call me whatever you like! \"Assistant,\" \"DeepSeek,\" or just \"hey you\" works too \ud83d\ude0a What feels most natural to you?",
+        "reasoning_content": "Hmm, the user is asking what they should call me. This seems like a friendly opening question, probably from someone who's just starting to interact with me and wants to establish a more personal connection. \n\nI notice they didn't specify any preferences, so I should offer some simple options while keeping it light and welcoming. The name \"DeepSeek\" reflects my identity but might feel too formal, so suggesting \"Assistant\" as an alternative makes it more approachable. \n\nThe smiley emoji at the end helps soften the tone - important since text lacks vocal warmth. The \"what feels natural to you\" part gives them ownership over the choice, which might make them more comfortable. \n\nNo need to overcomplicate this; they're likely just looking for a way to address me casually. Keeping it concise aligns with the \"plain text\" instruction while still feeling human."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 80,
+    "completion_tokens": 212,
+    "total_tokens": 292,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 177
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 80
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: can you keep conversation history ?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 128, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=30
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello!\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "71952b08-bc24-4990-8251-4d2567db9106",
+  "object": "chat.completion",
+  "created": 1753182221,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! \ud83d\ude0a How can I help you today?",
+        "reasoning_content": "Okay, the user just said \"hello!\" - a simple but warm greeting. \n\nHmm, since they're initiating a conversation, they might be testing the waters or genuinely starting an interaction. The tone feels friendly, so matching that energy is key. \n\nLooking at the guidelines: for greetings, I should respond appropriately and keep it concise. The example given is perfect - \"Hi there! How can I assist you today?\" covers all bases: acknowledges the greeting, expresses openness to help, and maintains approachability. \n\nNo need to overthink this one. A mirror of their enthusiasm with a prompt for their next move feels right. They didn't specify needs yet, so leaving the door wide open for anything they might want follows the \"helpful\" directive. \n\nAlso noting they used an exclamation point - might indicate eagerness! I'll reflect that in my response too."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 76,
+    "completion_tokens": 193,
+    "total_tokens": 269,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 179
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 76
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "7b6f3e59-1a4a-4e39-bced-8f50a93d6d8c",
+  "object": "chat.completion",
+  "created": 1753182659,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I help you today? \ud83d\ude0a",
+        "reasoning_content": "Hmm, the user has sent a simple \"hello\" message. This is a basic greeting, so my response should be warm and welcoming to set a friendly tone for the conversation. \n\nI recall that the instructions specifically mention how to handle greetings like this, with an example response: \"Hi there! How can I assist you today?\" That seems perfect - it's polite, open-ended, and invites the user to share what they need help with. \n\nThe user might just be testing the interaction or could be preparing to ask something more substantial. Either way, keeping it light and helpful is the right approach. No need to overcomplicate a simple hello. \n\nI'll mirror their casual tone while maintaining professionalism. The smiley in the example response adds a nice touch of friendliness without being excessive. \n\nThis initial exchange is important for establishing rapport, so I'll make sure my response feels inviting and ready to be of service."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 202,
+    "total_tokens": 277,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 188
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: can you do some gis tasks for me ?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "3761c2ee-e9bf-4a9c-850d-e60d33896b51",
+  "object": "chat.completion",
+  "created": 1753183544,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi! I can definitely help with GIS-related guidance! While I can't run software or process data directly, I can:  \n- Explain GIS concepts (buffers, overlays, projections, etc.)  \n- Suggest tools (QGIS, ArcGIS, Python libraries like GeoPandas)  \n- Help troubleshoot code or workflows  \n- Guide you through steps for tasks like mapping or analysis  \n\nWhat specific task are you working on? Let me know the details! \ud83d\ude0a",
+        "reasoning_content": "We are given a user message: \"can you do some gis tasks for me ?\"\n Since the user is asking about GIS (Geographic Information System) tasks, we need to respond in a friendly and helpful manner.\n However, note that as a conversational AI, I don't have direct access to GIS software or spatial data. But I can assist with:\n   - Providing guidance on GIS concepts and tools\n   - Suggesting steps for common GIS tasks\n   - Helping with spatial data analysis concepts\n   - Writing or explaining code for GIS (e.g., using Python with libraries like GeoPandas, Fiona, Shapely, etc.)\n   - Advising on GIS software (like QGIS, ArcGIS)\n\n We should be clear about what we can and cannot do.\n\n Let's craft a response that:\n  1. Acknowledges the user's request.\n  2. Explains the kind of GIS assistance we can provide.\n  3. Asks for more specific details about the task.\n\n Example response structure:\n  \"Hi! I can certainly help you with GIS-related questions and tasks. While I can't run GIS software directly, I can provide guidance, explain concepts, help with code, and suggest workflows. Could you tell me more about what you're trying to do? For example, are you working with a specific tool or do you have a particular task in mind?\""
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 84,
+    "completion_tokens": 378,
+    "total_tokens": 462,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 281
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 84
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "e086f3d7-8368-40dc-8de4-65a25317c96f",
+  "object": "chat.completion",
+  "created": 1753187515,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I assist you today?",
+        "reasoning_content": "Hmm, the user has just sent a simple \"hello\" message. Since this is clearly a greeting, I should respond warmly and openly to start the conversation. \n\nThe user seems friendly based on the casual tone, and they might be testing how I respond or genuinely starting a chat. As an AI assistant, my role is to be helpful and engaging, so a cheerful reply fits best here.\n\nLooking at the instructions, I need to keep it concise and plain-text, matching the example for greetings. \"Hi there! How can I assist you today?\" is a good template\u2014it's inviting and encourages them to share their needs. \n\nI'll go with that response since it's straightforward and aligns with being friendly and helpful. No need to overthink it; the user probably just wants a pleasant interaction to begin with."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 178,
+    "total_tokens": 253,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 166
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sent AI chat response: Hi there! How can I assist you today?
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 143, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 143, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 143, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=30
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "e411b938-053a-4f09-8aa0-62a4976970d4",
+  "object": "chat.completion",
+  "created": 1753205876,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I assist you today?",
+        "reasoning_content": "Hmm, the user has just sent a simple \"hello\" message. This is clearly a greeting, so my response should be warm and welcoming. \n\nI recall the system prompt specifies that for greetings like this, I should respond appropriately - with the given example being \"Hi there! How can I assist you today?\" That seems perfect here. \n\nThe user might be testing the waters or just starting a conversation. Since they haven't specified any needs yet, I'll keep it open-ended with \"How can I assist you today?\" to invite further interaction. \n\nNo need to overcomplicate this - a friendly, helpful tone is what's needed. The user seems neutral at this point, so a standard cheerful greeting response will work well. \n\nI'll go with the example format since it fits perfectly: \"Hi there! How can I assist you today?\" This acknowledges the greeting while immediately making myself available for whatever they need next."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 200,
+    "total_tokens": 275,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 188
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sent AI chat response: Hi there! How can I assist you today?
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: what can you do?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "de6b60da-bf95-4b03-9add-b37d2f148b7f",
+  "object": "chat.completion",
+  "created": 1753205910,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hey there! I'm here to help with a wide range of things, such as:\n\n*   **Answering questions** (facts, explanations, definitions)\n*   **Writing & editing** (emails, essays, stories, poems)\n*   **Summarizing** text or articles\n*   **Brainstorming ideas** (for projects, names, creative writing)\n*   **Learning & explaining concepts** (science, history, tech, etc.)\n*   **Translating** between languages\n*   **Helping with productivity** (planning, organizing, problem-solving)\n*   **Casual conversation** too!\n\nJust let me know what you need help with! \ud83d\ude0a",
+        "reasoning_content": "Okay, the user is asking what I can do. This is a common starting point for new users trying to understand my capabilities.  \n\nHmm, they kept it very simple with just \"what can you do?\" - no specifics mentioned. That means they probably want a broad overview rather than diving deep into one area.  \n\nI should keep it friendly and welcoming since first impressions matter. The example response for \"hello\" shows the expected tone - warm but professional.  \n\nListing categories makes sense: information, writing, productivity, etc. Covering the main areas without overwhelming them. Ending with an open question invites further interaction.  \n\nNoticed they used lowercase - seems like a casual user. No need for overly formal language. \"Hey there!\" matches that vibe while staying professional.  \n\nThe smiley at the end softens the list-heavy response. Important since \"here are some things\" could sound robotic otherwise.  \n\nBetter avoid technical jargon - they didn't ask about AI specifics. Just show practical value simply.  \n\n...and done. This balances completeness with brevity while leaving the door wide open for their next move."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 79,
+    "completion_tokens": 367,
+    "total_tokens": 446,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 225
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 79
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "293d388c-e7d5-4169-9fc5-1d9acec60c5d",
+  "object": "chat.completion",
+  "created": 1753209133,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I assist you today?",
+        "reasoning_content": "Okay, the user just said \"hello\". That's a simple greeting, so I should respond warmly and openly. \n\nHmm, the instructions specifically mention keeping it concise and plain text. They even gave an example response: \"Hi there! How can I assist you today?\" That's perfect - friendly, inviting, and leaves room for whatever they need next. \n\nNo need to overthink this. They might just be testing the interaction, or could have a real request coming. Either way, matching their casual tone while staying professional is key. \n\n...And done. Short, welcoming, and follows all guidelines."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 136,
+    "total_tokens": 211,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 124
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sent AI chat response: Hi there! How can I assist you today?
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: wassup\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "c1da711e-2fcd-4dac-8427-1a5d2ed3a074",
+  "object": "chat.completion",
+  "created": 1753209164,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hey! What's good? \ud83d\ude0a How can I help you today?",
+        "reasoning_content": "Okay, the user just said \"wassup\", which is a casual greeting. As a conversational AI, I should match their tone while staying friendly and helpful. \n\nHmm, \"wassup\" feels very informal - probably from someone young or just in a relaxed mood. They might not want anything specific yet, just testing the waters. \n\nLooking at the instructions: for greetings like this, I should respond appropriately but concisely. The \"hello\" example uses an open-ended question to invite further conversation. \n\nI'll go with \"Hey!\" to mirror their casual vibe, then offer assistance like the example. Adding \"what's good?\" keeps it conversational while leaving space for them to steer the topic. \n\nNo need to overthink this - short, warm, and ready to help if they follow up."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 76,
+    "completion_tokens": 183,
+    "total_tokens": 259,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 166
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 76
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Hello back! How can I assist you?
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hey\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    response = requests.post(
+        "https://api.deepseek.com/v1/chat/completions",
+    ...<2 lines>...
+        timeout=10
+    )
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+Error processing conversational request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 129, in process_conversational_request
+    Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        "Content-Type": "application/json",
+    
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sent AI chat response: Error processing request: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending DeepSeek conversational request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7
+}
+DeepSeek conversational response: {
+  "id": "2c4b00fb-c18d-46b4-a9eb-e2dd6567154e",
+  "object": "chat.completion",
+  "created": 1753216482,
+  "model": "deepseek-reasoner",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I assist you today?",
+        "reasoning_content": "Hmm, the user has sent a simple greeting message: \"hello\". This is a straightforward interaction where the user is initiating conversation. \n\nAs a conversational AI assistant, I should respond warmly and invitingly to encourage further interaction. The example provided shows that for greetings like this, an appropriate response would be something friendly and open-ended.\n\nI notice the user hasn't specified any particular need yet, so keeping it simple and welcoming is best. The response should be concise in plain text as requested, matching the example format. \n\nA good approach would be to acknowledge the greeting and express willingness to help, while leaving the conversation open for the user to direct it further. This maintains a helpful tone without being pushy.\n\nThe example response \"Hi there! How can I assist you today?\" works perfectly here - it's polite, friendly, and invites the user to share what they need help with. I'll use that exact phrasing since it meets all requirements."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 203,
+    "total_tokens": 278,
+    "prompt_tokens_details": {
+      "cached_tokens": 64
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 191
+    },
+    "prompt_cache_hit_tokens": 64,
+    "prompt_cache_miss_tokens": 11
+  },
+  "system_fingerprint": "fp_393bca965e_prod0623_fp8_kvcache"
+}
+Sent AI chat response: Hi there! How can I assist you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Error processing conversational request: name 'get_channel_layer' is not defined
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\consumers.py", line 131, in process_conversational_request
+    channel_layer = get_channel_layer()
+                    ^^^^^^^^^^^^^^^^^
+NameError: name 'get_channel_layer' is not defined
+Sent AI chat response: Error processing request: name 'get_channel_layer' is not defined
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: how are you\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response: !
+Streamed partial conversational response:  I
+Streamed partial conversational response: 'm
+Streamed partial conversational response:  doing
+Streamed partial conversational response:  well
+Streamed partial conversational response: ,
+Streamed partial conversational response:  thanks
+Streamed partial conversational response:  for
+Streamed partial conversational response:  asking
+Streamed partial conversational response: .
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi! I'm doing well, thanks for asking. How can I help you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I assist you today?
+Sending map trigger: functionName=zoomToLocation, params={'lng': 0.0, 'lat': 0.0, 'zoom': 10}
+Error sending map trigger: Invalid format specifier ' float, 'lat': float' for object of type 'str'
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\utils.py", line 47, in send_map_trigger
+    - For 'calculateCentroid', expect 'geojson' as a GeoJSON string and return centroid coordinates {'lng': float, 'lat': float}.
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier ' float, 'lat': float' for object of type 'str'
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: how are you\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hey
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  I
+Streamed partial conversational response: 'm
+Streamed partial conversational response:  doing
+Streamed partial conversational response:  great
+Streamed partial conversational response: ,
+Streamed partial conversational response:  thanks
+Streamed partial conversational response:  for
+Streamed partial conversational response:  asking
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  about
+Streamed partial conversational response:  you
+Streamed partial conversational response: ?
+Streamed partial conversational response:  What
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  with
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I assist you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I help you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I assist you today?
+Sending map trigger: functionName=zoomToLocation, params={'lng': 0.0, 'lat': 0.0, 'zoom': 10}, message_id=2025-07-23T06:35:31.660Z
+Sending DeepSeek R1 streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n        Validate the following JSON map trigger data for a GIS application:\n        Function Name: zoomToLocation\n        Parameters: {\"lng\": 0.0, \"lat\": 0.0, \"zoom\": 10}\n\n        Requirements:\n        - For 'zoomToLocation', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'zoom' is an integer between 0 and 20.\n        - For 'addMarker', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'title' is a non-empty string.\n        - For 'calculateCentroid', expect 'geojson' as a GeoJSON string and return centroid coordinates {'lng': float, 'lat': float}.\n        - Return a JSON object with:\n          - 'valid': boolean\n          - 'params': dict (formatted data or empty if invalid)\n          - 'response': str (text response for chat, e.g., 'Zoomed to location!')\n        - If invalid, include 'error': str with the reason.\n        Example valid response: {\"valid\": true, \"params\": {\"lng\": -47.0616, \"lat\": -22.9064, \"zoom\": 10}, \"response\": \"Zoomed to location!\"}\n        "
+    }
+  ],
+  "temperature": 0.7,
+  "response_format": {
+    "type": "json_object"
+  },
+  "stream": true
+}
+Sent chat response: Zoomed to location!
+Sent map trigger: zoomToLocation with params {'lng': 0.0, 'lat': 0.0, 'zoom': 10}
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: do you understand your insrtructions?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Yes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  I
+Streamed partial conversational response:  understand
+Streamed partial conversational response:  my
+Streamed partial conversational response:  instructions
+Streamed partial conversational response:  clearly
+Streamed partial conversational response: !
+Streamed partial conversational response:  I
+Streamed partial conversational response: 'm
+Streamed partial conversational response:  here
+Streamed partial conversational response:  to
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  in
+Streamed partial conversational response:  a
+Streamed partial conversational response:  friendly
+Streamed partial conversational response:  and
+Streamed partial conversational response:  helpful
+Streamed partial conversational response:  way
+Streamed partial conversational response: .
+Streamed partial conversational response:   
+
+Streamed partial conversational response: What
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  do
+Streamed partial conversational response:  for
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: what are spatial patterns ?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: S
+Streamed partial conversational response: pat
+Streamed partial conversational response: ial
+Streamed partial conversational response:  patterns
+Streamed partial conversational response:  refer
+Streamed partial conversational response:  to
+Streamed partial conversational response:  the
+Streamed partial conversational response:  **
+Streamed partial conversational response: arr
+Streamed partial conversational response: angement
+Streamed partial conversational response:  or
+Streamed partial conversational response:  distribution
+Streamed partial conversational response:  of
+Streamed partial conversational response:  things
+Streamed partial conversational response:  across
+Streamed partial conversational response:  physical
+Streamed partial conversational response:  space
+Streamed partial conversational response:  or
+Streamed partial conversational response:  a
+Streamed partial conversational response:  defined
+Streamed partial conversational response:  area
+Streamed partial conversational response: **.
+Streamed partial conversational response:  They
+Streamed partial conversational response:  show
+Streamed partial conversational response:  how
+Streamed partial conversational response:  objects
+Streamed partial conversational response: ,
+Streamed partial conversational response:  features
+Streamed partial conversational response: ,
+Streamed partial conversational response:  or
+Streamed partial conversational response:  phenomena
+Streamed partial conversational response:  are
+Streamed partial conversational response:  organized
+Streamed partial conversational response:  geographically
+Streamed partial conversational response: .
+Streamed partial conversational response:   
+
+
+Streamed partial conversational response: **
+Streamed partial conversational response: Examples
+Streamed partial conversational response:  include
+Streamed partial conversational response: :**
+Streamed partial conversational response:   
+
+Streamed partial conversational response: -
+Streamed partial conversational response:  The
+Streamed partial conversational response:  clustered
+Streamed partial conversational response:  pattern
+Streamed partial conversational response:  of
+Streamed partial conversational response:  houses
+Streamed partial conversational response:  in
+Streamed partial conversational response:  a
+Streamed partial conversational response:  village
+Streamed partial conversational response:   
+
+Streamed partial conversational response: -
+Streamed partial conversational response:  The
+Streamed partial conversational response:  linear
+Streamed partial conversational response:  pattern
+Streamed partial conversational response:  of
+Streamed partial conversational response:  shops
+Streamed partial conversational response:  along
+Streamed partial conversational response:  a
+Streamed partial conversational response:  highway
+Streamed partial conversational response:   
+
+Streamed partial conversational response: -
+Streamed partial conversational response:  The
+Streamed partial conversational response:  random
+Streamed partial conversational response:  distribution
+Streamed partial conversational response:  of
+Streamed partial conversational response:  trees
+Streamed partial conversational response:  in
+Streamed partial conversational response:  a
+Streamed partial conversational response:  forest
+Streamed partial conversational response:   
+
+Streamed partial conversational response: -
+Streamed partial conversational response:  The
+Streamed partial conversational response:  radial
+Streamed partial conversational response:  pattern
+Streamed partial conversational response:  of
+Streamed partial conversational response:  roads
+Streamed partial conversational response:  around
+Streamed partial conversational response:  a
+Streamed partial conversational response:  city
+Streamed partial conversational response:  center
+Streamed partial conversational response:   
+
+
+Streamed partial conversational response: Ess
+Streamed partial conversational response: entially
+Streamed partial conversational response: ,
+Streamed partial conversational response:  spatial
+Streamed partial conversational response:  patterns
+Streamed partial conversational response:  help
+Streamed partial conversational response:  us
+Streamed partial conversational response:  visualize
+Streamed partial conversational response:  and
+Streamed partial conversational response:  understand
+Streamed partial conversational response:  *
+Streamed partial conversational response: where
+Streamed partial conversational response: *
+Streamed partial conversational response:  things
+Streamed partial conversational response:  are
+Streamed partial conversational response:  located
+Streamed partial conversational response:  and
+Streamed partial conversational response:  *
+Streamed partial conversational response: how
+Streamed partial conversational response: *
+Streamed partial conversational response:  they
+Streamed partial conversational response:  relate
+Streamed partial conversational response:  to
+Streamed partial conversational response:  their
+Streamed partial conversational response:  surroundings
+Streamed partial conversational response: .
+Streamed partial conversational response:  Let
+Streamed partial conversational response:  me
+Streamed partial conversational response:  know
+Streamed partial conversational response:  if
+Streamed partial conversational response:  you
+Streamed partial conversational response: 'd
+Streamed partial conversational response:  like
+Streamed partial conversational response:  more
+Streamed partial conversational response:  examples
+Streamed partial conversational response: !
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I assist you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: tell me about urban planing\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Sure
+Streamed partial conversational response:  thing
+Streamed partial conversational response: !
+Streamed partial conversational response:  Urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  is
+Streamed partial conversational response:  the
+Streamed partial conversational response:  process
+Streamed partial conversational response:  of
+Streamed partial conversational response:  designing
+Streamed partial conversational response:  and
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  the
+Streamed partial conversational response:  development
+Streamed partial conversational response:  of
+Streamed partial conversational response:  cities
+Streamed partial conversational response: ,
+Streamed partial conversational response:  towns
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  regions
+Streamed partial conversational response: .
+Streamed partial conversational response:  It
+Streamed partial conversational response:  focuses
+Streamed partial conversational response:  on
+Streamed partial conversational response:  creating
+Streamed partial conversational response:  functional
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sustainable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  liv
+Streamed partial conversational response: able
+Streamed partial conversational response:  communities
+Streamed partial conversational response:  by
+Streamed partial conversational response:  considering
+Streamed partial conversational response:  things
+Streamed partial conversational response:  like
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Land
+Streamed partial conversational response:  Use
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Dec
+Streamed partial conversational response: iding
+Streamed partial conversational response:  where
+Streamed partial conversational response:  homes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  businesses
+Streamed partial conversational response: ,
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  industries
+Streamed partial conversational response:  go
+Streamed partial conversational response:  (
+Streamed partial conversational response: z
+Streamed partial conversational response: oning
+Streamed partial conversational response: ).
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Transport
+Streamed partial conversational response: ation
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  transit
+Streamed partial conversational response: ,
+Streamed partial conversational response:  bike
+Streamed partial conversational response:  lanes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  walk
+Streamed partial conversational response: ability
+Streamed partial conversational response: .
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Inf
+Streamed partial conversational response: rastructure
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Managing
+Streamed partial conversational response:  water
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sewage
+Streamed partial conversational response: ,
+Streamed partial conversational response:  electricity
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  communication
+Streamed partial conversational response:  systems
+Streamed partial conversational response: .
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Environment
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Protecting
+Streamed partial conversational response:  natural
+Streamed partial conversational response:  resources
+Streamed partial conversational response: ,
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  waste
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  promoting
+Streamed partial conversational response:  sustainability
+Streamed partial conversational response: .
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Community
+Streamed partial conversational response:  Needs
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Ensuring
+Streamed partial conversational response:  access
+Streamed partial conversational response:  to
+Streamed partial conversational response:  housing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  schools
+Streamed partial conversational response: ,
+Streamed partial conversational response:  healthcare
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  public
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: .
+
+Streamed partial conversational response: *
+Streamed partial conversational response:   
+Streamed partial conversational response:  **
+Streamed partial conversational response: Economic
+Streamed partial conversational response:  Development
+Streamed partial conversational response: :**
+Streamed partial conversational response:  F
+Streamed partial conversational response: ost
+Streamed partial conversational response: ering
+Streamed partial conversational response:  job
+Streamed partial conversational response:  growth
+Streamed partial conversational response:  and
+Streamed partial conversational response:  vibrant
+Streamed partial conversational response:  local
+Streamed partial conversational response:  economies
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: The
+Streamed partial conversational response:  goal
+Streamed partial conversational response:  is
+Streamed partial conversational response:  to
+Streamed partial conversational response:  balance
+Streamed partial conversational response:  growth
+Streamed partial conversational response:  with
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  of
+Streamed partial conversational response:  life
+Streamed partial conversational response: ,
+Streamed partial conversational response:  efficiency
+Streamed partial conversational response: ,
+Streamed partial conversational response:  equity
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  environmental
+Streamed partial conversational response:  health
+Streamed partial conversational response:  for
+Streamed partial conversational response:  current
+Streamed partial conversational response:  and
+Streamed partial conversational response:  future
+Streamed partial conversational response:  residents
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: Feel
+Streamed partial conversational response:  free
+Streamed partial conversational response:  to
+Streamed partial conversational response:  ask
+Streamed partial conversational response:  about
+Streamed partial conversational response:  any
+Streamed partial conversational response:  specific
+Streamed partial conversational response:  aspect
+Streamed partial conversational response: !
+Sent final conversational response: Sure thing! Urban planning is the process of designing and managing the development of cities, towns, and regions. It focuses on creating functional, sustainable, and livable communities by considering things like:
+
+*   **Land Use:** Deciding where homes, businesses, parks, and industries go (zoning).
+*   **Transportation:** Planning roads, public transit, bike lanes, and walkability.
+*   **Infrastructure:** Managing water, sewage, electricity, and communication systems.
+*   **Environment:** Protecting natural resources, managing waste, and promoting sustainability.
+*   **Community Needs:** Ensuring access to housing, schools, healthcare, and public spaces.
+*   **Economic Development:** Fostering job growth and vibrant local economies.
+
+The goal is to balance growth with quality of life, efficiency, equity, and environmental health for current and future residents.
+
+Feel free to ask about any specific aspect!
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hi
+Streamed partial conversational response:  there
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  assist
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hi there! How can I assist you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: hello\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Hello
+Streamed partial conversational response: !
+Streamed partial conversational response:  How
+Streamed partial conversational response:  can
+Streamed partial conversational response:  I
+Streamed partial conversational response:  help
+Streamed partial conversational response:  you
+Streamed partial conversational response:  today
+Streamed partial conversational response: ?
+Sent final conversational response: Hello! How can I help you today?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: tell me about urban planning\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  is
+Streamed partial conversational response:  all
+Streamed partial conversational response:  about
+Streamed partial conversational response:  designing
+Streamed partial conversational response:  and
+Streamed partial conversational response:  organizing
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  and
+Streamed partial conversational response:  towns
+Streamed partial conversational response:  to
+Streamed partial conversational response:  make
+Streamed partial conversational response:  them
+Streamed partial conversational response:  functional
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sustainable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  liv
+Streamed partial conversational response: able
+Streamed partial conversational response: !
+Streamed partial conversational response:  It
+Streamed partial conversational response:  involves
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: 1
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Land
+Streamed partial conversational response:  Use
+Streamed partial conversational response: **:
+Streamed partial conversational response:  Dec
+Streamed partial conversational response: iding
+Streamed partial conversational response:  where
+Streamed partial conversational response:  homes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  businesses
+Streamed partial conversational response: ,
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  industries
+Streamed partial conversational response:  should
+Streamed partial conversational response:  go
+Streamed partial conversational response:  (
+Streamed partial conversational response: z
+Streamed partial conversational response: oning
+Streamed partial conversational response: ).
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 2
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Inf
+Streamed partial conversational response: rastructure
+Streamed partial conversational response: **:
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  transit
+Streamed partial conversational response: ,
+Streamed partial conversational response:  water
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  energy
+Streamed partial conversational response:  systems
+Streamed partial conversational response: .
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 3
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Sustainability
+Streamed partial conversational response: **:
+Streamed partial conversational response:  Creating
+Streamed partial conversational response:  green
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: ,
+Streamed partial conversational response:  reducing
+Streamed partial conversational response:  pollution
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  preparing
+Streamed partial conversational response:  for
+Streamed partial conversational response:  climate
+Streamed partial conversational response:  challenges
+Streamed partial conversational response: .
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 4
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Community
+Streamed partial conversational response:  Needs
+Streamed partial conversational response: **:
+Streamed partial conversational response:  Ensuring
+Streamed partial conversational response:  access
+Streamed partial conversational response:  to
+Streamed partial conversational response:  housing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  schools
+Streamed partial conversational response: ,
+Streamed partial conversational response:  healthcare
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  cultural
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: .
+Streamed partial conversational response:   
+
+
+Streamed partial conversational response: Good
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  prevents
+Streamed partial conversational response:  urban
+Streamed partial conversational response:  spraw
+Streamed partial conversational response: l
+Streamed partial conversational response: ,
+Streamed partial conversational response:  reduces
+Streamed partial conversational response:  traffic
+Streamed partial conversational response: ,
+Streamed partial conversational response:  promotes
+Streamed partial conversational response:  equity
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  improves
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  of
+Streamed partial conversational response:  life
+Streamed partial conversational response: .
+Streamed partial conversational response:  Think
+Streamed partial conversational response:  of
+Streamed partial conversational response:  it
+Streamed partial conversational response:  as
+Streamed partial conversational response:  "
+Streamed partial conversational response: city
+Streamed partial conversational response:  design
+Streamed partial conversational response:  for
+Streamed partial conversational response:  people
+Streamed partial conversational response:  and
+Streamed partial conversational response:  the
+Streamed partial conversational response:  planet
+Streamed partial conversational response: ."
+Streamed partial conversational response:   
+
+Streamed partial conversational response: Want
+Streamed partial conversational response:  to
+Streamed partial conversational response:  dive
+Streamed partial conversational response:  deeper
+Streamed partial conversational response:  into
+Streamed partial conversational response:  a
+Streamed partial conversational response:  specific
+Streamed partial conversational response:  aspect
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: tell me about uban planning\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  is
+Streamed partial conversational response:  the
+Streamed partial conversational response:  process
+Streamed partial conversational response:  of
+Streamed partial conversational response:  designing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  organizing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  the
+Streamed partial conversational response:  physical
+Streamed partial conversational response: ,
+Streamed partial conversational response:  social
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  economic
+Streamed partial conversational response:  development
+Streamed partial conversational response:  of
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  and
+Streamed partial conversational response:  towns
+Streamed partial conversational response: .
+Streamed partial conversational response:  It
+Streamed partial conversational response:  involves
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: 1
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Land
+Streamed partial conversational response:  Use
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Dec
+Streamed partial conversational response: iding
+Streamed partial conversational response:  how
+Streamed partial conversational response:  land
+Streamed partial conversational response:  is
+Streamed partial conversational response:  allocated
+Streamed partial conversational response:  for
+Streamed partial conversational response:  housing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  businesses
+Streamed partial conversational response: ,
+Streamed partial conversational response:  industry
+Streamed partial conversational response: ,
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  infrastructure
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 2
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Transport
+Streamed partial conversational response: ation
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  transit
+Streamed partial conversational response: ,
+Streamed partial conversational response:  cycling
+Streamed partial conversational response:  paths
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  pedestrian
+Streamed partial conversational response:  zones
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 3
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Inf
+Streamed partial conversational response: rastructure
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Ensuring
+Streamed partial conversational response:  access
+Streamed partial conversational response:  to
+Streamed partial conversational response:  water
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sewage
+Streamed partial conversational response: ,
+Streamed partial conversational response:  energy
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  communication
+Streamed partial conversational response:  systems
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 4
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Sustainability
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Creating
+Streamed partial conversational response:  environmentally
+Streamed partial conversational response:  friendly
+Streamed partial conversational response: ,
+Streamed partial conversational response:  resilient
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  with
+Streamed partial conversational response:  green
+Streamed partial conversational response:  spaces
+Streamed partial conversational response:  and
+Streamed partial conversational response:  efficient
+Streamed partial conversational response:  resource
+Streamed partial conversational response:  use
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 5
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Z
+Streamed partial conversational response: oning
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Establishing
+Streamed partial conversational response:  regulations
+Streamed partial conversational response:  for
+Streamed partial conversational response:  building
+Streamed partial conversational response:  heights
+Streamed partial conversational response: ,
+Streamed partial conversational response:  densities
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  uses
+Streamed partial conversational response:  in
+Streamed partial conversational response:  different
+Streamed partial conversational response:  areas
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 6
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Community
+Streamed partial conversational response:  Needs
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Addressing
+Streamed partial conversational response:  housing
+Streamed partial conversational response:  affordability
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  services
+Streamed partial conversational response: ,
+Streamed partial conversational response:  safety
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  of
+Streamed partial conversational response:  life
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: The
+Streamed partial conversational response:  goal
+Streamed partial conversational response:  is
+Streamed partial conversational response:  to
+Streamed partial conversational response:  create
+Streamed partial conversational response:  functional
+Streamed partial conversational response: ,
+Streamed partial conversational response:  equitable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  vibrant
+Streamed partial conversational response:  communities
+Streamed partial conversational response:  for
+Streamed partial conversational response:  current
+Streamed partial conversational response:  and
+Streamed partial conversational response:  future
+Streamed partial conversational response:  residents
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: Want
+Streamed partial conversational response:  to
+Streamed partial conversational response:  know
+Streamed partial conversational response:  more
+Streamed partial conversational response:  about
+Streamed partial conversational response:  a
+Streamed partial conversational response:  specific
+Streamed partial conversational response:  aspect
+Streamed partial conversational response:  like
+Streamed partial conversational response:  sustainability
+Streamed partial conversational response: ,
+Streamed partial conversational response:  zoning
+Streamed partial conversational response: ,
+Streamed partial conversational response:  or
+Streamed partial conversational response:  city
+Streamed partial conversational response:  design
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: tell me about urban planning\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  is
+Streamed partial conversational response:  the
+Streamed partial conversational response:  process
+Streamed partial conversational response:  of
+Streamed partial conversational response:  designing
+Streamed partial conversational response:  and
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  cities
+Streamed partial conversational response: ,
+Streamed partial conversational response:  towns
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  communities
+Streamed partial conversational response:  to
+Streamed partial conversational response:  create
+Streamed partial conversational response:  functional
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sustainable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  liv
+Streamed partial conversational response: able
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: .
+Streamed partial conversational response:  It
+Streamed partial conversational response:  involves
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: 1
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Land
+Streamed partial conversational response:  Use
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Dec
+Streamed partial conversational response: iding
+Streamed partial conversational response:  where
+Streamed partial conversational response:  homes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  businesses
+Streamed partial conversational response: ,
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  industries
+Streamed partial conversational response:  go
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 2
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Transport
+Streamed partial conversational response: ation
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Designing
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  transit
+Streamed partial conversational response: ,
+Streamed partial conversational response:  bike
+Streamed partial conversational response:  lanes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  walk
+Streamed partial conversational response: able
+Streamed partial conversational response:  areas
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 3
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Inf
+Streamed partial conversational response: rastructure
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  utilities
+Streamed partial conversational response:  (
+Streamed partial conversational response: water
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sewage
+Streamed partial conversational response: ,
+Streamed partial conversational response:  power
+Streamed partial conversational response: ),
+Streamed partial conversational response:  public
+Streamed partial conversational response:  services
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  communication
+Streamed partial conversational response:  networks
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 4
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Environment
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Protecting
+Streamed partial conversational response:  green
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: ,
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  resources
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  promoting
+Streamed partial conversational response:  sustainability
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 5
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Community
+Streamed partial conversational response:  Needs
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Ensuring
+Streamed partial conversational response:  access
+Streamed partial conversational response:  to
+Streamed partial conversational response:  housing
+Streamed partial conversational response: ,
+Streamed partial conversational response:  schools
+Streamed partial conversational response: ,
+Streamed partial conversational response:  healthcare
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  recreation
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: Pl
+Streamed partial conversational response: anners
+Streamed partial conversational response:  work
+Streamed partial conversational response:  with
+Streamed partial conversational response:  governments
+Streamed partial conversational response: ,
+Streamed partial conversational response:  engineers
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  residents
+Streamed partial conversational response:  to
+Streamed partial conversational response:  balance
+Streamed partial conversational response:  growth
+Streamed partial conversational response: ,
+Streamed partial conversational response:  equity
+Streamed partial conversational response: ,
+Streamed partial conversational response:  safety
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  environmental
+Streamed partial conversational response:  health
+Streamed partial conversational response: .
+Streamed partial conversational response:  Good
+Streamed partial conversational response:  urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  improves
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  of
+Streamed partial conversational response:  life
+Streamed partial conversational response: ,
+Streamed partial conversational response:  reduces
+Streamed partial conversational response:  pollution
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  fosters
+Streamed partial conversational response:  vibrant
+Streamed partial conversational response:  communities
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: Want
+Streamed partial conversational response:  to
+Streamed partial conversational response:  dive
+Streamed partial conversational response:  deeper
+Streamed partial conversational response:  into
+Streamed partial conversational response:  any
+Streamed partial conversational response:  specific
+Streamed partial conversational response:  aspect
+Streamed partial conversational response: ?
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: tell me about urban planning\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Urban
+Streamed partial conversational response:  planning
+Streamed partial conversational response:  is
+Streamed partial conversational response:  the
+Streamed partial conversational response:  process
+Streamed partial conversational response:  of
+Streamed partial conversational response:  designing
+Streamed partial conversational response:  and
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  the
+Streamed partial conversational response:  physical
+Streamed partial conversational response:  layout
+Streamed partial conversational response: ,
+Streamed partial conversational response:  development
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  use
+Streamed partial conversational response:  of
+Streamed partial conversational response:  land
+Streamed partial conversational response:  in
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  and
+Streamed partial conversational response:  towns
+Streamed partial conversational response: .
+Streamed partial conversational response:  Its
+Streamed partial conversational response:  core
+Streamed partial conversational response:  goal
+Streamed partial conversational response:  is
+Streamed partial conversational response:  to
+Streamed partial conversational response:  create
+Streamed partial conversational response:  functional
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sustainable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  liv
+Streamed partial conversational response: able
+Streamed partial conversational response:  communities
+Streamed partial conversational response:  by
+Streamed partial conversational response:  balancing
+Streamed partial conversational response:  various
+Streamed partial conversational response:  needs
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: 1
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: Land
+Streamed partial conversational response:  Use
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Dec
+Streamed partial conversational response: iding
+Streamed partial conversational response:  where
+Streamed partial conversational response:  residential
+Streamed partial conversational response: ,
+Streamed partial conversational response:  commercial
+Streamed partial conversational response: ,
+Streamed partial conversational response:  industrial
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  recreational
+Streamed partial conversational response:  areas
+Streamed partial conversational response:  go
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 2
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: Transport
+Streamed partial conversational response: ation
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  public
+Streamed partial conversational response:  transit
+Streamed partial conversational response: ,
+Streamed partial conversational response:  bike
+Streamed partial conversational response:  lanes
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  walk
+Streamed partial conversational response: ability
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 3
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: H
+Streamed partial conversational response: ousing
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Ensuring
+Streamed partial conversational response:  diverse
+Streamed partial conversational response: ,
+Streamed partial conversational response:  affordable
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  housing
+Streamed partial conversational response:  options
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 4
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: Environment
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Protecting
+Streamed partial conversational response:  natural
+Streamed partial conversational response:  resources
+Streamed partial conversational response: ,
+Streamed partial conversational response:  managing
+Streamed partial conversational response:  pollution
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  promoting
+Streamed partial conversational response:  sustainability
+Streamed partial conversational response:  (
+Streamed partial conversational response: green
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: ,
+Streamed partial conversational response:  energy
+Streamed partial conversational response:  efficiency
+Streamed partial conversational response: ,
+Streamed partial conversational response:  climate
+Streamed partial conversational response:  resilience
+Streamed partial conversational response: ).
+
+Streamed partial conversational response: 5
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: Public
+Streamed partial conversational response:  Spaces
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Designing
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  pl
+Streamed partial conversational response: az
+Streamed partial conversational response: as
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  community
+Streamed partial conversational response:  facilities
+Streamed partial conversational response: .
+
+Streamed partial conversational response: 6
+Streamed partial conversational response: .
+Streamed partial conversational response:  
+Streamed partial conversational response:  **
+Streamed partial conversational response: Inf
+Streamed partial conversational response: rastructure
+Streamed partial conversational response: :**
+Streamed partial conversational response:  Managing
+Streamed partial conversational response:  water
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sewage
+Streamed partial conversational response: ,
+Streamed partial conversational response:  electricity
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  communication
+Streamed partial conversational response:  systems
+Streamed partial conversational response: .
+
+
+Streamed partial conversational response: Pl
+Streamed partial conversational response: anners
+Streamed partial conversational response:  work
+Streamed partial conversational response:  with
+Streamed partial conversational response:  communities
+Streamed partial conversational response: ,
+Streamed partial conversational response:  governments
+Streamed partial conversational response: ,
+Streamed partial conversational response:  engineers
+Streamed partial conversational response: ,
+Streamed partial conversational response:  architects
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  policymakers
+Streamed partial conversational response: .
+Streamed partial conversational response:  They
+Streamed partial conversational response:  use
+Streamed partial conversational response:  tools
+Streamed partial conversational response:  like
+Streamed partial conversational response:  zoning
+Streamed partial conversational response:  regulations
+Streamed partial conversational response: ,
+Streamed partial conversational response:  development
+Streamed partial conversational response:  plans
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  public
+Streamed partial conversational response:  consultations
+Streamed partial conversational response:  to
+Streamed partial conversational response:  shape
+Streamed partial conversational response:  how
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  grow
+Streamed partial conversational response:  and
+Streamed partial conversational response:  function
+Streamed partial conversational response: ,
+Streamed partial conversational response:  tackling
+Streamed partial conversational response:  challenges
+Streamed partial conversational response:  like
+Streamed partial conversational response:  population
+Streamed partial conversational response:  growth
+Streamed partial conversational response: ,
+Streamed partial conversational response:  inequality
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  climate
+Streamed partial conversational response:  change
+Streamed partial conversational response: .
+Streamed partial conversational response:  Ultimately
+Streamed partial conversational response: ,
+Streamed partial conversational response:  it
+Streamed partial conversational response: 's
+Streamed partial conversational response:  about
+Streamed partial conversational response:  improving
+Streamed partial conversational response:  people
+Streamed partial conversational response: 's
+Streamed partial conversational response:  quality
+Streamed partial conversational response:  of
+Streamed partial conversational response:  life
+Streamed partial conversational response:  in
+Streamed partial conversational response:  urban
+Streamed partial conversational response:  areas
+Streamed partial conversational response: .
+Sent final conversational response: Urban planning is the process of designing and managing the physical layout, development, and use of land in cities and towns. Its core goal is to create functional, sustainable, and livable communities by balancing various needs:
+
+1.  **Land Use:** Deciding where residential, commercial, industrial, and recreational areas go.
+2.  **Transportation:** Planning roads, public transit, bike lanes, and walkability.
+3.  **Housing:** Ensuring diverse, affordable, and quality housing options.
+4.  **Environment:** Protecting natural resources, managing pollution, and promoting sustainability (green spaces, energy efficiency, climate resilience).
+5.  **Public Spaces:** Designing parks, plazas, and community facilities.
+6.  **Infrastructure:** Managing water, sewage, electricity, and communication systems.
+
+Planners work with communities, governments, engineers, architects, and policymakers. They use tools like zoning regulations, development plans, and public consultations to shape how cities grow and function, tackling challenges like population growth, inequality, and climate change. Ultimately, it's about improving people's quality of life in urban areas.
+Sending DeepSeek conversational streaming request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n            You are a conversational AI assistant. Respond to the following user message in a friendly and helpful manner:\n            User Message: how do urban planners help the community?\n            \n            Provide a concise response in plain text. If the message is a greeting like 'hello', respond appropriately.\n            Example response for 'hello': 'Hi there! How can I assist you today?'\n            "
+    }
+  ],
+  "temperature": 0.7,
+  "stream": true
+}
+Streamed partial conversational response: Urban
+Streamed partial conversational response:  planners
+Streamed partial conversational response:  help
+Streamed partial conversational response:  communities
+Streamed partial conversational response:  by
+Streamed partial conversational response: :
+
+
+Streamed partial conversational response: 1
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Design
+Streamed partial conversational response: ing
+Streamed partial conversational response:  liv
+Streamed partial conversational response: able
+Streamed partial conversational response:  spaces
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Creating
+Streamed partial conversational response:  walk
+Streamed partial conversational response: able
+Streamed partial conversational response:  neighborhoods
+Streamed partial conversational response: ,
+Streamed partial conversational response:  accessible
+Streamed partial conversational response:  parks
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  efficient
+Streamed partial conversational response:  transit
+Streamed partial conversational response:  systems
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 2
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Bal
+Streamed partial conversational response: ancing
+Streamed partial conversational response:  growth
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Managing
+Streamed partial conversational response:  development
+Streamed partial conversational response:  while
+Streamed partial conversational response:  preserving
+Streamed partial conversational response:  community
+Streamed partial conversational response:  character
+Streamed partial conversational response:  and
+Streamed partial conversational response:  green
+Streamed partial conversational response:  spaces
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 3
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Impro
+Streamed partial conversational response: ving
+Streamed partial conversational response:  infrastructure
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Planning
+Streamed partial conversational response:  roads
+Streamed partial conversational response: ,
+Streamed partial conversational response:  utilities
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  public
+Streamed partial conversational response:  facilities
+Streamed partial conversational response:  to
+Streamed partial conversational response:  serve
+Streamed partial conversational response:  current
+Streamed partial conversational response:  and
+Streamed partial conversational response:  future
+Streamed partial conversational response:  needs
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 4
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Ens
+Streamed partial conversational response: uring
+Streamed partial conversational response:  equity
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Promoting
+Streamed partial conversational response:  affordable
+Streamed partial conversational response:  housing
+Streamed partial conversational response:  and
+Streamed partial conversational response:  accessible
+Streamed partial conversational response:  services
+Streamed partial conversational response:  for
+Streamed partial conversational response:  all
+Streamed partial conversational response:  residents
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 5
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: Eng
+Streamed partial conversational response: aging
+Streamed partial conversational response:  communities
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Gathering
+Streamed partial conversational response:  public
+Streamed partial conversational response:  input
+Streamed partial conversational response:  to
+Streamed partial conversational response:  shape
+Streamed partial conversational response:  plans
+Streamed partial conversational response:  that
+Streamed partial conversational response:  reflect
+Streamed partial conversational response:  local
+Streamed partial conversational response:  values
+Streamed partial conversational response:   
+
+Streamed partial conversational response: 6
+Streamed partial conversational response: .
+Streamed partial conversational response:  **
+Streamed partial conversational response: En
+Streamed partial conversational response: hancing
+Streamed partial conversational response:  resilience
+Streamed partial conversational response: **
+Streamed partial conversational response:  -
+Streamed partial conversational response:  Preparing
+Streamed partial conversational response:  cities
+Streamed partial conversational response:  for
+Streamed partial conversational response:  climate
+Streamed partial conversational response:  impacts
+Streamed partial conversational response:  and
+Streamed partial conversational response:  emergencies
+Streamed partial conversational response:   
+
+
+Streamed partial conversational response: They
+Streamed partial conversational response:  turn
+Streamed partial conversational response:  community
+Streamed partial conversational response:  visions
+Streamed partial conversational response:  into
+Streamed partial conversational response:  practical
+Streamed partial conversational response: ,
+Streamed partial conversational response:  sustainable
+Streamed partial conversational response:  places
+Streamed partial conversational response:  to
+Streamed partial conversational response:  live
+Streamed partial conversational response: ,
+Streamed partial conversational response:  work
+Streamed partial conversational response: ,
+Streamed partial conversational response:  and
+Streamed partial conversational response:  thrive
+Streamed partial conversational response: .
+Sent final conversational response: Urban planners help communities by:
+
+1. **Designing livable spaces** - Creating walkable neighborhoods, accessible parks, and efficient transit systems  
+2. **Balancing growth** - Managing development while preserving community character and green spaces  
+3. **Improving infrastructure** - Planning roads, utilities, and public facilities to serve current and future needs  
+4. **Ensuring equity** - Promoting affordable housing and accessible services for all residents  
+5. **Engaging communities** - Gathering public input to shape plans that reflect local values  
+6. **Enhancing resilience** - Preparing cities for climate impacts and emergencies  
+
+They turn community visions into practical, sustainable places to live, work, and thrive.
+Sending DeepSeek streaming request
+Sent AI chat response: Urban planners design and manage the development of cities and communities. Their core tasks include:
+
+1.  **Land Use Planning:** Deciding where residential, commercial, industrial, and recreational areas should go (zoning).
+2.  **Infrastructure Coordination:** Planning transportation systems (roads, transit, bike lanes), utilities, and public spaces like parks.
+3.  **Policy Development:** Creating regulations and long-term plans (e.g., master plans) to guide sustainable growth and revitalization.
+4.  **Community Engagement:** Working with residents, officials, and developers to understand needs and shape plans.
+5.  **Problem Solving:** Addressing challenges like traffic congestion, housing shortages, environmental protection, and economic development.
+
+**Their goal is to create functional, equitable, sustainable, and attractive places for people to live, work, and play.**
+Sending DeepSeek streaming request
+Sent AI chat response: An urban planner helps design, manage, and improve cities and communities. Their key responsibilities include:
+
+1.  **Land Use Planning:** Deciding how land should be used (housing, industry, parks, shops).
+2.  **Regulation:** Creating zoning laws and building codes to guide development.
+3.  **Analysis:** Studying data on population, traffic, environment, and economics.
+4.  **Community Engagement:** Gathering public input on projects and plans.
+5.  **Future Vision:** Developing long-term plans for growth, sustainability, and infrastructure (transport, utilities).
+6.  **Problem Solving:** Addressing issues like traffic congestion, housing shortages, and environmental protection.
+
+**In short:** They shape the physical layout and policies of communities to make them functional, sustainable, and livable for residents.
+Sending DeepSeek streaming request
+Sending DeepSeek streaming request
+Sent AI chat response: **GIS** stands for **Geographic Information System**. It's a framework for gathering, managing, analyzing, and visualizing **spatial data** (data linked to locations on Earth).
+
+Think of it as a digital mapping system that combines:
+1. **Geographic Data** (where things are: roads, rivers, buildings, etc.).
+2. **Attribute Data** (what things are: names, populations, soil types, etc.).
+3. **Software** to analyze relationships, patterns, and trends (e.g., finding optimal routes or predicting flood zones).
+
+**Common uses:** Urban planning, disaster response, environmental science, navigation apps, and business logistics. It turns location-based data into actionable insights.
+Sending DeepSeek streaming request
+Sending DeepSeek streaming request
+Streaming chunk: **...
+Streaming chunk: GIS...
+Streaming chunk: **...
+Streaming chunk:  stands...
+Streaming chunk:  for...
+Streaming chunk:  **...
+Streaming chunk: Ge...
+Streaming chunk: ographic...
+Streaming chunk:  Information...
+Streaming chunk:  System...
+Streaming chunk: **....
+Streaming chunk:  It...
+Streaming chunk: 's...
+Streaming chunk:  a...
+Streaming chunk:  computer...
+Streaming chunk: -based...
+Streaming chunk:  system...
+Streaming chunk:  that...
+Streaming chunk:  captures...
+Streaming chunk: ,...
+Streaming chunk:  stores...
+Streaming chunk: ,...
+Streaming chunk:  analyzes...
+Streaming chunk: ,...
+Streaming chunk:  manages...
+Streaming chunk: ,...
+Streaming chunk:  and...
+Streaming chunk:  displays...
+Streaming chunk:  **...
+Streaming chunk: sp...
+Streaming chunk: atial...
+Streaming chunk:  or...
+Streaming chunk:  geographic...
+Streaming chunk:  data...
+Streaming chunk: **...
+Streaming chunk:  (...
+Streaming chunk: data...
+Streaming chunk:  tied...
+Streaming chunk:  to...
+Streaming chunk:  locations...
+Streaming chunk:  on...
+Streaming chunk:  Earth...
+Streaming chunk: )....
+Streaming chunk:   
+
+...
+Streaming chunk: **...
+Streaming chunk: Simply...
+Streaming chunk:  put...
+Streaming chunk: :**...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  It...
+Streaming chunk:  combines...
+Streaming chunk:  **...
+Streaming chunk: maps...
+Streaming chunk: **...
+Streaming chunk:  with...
+Streaming chunk:  **...
+Streaming chunk: dat...
+Streaming chunk: abases...
+Streaming chunk: **....
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Allows...
+Streaming chunk:  you...
+Streaming chunk:  to...
+Streaming chunk:  visualize...
+Streaming chunk: ,...
+Streaming chunk:  question...
+Streaming chunk: ,...
+Streaming chunk:  and...
+Streaming chunk:  interpret...
+Streaming chunk:  patterns...
+Streaming chunk: /...
+Streaming chunk: relationships...
+Streaming chunk:  in...
+Streaming chunk:  location...
+Streaming chunk: -based...
+Streaming chunk:  data...
+Streaming chunk: ....
+Streaming chunk:   
+
+...
+Streaming chunk: **...
+Streaming chunk: Examples...
+Streaming chunk:  of...
+Streaming chunk:  use...
+Streaming chunk: :**...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Tracking...
+Streaming chunk:  disease...
+Streaming chunk:  outbreaks...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Urban...
+Streaming chunk:  planning...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Environmental...
+Streaming chunk:  monitoring...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Navigation...
+Streaming chunk:  (...
+Streaming chunk: like...
+Streaming chunk:  Google...
+Streaming chunk:  Maps...
+Streaming chunk: )...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Disaster...
+Streaming chunk:  response...
+Streaming chunk:   
+
+...
+Streaming chunk: **...
+Streaming chunk: Key...
+Streaming chunk:  take...
+Streaming chunk: away...
+Streaming chunk: :**...
+Streaming chunk:  GIS...
+Streaming chunk:  turns...
+Streaming chunk:  raw...
+Streaming chunk:  location...
+Streaming chunk:  data...
+Streaming chunk:  (...
+Streaming chunk: e...
+Streaming chunk: .g...
+Streaming chunk: .,...
+Streaming chunk:  addresses...
+Streaming chunk: ,...
+Streaming chunk:  coordinates...
+Streaming chunk: )...
+Streaming chunk:  into...
+Streaming chunk:  interactive...
+Streaming chunk:  maps...
+Streaming chunk:  and...
+Streaming chunk:  insights...
+Streaming chunk:  for...
+Streaming chunk:  better...
+Streaming chunk:  decision...
+Streaming chunk: -making...
+Streaming chunk: ....
+Sending final AI response: **GIS** stands for **Geographic Information System**. It's a computer-based system that captures, st...
+Sending DeepSeek streaming request
+Streaming chunk: A...
+Streaming chunk:  **...
+Streaming chunk: Ge...
+Streaming chunk: ographic...
+Streaming chunk:  Information...
+Streaming chunk:  System...
+Streaming chunk:  (...
+Streaming chunk: GIS...
+Streaming chunk: )**...
+Streaming chunk:  is...
+Streaming chunk:  a...
+Streaming chunk:  computer...
+Streaming chunk: -based...
+Streaming chunk:  tool...
+Streaming chunk:  for...
+Streaming chunk: :...
+Streaming chunk:   
+
+...
+Streaming chunk: 1...
+Streaming chunk: ....
+Streaming chunk:  **...
+Streaming chunk: Capt...
+Streaming chunk: uring...
+Streaming chunk: **...
+Streaming chunk:  geographic...
+Streaming chunk:  data...
+Streaming chunk:  (...
+Streaming chunk: e...
+Streaming chunk: .g...
+Streaming chunk: .,...
+Streaming chunk:  satellite...
+Streaming chunk:  images...
+Streaming chunk: ,...
+Streaming chunk:  coordinates...
+Streaming chunk: ,...
+Streaming chunk:  addresses...
+Streaming chunk: )....
+Streaming chunk:   
+...
+Streaming chunk: 2...
+Streaming chunk: ....
+Streaming chunk:  **...
+Streaming chunk: St...
+Streaming chunk: oring...
+Streaming chunk: **...
+Streaming chunk:  this...
+Streaming chunk:  data...
+Streaming chunk:  in...
+Streaming chunk:  digital...
+Streaming chunk:  maps...
+Streaming chunk:  or...
+Streaming chunk:  databases...
+Streaming chunk: ....
+Streaming chunk:   
+...
+Streaming chunk: 3...
+Streaming chunk: ....
+Streaming chunk:  **...
+Streaming chunk: Analy...
+Streaming chunk: zing...
+Streaming chunk: **...
+Streaming chunk:  spatial...
+Streaming chunk:  relationships...
+Streaming chunk:  (...
+Streaming chunk: e...
+Streaming chunk: .g...
+Streaming chunk: .,...
+Streaming chunk:  flood...
+Streaming chunk:  risk...
+Streaming chunk:  zones...
+Streaming chunk: ,...
+Streaming chunk:  optimal...
+Streaming chunk:  store...
+Streaming chunk:  locations...
+Streaming chunk: )....
+Streaming chunk:   
+...
+Streaming chunk: 4...
+Streaming chunk: ....
+Streaming chunk:  **...
+Streaming chunk: Visual...
+Streaming chunk: izing...
+Streaming chunk: **...
+Streaming chunk:  results...
+Streaming chunk:  through...
+Streaming chunk:  maps...
+Streaming chunk: ,...
+Streaming chunk:  charts...
+Streaming chunk: ,...
+Streaming chunk:  or...
+Streaming chunk:  ...
+Streaming chunk: 3...
+Streaming chunk: D...
+Streaming chunk:  models...
+Streaming chunk: ....
+Streaming chunk:   
+
+...
+Streaming chunk: **...
+Streaming chunk: Key...
+Streaming chunk:  Uses...
+Streaming chunk: **:...
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Urban...
+Streaming chunk:  planning...
+Streaming chunk: ,...
+Streaming chunk:  disaster...
+Streaming chunk:  response...
+Streaming chunk: ,...
+Streaming chunk:  environmental...
+Streaming chunk:  science...
+Streaming chunk: ,...
+Streaming chunk:  logistics...
+Streaming chunk: ,...
+Streaming chunk:  and...
+Streaming chunk:  navigation...
+Streaming chunk:  apps...
+Streaming chunk: ....
+Streaming chunk:   
+...
+Streaming chunk: -...
+Streaming chunk:  Comb...
+Streaming chunk: ines...
+Streaming chunk:  location...
+Streaming chunk:  (...
+Streaming chunk: stre...
+Streaming chunk: ets...
+Streaming chunk: ,...
+Streaming chunk:  terrain...
+Streaming chunk: )...
+Streaming chunk:  with...
+Streaming chunk:  attributes...
+Streaming chunk:  (...
+Streaming chunk: population...
+Streaming chunk: ,...
+Streaming chunk:  soil...
+Streaming chunk:  type...
+Streaming chunk: )...
+Streaming chunk:  to...
+Streaming chunk:  solve...
+Streaming chunk:  real...
+Streaming chunk: -world...
+Streaming chunk:  problems...
+Streaming chunk: ....
+Streaming chunk:   
+
+...
+Streaming chunk: In...
+Streaming chunk:  short...
+Streaming chunk: :...
+Streaming chunk:  GIS...
+Streaming chunk:  turns...
+Streaming chunk:  geographic...
+Streaming chunk:  data...
+Streaming chunk:  into...
+Streaming chunk:  actionable...
+Streaming chunk:  insights...
+Streaming chunk: ....
+Sending final AI response: A **Geographic Information System (GIS)** is a computer-based tool for:  
+
+1. **Capturing** geograph...
+Sending DeepSeek request
+Sending final AI response: **GIS** stands for **Geographic Information System**. It's a computer-based system used to:
+
+1. **Ca...
+Sending DeepSeek request
+Sending final AI response: I'm designed to assist you with:
+
+1. **GIS Analysis**  
+   - Processing spatial data (shapefiles, ra...
+Sending map trigger: functionName=zoomToLocation, params={'lng': '0.0', 'lat': '10.0', 'zoom': 10}, message_id=2025-07-23T09:38:32.946Z
+Sending DeepSeek R1 request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n        Validate the following JSON map trigger data for a GIS application:\n        Function Name: zoomToLocation\n        Parameters: {\"lng\": \"0.0\", \"lat\": \"10.0\", \"zoom\": 10}\n\n        Requirements:\n        - For 'zoomToLocation', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'zoom' is an integer between 0 and 20.\n        - For 'addMarker', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'title' is a non-empty string.\n        - For 'calculateCentroid', expect 'geojson' as a GeoJSON string and return centroid coordinates {'lng': float, 'lat': float}.\n        - Return a JSON object with:\n          - 'valid': boolean\n          - 'params': dict (formatted data or empty if invalid)\n          - 'response': str (text response for chat, e.g., 'Zoomed to location!')\n        - If invalid, include 'error': str with the reason.\n        Example valid response: {\"valid\": true, \"params\": {\"lng\": -47.0616, \"lat\": -22.9064, \"zoom\": 10}, \"response\": \"Zoomed to location!\"}\n        "
+    }
+  ],
+  "temperature": 0.7,
+  "response_format": {
+    "type": "json_object"
+  },
+  "stream": false
+}
+DeepSeek R1 API error: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\utils.py", line 80, in send_map_trigger
+    with requests.post(
+         ~~~~~~~~~~~~~^
+        f"{base_url}/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        timeout=60
+        ^^^^^^^^^^
+    ) as response:
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Sending map trigger: functionName=zoomToLocation, params={'lng': 10.0, 'lat': 10.0, 'zoom': 12}, message_id=2025-07-23T11:13:31.790Z
+Sending DeepSeek R1 request: {
+  "model": "deepseek-reasoner",
+  "messages": [
+    {
+      "role": "user",
+      "content": "\n        Validate the following JSON map trigger data for a GIS application:\n        Function Name: zoomToLocation\n        Parameters: {\"lng\": 10.0, \"lat\": 10.0, \"zoom\": 12}\n\n        Requirements:\n        - For 'zoomToLocation', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'zoom' is an integer between 0 and 20.\n        - For 'addMarker', ensure 'lng' is between -180 and 180, 'lat' is between -90 and 90, and 'title' is a non-empty string.\n        - For 'calculateCentroid', expect 'geojson' as a GeoJSON string and return centroid coordinates {'lng': float, 'lat': float}.\n        - Return a JSON object with:\n          - 'valid': boolean\n          - 'params': dict (formatted data or empty if invalid)\n          - 'response': str (text response for chat, e.g., 'Zoomed to location!')\n        - If invalid, include 'error': str with the reason.\n        Example valid response: {\"valid\": true, \"params\": {\"lng\": -47.0616, \"lat\": -22.9064, \"zoom\": 10}, \"response\": \"Zoomed to location!\"}\n        "
+    }
+  ],
+  "temperature": 0.7,
+  "response_format": {
+    "type": "json_object"
+  },
+  "stream": false
+}
+DeepSeek R1 API error: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 748, in _error_catcher
+    yield
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1206, in read_chunked
+    self._update_chunk_length()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1125, in _update_chunk_length
+    line = self._fp.fp.readline()  # type: ignore[union-attr]
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1057, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 1189, in read_chunked
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admn\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\urllib3\response.py", line 753, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\john\mtaawetu-base\backendMtaawetuApi\chatwebsockets\utils.py", line 80, in send_map_trigger
+    with requests.post(
+         ~~~~~~~~~~~~~^
+        f"{base_url}/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        timeout=60
+        ^^^^^^^^^^
+    ) as response:
+    ^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\sessions.py", line 746, in send
+    r.content
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 902, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\john\mtaa-wetu\Lib\site-packages\requests\models.py", line 826, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.

@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'mapdatacontroler',
     "corsheaders",
     "rest_framework_simplejwt",
-    'coreApi',  # Your custom app for user management and packages
+    'coreApi', 
+    'channels',
+    'chatwebsockets',
+    'daphne',
 ]
 
 MIDDLEWARE = [
@@ -165,26 +168,19 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': 'django.log',
-        },
         'console': {
-            'level': 'INFO',
             'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'your_app': {  # Replace with your app name
-            'handlers': ['file', 'console'],
+        'chatwebsockets': {
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
-            'propagate': True,
+            'propagate': False,
         },
     },
 }
@@ -206,7 +202,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backendMtaawetuApi.wsgi.application'
+ASGI_APPLICATION = 'backendMtaawetuApi.asgi.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

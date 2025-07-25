@@ -11,7 +11,7 @@ import {
   Layers,
   ArrowLeft,
   ChevronDown,
-  ArrowRight,
+  Stars,
 } from "lucide-react";
 import maplibregl, { ScaleControl } from "maplibre-gl";
 import * as turf from "@turf/turf";
@@ -30,7 +30,7 @@ import { hideLegend } from "../utils/utils";
 import LogoutButton from "@/components/LogoutButton";
 import { User } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-
+import ChatBubble from "@/components/Chat";
 import { useNavigate } from "react-router-dom";
 // Define the type for suggestion (based on Nominatim response structure)
 // interface Suggestion {
@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [isBottomPanelVisible, setIsBottomPanelVisible] = useState(false);
   // const [neighbourhoodName, setCurrentNeighborhoodName] = useState<string>("");
-  const MAPTILER_KEY = "Zk2vXxVka5bwTvXQmJ0l";
+  const MAPTILER_KEY = import.meta.env.VITE_MAP_TILER_API_KEY;
   const mapRef = useRef<maplibregl.Map | null>(null); // Reference for the map instance
   const [activePanel, setActivePanel] = useState("select");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,6 +82,9 @@ const Dashboard: React.FC = () => {
   const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesDataType>({
     time_series: [],
   });
+
+  const [opacityMap, setOpacityMap] = useState<{ [layerId: string]: number }>({});
+  const [isChatBubbleVisible, setIsChatBubbleVisible] = useState(false);
 
   // 2. Add this in your component (after other state declarations)
   const { user } = useAuth(); // Get user from auth context
@@ -399,24 +402,41 @@ const Dashboard: React.FC = () => {
                 const statsData = await statsResponse.json();
                 console.log("Stats:", statsData);
 
-                const popupContent = `
-                  <div style="font-family: Arial, sans-serif; max-width: 400px; max-height: 200px; overflow-y: auto;">
-                    <h3 style="color: #333; margin-bottom: 8px;">Feature Details</h3>
-                    <div style="margin-bottom: 12px;">
-                      <strong>ID:</strong> ${id}<br>
-                      <strong>Properties:</strong>
-                      <ul style="margin: 0; padding-left: 18px; color: #555;">
-                        ${Object.entries(properties)
-                          .map(
-                            ([key, value]) =>
-                              `<li><strong>${key}:</strong> ${value}</li>`
-                          )
-                          .join("")}
-                      </ul>
+              const popupContent = `
+                    <div style="font-family: Arial, sans-serif; max-width: 280px; font-size: 12px;">
+                      <h4 style="color: #333; margin: 4px 0;">Feature Details</h4>
+                      <div><strong>ID:</strong> ${id}</div>
+                      <div><strong>Properties:</strong></div>
+                      
+                      <!-- Scrollable table wrapper -->
+                      <div style="max-height: 120px; overflow-y: auto; margin-top: 4px; border: 1px solid #ccc;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                          <thead>
+                            <tr>
+                              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc;">Key</th>
+                              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #ccc;">Value</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            ${Object.entries(properties)
+                              .map(
+                                ([key, value]) =>
+                                  `<tr>
+                                    <td style="padding: 4px; border-bottom: 1px solid #eee; border-right: 1px solid #ccc;"><strong>${key}</strong></td>
+                                    <td style="padding: 4px; border-bottom: 1px solid #eee;">${value}</td>
+                                  </tr>`
+                              )
+                              .join("")}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <!-- Button/interactive area OUTSIDE scroll -->
+                      <div id="sheet-container" style="margin-top: 8px;"></div>
                     </div>
-                  </div>
-                  <div id="sheet-container" style="margin-top: 16px;"></div>
-                `;
+                  `;
+
+
 
                 new maplibregl.Popup()
                   .setLngLat(e.lngLat)
@@ -509,7 +529,9 @@ const Dashboard: React.FC = () => {
             id: layerName,
             type: "raster",
             source: layerName,
-            paint: {},
+              paint: {
+              "raster-opacity": 0.7, // ← set initial opacity here
+            },
           },
           labelLayerId
         );
@@ -947,6 +969,12 @@ const Dashboard: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+
+  const handleAiClick = () => {
+    setIsChatBubbleVisible((prev) => !prev);
+  };
+
+
   return (
     <div className="flex flex-col h-screen w-screen bg-slate-50 overflow-hidden">
       {/* Header - Responsive for both mobile and desktop */}
@@ -1128,6 +1156,32 @@ const Dashboard: React.FC = () => {
                   {!isMobileMenuOpen && !isSidebarOpen && (
                     <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
                       Time Series
+                    </div>
+                  )}
+                </button>
+                                <button
+                  onClick={() => {
+                    handleAiClick();
+                    if (window.innerWidth < 1024) setMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center w-full p-3 rounded-lg transition-colors group ${
+                    isTimeSeriesVisible
+                      ? "bg-blue-700/70"
+                      : "hover:bg-blue-700/50"
+                  }`}
+                >
+                  <Stars
+                    size={isMobileMenuOpen || isSidebarOpen ? 18 : 22}
+                    className={`${
+                      !isMobileMenuOpen && !isSidebarOpen && "mx-auto"
+                    } group-hover:scale-110 transition-transform`}
+                  />
+                  {(isMobileMenuOpen || isSidebarOpen) && (
+                    <span className="ml-3 font-medium">AI</span>
+                  )}
+                  {!isMobileMenuOpen && !isSidebarOpen && (
+                    <div className="absolute left-20 hidden lg:group-hover:flex bg-blue-800 text-white py-1 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                      AI
                     </div>
                   )}
                 </button>
@@ -1411,92 +1465,118 @@ const Dashboard: React.FC = () => {
                 </button>
               </div>
             </div>
-
-            {/* Panel Content */}
-            <div
-              className="overflow-y-auto p-4 lg:pb-4"
-              style={{
-                height:
-                  window.innerWidth >= 1024
-                    ? "calc(100% - 125px)"
-                    : "calc(100% - 130px)",
-              }}
-            >
-              {activePanel === "select" ? (
-                <div className="space-y-4">
-                  <p className="text-sm text-gray-600">
-                    Select map layers to display on your visualization.
-                  </p>
-                  {Object.entries(groupedMapLayers).map(([category, data]) => (
-                    <SelectMenuMap
-                      key={category}
-                      items={data.items}
-                      category={category}
-                      description={data.description}
-                      onClick={(name, apilink, legendUrl) => {
-                        if (apilink.includes("maps-wms")) {
-                          addWMSLayer(mapRef.current, name, apilink, name);
-                          showLegend(legendUrl, name);
-                        } else {
-                          addGeoJsonLayer(
-                            mapRef.current,
-                            apilink,
-                            name,
-                            "name"
-                          );
-                        }
-                        if (window.innerWidth < 1024) setPanelsVisible(false);
-                      }}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <p className="text-sm text-gray-600 mb-2">
-                    Currently active map layers. Manage visibility and settings.
-                  </p>
-                  {loadedLayers.length === 0 ? (
-                    <div className="text-center py-8 text-gray-500">
-                      <Layers size={32} className="mx-auto mb-2 opacity-50" />
-                      <p>No layers loaded</p>
-                      <p className="text-sm mt-1">
-                        Switch to Select Layers to add data
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      {loadedLayers.map((layer) => (
-                        <div
-                          key={layer}
-                          className="rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between hover:bg-blue-50 transition-colors"
-                        >
-                          <div className="overflow-hidden">
-                            <span className="text-sm font-medium text-gray-700 truncate">
-                              {layer}
-                            </span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <ToggleButton
-                              layerId={layer}
-                              map={mapRef.current}
-                            />
-                            <DropDownComponent />
-                            <button
-                              className="p-1 rounded-md text-red-600 hover:bg-red-50"
-                              onClick={() => removeLayer(layer)}
-                              title="Remove layer"
-                            >
-                              <X size={16} />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+      {/* Conditionally Render ChatBubble */}
+      {isChatBubbleVisible && <ChatBubble map={mapRef.current} username="user1" />}
+     {/* Panel Content */}
+      <div
+        className="overflow-y-auto p-4 lg:pb-4"
+        style={{
+          height:
+            window.innerWidth >= 1024
+              ? "calc(100% - 125px)"
+              : "calc(100% - 130px)",
+        }}
+      >
+        {activePanel === "select" ? (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600">
+              Select map layers to display on your visualization.
+            </p>
+            {Object.entries(groupedMapLayers).map(([category, data]) => (
+              <SelectMenuMap
+                key={category}
+                items={data.items}
+                category={category}
+                description={data.description}
+                onClick={(name, apilink, legendUrl) => {
+                  if (apilink.includes("maps-wms")) {
+                    addWMSLayer(mapRef.current, name, apilink, name);
+                    showLegend(legendUrl, name);
+                  } else {
+                    addGeoJsonLayer(
+                      mapRef.current,
+                      apilink,
+                      name,
+                      "name"
+                    );
+                  }
+                  if (window.innerWidth < 1024) setPanelsVisible(false);
+                }}
+              />
+            ))}
           </div>
+        ) : (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 mb-2">
+              Currently active map layers. Manage visibility and settings.
+            </p>
+            {loadedLayers.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <Layers size={32} className="mx-auto mb-2 opacity-50" />
+                <p>No layers loaded</p>
+                <p className="text-sm mt-1">
+                  Switch to Select Layers to add data
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {loadedLayers.map((layer) => (
+                  <div
+                    key={layer}
+                    className="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 transition-colors duration-200 shadow-sm"
+                  >
+                    {/* Layer Name and Buttons */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-800 truncate flex-1">
+                        {layer}
+                      </span>
+                      <div className="flex items-center space-x-3">
+                        <div className="relative inline-flex items-center">
+                          <ToggleButton
+                            layerId={layer}
+                            map={mapRef.current}
+                          />
+                        </div>
+                        <button
+                          className="p-2 rounded-full text-red-500 hover:bg-red-100 hover:text-red-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300"
+                          onClick={() => removeLayer(layer)}
+                          title="Remove layer"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+                    </div>
+                    {/* Opacity Slider with Title */}
+                    <div className="space-y-1">
+                      <label className="text-xs text-gray-500 font-medium">Opacity</label>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="range"
+                          min={0}
+                          max={100}
+                          step={1}
+                          value={opacityMap[layer] ?? 70}
+                          onChange={(e) => {
+                            const newOpacity = Number(e.target.value);
+                            setOpacityMap((prev) => ({ ...prev, [layer]: newOpacity }));
+                            mapRef.current?.setPaintProperty(layer, "raster-opacity", newOpacity / 100);
+                          }}
+                          className="w-full h-1 bg-gray-200 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200 accent-blue-600 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none"
+                        />
+                        <span className="text-xs font-medium text-gray-700 w-8 text-right">
+                          {(opacityMap[layer] ?? 70)}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+         </div>
         </div>
 
         {/* Legend - Better Desktop Positioning */}

@@ -105,6 +105,7 @@ def query(table_name):
 def getCurrentNeighbourhood(request):
     engine = get_db_engine()  # Use cached engine
     coordinates = request.GET.get("coordinates")
+    print(coordinates)
     try:
         # Parse the coordinates into a list of floats
         coords = [float(coord) for coord in coordinates.split(",")]

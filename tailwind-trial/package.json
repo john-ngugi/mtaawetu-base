@@ -36,6 +36,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-jupyter-notebook": "^0.4.0",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^6.26.2",
     "react-syntax-highlighter": "^15.6.1",
     "shadcn": "^1.0.0",
