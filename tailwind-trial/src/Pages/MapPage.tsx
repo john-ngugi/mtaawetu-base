@@ -703,7 +703,7 @@ const Dashboard: React.FC = () => {
     //https://api.maptiler.com/maps/streets-v2-light/style.json?key=Zk2vXxVka5bwTvXQmJ0l
     //https://api.maptiler.com/maps/streets-v2-dark/style.json?key=Zk2vXxVka5bwTvXQmJ0l
     const map = new maplibregl.Map({
-      style: `https://api.maptiler.com/maps/streets-v2-light/style.json?key=${MAPTILER_KEY}`,
+      style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
       center: [36.8219, -1.2921],
       zoom: 12.5,
       // pitch: 60,
